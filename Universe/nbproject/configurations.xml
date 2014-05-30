@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="89">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>include/CApp.h</itemPath>
+      <itemPath>include/CDataManager.h</itemPath>
+      <itemPath>include/CMapControls.h</itemPath>
+      <itemPath>include/CMapRender.h</itemPath>
+      <itemPath>include/CMapSegment.h</itemPath>
+      <itemPath>include/CSprite.h</itemPath>
+      <itemPath>include/CTileRender.h</itemPath>
+      <itemPath>include/CUnitControls.h</itemPath>
+      <itemPath>include/CUnitRender.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>src/CApp.cpp</itemPath>
+      <itemPath>src/CDataManager.cpp</itemPath>
+      <itemPath>src/CMapControls.cpp</itemPath>
+      <itemPath>src/CMapRender.cpp</itemPath>
+      <itemPath>src/CMapSegment.cpp</itemPath>
+      <itemPath>src/CSprite.cpp</itemPath>
+      <itemPath>src/CTileRender.cpp</itemPath>
+      <itemPath>src/CUnitControls.cpp</itemPath>
+      <itemPath>src/CUnitRender.cpp</itemPath>
+      <itemPath>src/main.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <standard>8</standard>
+          <incDir>
+            <pElem>../YmirCore/include</pElem>
+            <pElem>include</pElem>
+            <pElem>/usr/include/qt4</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>bin/universe</output>
+          <linkerLibItems>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../YmirCore"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../YmirCore"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="bin/libYmirCore.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibLibItem>SDL</linkerLibLibItem>
+            <linkerLibLibItem>SDLmain</linkerLibLibItem>
+            <linkerLibLibItem>SDL_gfx</linkerLibLibItem>
+            <linkerLibLibItem>SDL_image</linkerLibLibItem>
+            <linkerLibLibItem>SDL_mixer</linkerLibLibItem>
+            <linkerLibLibItem>SDL_ttf</linkerLibLibItem>
+            <linkerOptionItem>`pkg-config --libs QtCore`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs QtGui`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs QtXml`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+        <requiredProjects>
+          <makeArtifact PL="../YmirCore"
+                        CT="2"
+                        CN="Debug"
+                        AC="true"
+                        BL="true"
+                        WD="../YmirCore"
+                        BC="${MAKE}  -f Makefile CONF=Debug"
+                        CC="${MAKE}  -f Makefile CONF=Debug clean"
+                        OP="bin/libYmirCore.${CND_DLIB_EXT}">
+          </makeArtifact>
+        </requiredProjects>
+      </compileType>
+      <item path="include/CApp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CDataManager.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CMapControls.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CMapRender.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CMapSegment.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CSprite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CTileRender.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CUnitControls.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CUnitRender.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/CApp.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CDataManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CMapControls.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CMapRender.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CMapSegment.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CSprite.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CTileRender.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CUnitControls.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CUnitRender.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="include/CApp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CDataManager.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CMapControls.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CMapRender.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CMapSegment.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CSprite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CTileRender.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CUnitControls.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CUnitRender.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/CApp.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CDataManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CMapControls.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CMapRender.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CMapSegment.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CSprite.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CTileRender.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CUnitControls.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CUnitRender.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
