@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="89">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>CMapRender.h</itemPath>
+      <itemPath>Forms/EntryForm.h</itemPath>
+      <itemPath>Forms/NewMapDlg.h</itemPath>
+      <itemPath>Forms/NewObjectModuleDlg.h</itemPath>
+      <itemPath>Forms/NewTileModuleDlg.h</itemPath>
+      <itemPath>Forms/NewUnitModuleDlg.h</itemPath>
+      <itemPath>include/QClickLabel.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+      <itemPath>Forms/EntryForm.ui</itemPath>
+      <itemPath>Forms/NewMapDlg.ui</itemPath>
+      <itemPath>Forms/NewObjectModuleDlg.ui</itemPath>
+      <itemPath>Forms/NewTileModuleDlg.ui</itemPath>
+      <itemPath>Forms/NewUnitModuleDlg.ui</itemPath>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>CMapRender.cpp</itemPath>
+      <itemPath>Forms/EntryForm.cpp</itemPath>
+      <itemPath>Forms/NewMapDlg.cpp</itemPath>
+      <itemPath>Forms/NewObjectModuleDlg.cpp</itemPath>
+      <itemPath>Forms/NewTileModuleDlg.cpp</itemPath>
+      <itemPath>Forms/NewUnitModuleDlg.cpp</itemPath>
+      <itemPath>src/QClickLabel.cpp</itemPath>
+      <itemPath>main.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>../YmirCore</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="4">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>GNU|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <qt>
+        <modules>core gui xml</modules>
+      </qt>
+      <compileType>
+        <ccTool>
+          <incDir>
+            <pElem>../YmirCore/include</pElem>
+            <pElem>/usr/include/qt4</pElem>
+            <pElem>include</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../YmirCore"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../YmirCore"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="bin/libYmirCore.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+          </linkerLibItems>
+        </linkerTool>
+        <requiredProjects>
+          <makeArtifact PL="../YmirCore"
+                        CT="2"
+                        CN="Debug"
+                        AC="true"
+                        BL="true"
+                        WD="../YmirCore"
+                        BC="${MAKE}  -f Makefile CONF=Debug"
+                        CC="${MAKE}  -f Makefile CONF=Debug clean"
+                        OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libYmirCore.${CND_DLIB_EXT}">
+          </makeArtifact>
+        </requiredProjects>
+      </compileType>
+      <item path="CMapRender.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CMapRender.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/EntryForm.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Forms/EntryForm.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/EntryForm.ui" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewMapDlg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Forms/NewMapDlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewMapDlg.ui" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewObjectModuleDlg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Forms/NewObjectModuleDlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewObjectModuleDlg.ui" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewTileModuleDlg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Forms/NewTileModuleDlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewTileModuleDlg.ui" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewUnitModuleDlg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Forms/NewUnitModuleDlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewUnitModuleDlg.ui" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/QClickLabel.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/QClickLabel.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="4">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>GNU|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <qt>
+        <buildMode>1</buildMode>
+        <modules>core gui</modules>
+      </qt>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="CMapRender.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CMapRender.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/EntryForm.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Forms/EntryForm.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/EntryForm.ui" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewMapDlg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Forms/NewMapDlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewMapDlg.ui" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewObjectModuleDlg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Forms/NewObjectModuleDlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewObjectModuleDlg.ui" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewTileModuleDlg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Forms/NewTileModuleDlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewTileModuleDlg.ui" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewUnitModuleDlg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Forms/NewUnitModuleDlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Forms/NewUnitModuleDlg.ui" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/QClickLabel.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/QClickLabel.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
