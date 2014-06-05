@@ -15,6 +15,7 @@
 #include "CModule.h"
 #include "CTile.h"
 #include "CUnit.h"
+#include "CObject.h"
 
 class EntryForm : public QMainWindow {
     Q_OBJECT
@@ -26,8 +27,9 @@ private:
 
     CMap            *map;
     CMapRender      *map_render;
-    CModule<CTile>  tile_module;
-    CModule<CUnit>  unit_module;
+    CModule<CTile>    tile_module;
+    CModule<CUnit>    unit_module;
+    CModule<CObject>  object_module;
 
 public slots:
     void    newMap();

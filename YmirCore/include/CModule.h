@@ -151,8 +151,7 @@ public:
                 data[key] = value;
               }
               xml.readNext();
-            }
-            unit = new T(data);
+            }            unit = new T(data);
             buffer.push_back(*unit);
             if (next_id <= unit->GetID()) {
               next_id = unit->GetID() + 1;

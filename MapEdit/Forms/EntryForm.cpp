@@ -46,7 +46,7 @@ void EntryForm::newMap() {
   NewMapDlg dlg(&tile_module);
 
   if (dlg.exec()) {    
-    map = new CMap(dlg.map_dlg.x, dlg.map_dlg.y, dlg.map_dlg.default_tile, &tile_module, &unit_module);
+    map = new CMap(dlg.map_dlg.x, dlg.map_dlg.y, dlg.map_dlg.default_tile, &tile_module, &unit_module, &object_module);
     map->setName(dlg.map_dlg.name);
     //map->generateMap(dlg.map_dlg.centroids[0], dlg.map_dlg.centroids[1], dlg.map_dlg.centroids[2], dlg.map_dlg.centroids[3]);
     map_render->setMapPtr(map);

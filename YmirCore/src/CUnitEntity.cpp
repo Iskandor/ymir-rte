@@ -12,7 +12,7 @@
 #include "CMathUtils.h"
 #include "CMap.h"
 
-CUnitEntity::CUnitEntity(CUnit* unit, int inner_id, int x, int y) : CObjectEntity(unit, inner_id, x, y) {
+CUnitEntity::CUnitEntity(CUnit* unit, int inner_id, int x, int y) : CObjectEntity(unit, inner_id, x, y, 0) {
   root_unit = unit;
   
   //generateProps();
@@ -22,9 +22,6 @@ CUnitEntity::CUnitEntity(CUnit* unit, int inner_id, int x, int y) : CObjectEntit
   mp = max_mp;
   sp = 0;
   as = 0;
-  
-  state = IDLE;
-  direction = CUnitEntity::RIGHT;
 }
 
 CUnitEntity::CUnitEntity(const CUnitEntity& orig) : CObjectEntity(orig) {
@@ -36,9 +33,6 @@ CUnitEntity::CUnitEntity(const CUnitEntity& orig) : CObjectEntity(orig) {
   mp = orig.mp;
   sp = orig.sp;
   as = orig.as;
-  
-  state = orig.state;
-  direction = orig.direction;
 }
 
 CUnitEntity::~CUnitEntity() {
@@ -61,7 +55,13 @@ CUnit* CUnitEntity::GetRootUnit() {
 
 void CUnitEntity::Move() {
   if (!path.empty()) {
-    setPosition(path.front().first, path.front().second);
+    int new_x = path.front().first;
+    int new_y = path.front().second;
+    setPosition(new_x, new_y);
+    if (ref_object_entity != NULL) {
+      ref_object_entity->setPosition(new_x, new_y);
+    }
+    
     path.pop();    
   }
   else {

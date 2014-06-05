@@ -66,8 +66,7 @@ void NewUnitModuleDlg::RefreshComboBox() {
 }
 
 void NewUnitModuleDlg::RefreshImage(QString _filename) {
-  QString filename(IMAGE_PATH_UNITS);
-  filename.append(_filename);
+  QString filename(_filename);
   
   if (unit_image != NULL) {
     delete unit_image;
@@ -127,7 +126,7 @@ void NewUnitModuleDlg::chooseFile() {
 
   
   QStringList str_list = usersfilename.split("/");
-  usersfilename = str_list.last();
+  usersfilename = IMAGE_PATH_UNITS + str_list.last();
           
   widget.ImageLed->setText(usersfilename);
   

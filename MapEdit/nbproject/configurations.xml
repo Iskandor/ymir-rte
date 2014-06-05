@@ -62,6 +62,7 @@
       </qt>
       <compileType>
         <ccTool>
+          <standard>8</standard>
           <incDir>
             <pElem>../YmirCore/include</pElem>
             <pElem>/usr/include/qt4</pElem>

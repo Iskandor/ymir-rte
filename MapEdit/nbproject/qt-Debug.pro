@@ -22,3 +22,4 @@ QMAKE_CXX = g++
 DEFINES += 
 INCLUDEPATH += ../YmirCore/include /usr/include/qt4 include 
 LIBS += -Wl,-rpath,../YmirCore/bin ../YmirCore/bin/libYmirCore.so  
+QMAKE_CXXFLAGS += -std=c++11

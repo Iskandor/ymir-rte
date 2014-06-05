@@ -22,26 +22,11 @@ public:
   CUnitEntity(const CUnitEntity& orig);
   virtual ~CUnitEntity();
   
-  enum E_STATE {
-    IDLE,
-    MOVING
-  };
-
-  enum E_DIRECTION {
-    RIGHT = 0,
-    LEFT  = 1
-  };  
-
 public:
   CUnit*  GetRootUnit();
   
   void Move(double* block_map, int size_x, int size_y, int x, int y);
   void Move();
-  
-  E_STATE     GetState()      {return state; };
-  E_DIRECTION GetDirection()  {return direction; };
-  
-  void SetDirection(E_DIRECTION value) { direction = value; };
   
 private:
   void generate_props();
@@ -60,8 +45,6 @@ private:
   double as;
   
   queue< pair<int, int> > path;
-  E_STATE     state;
-  E_DIRECTION direction;
 };
 
 #endif	/* CUNITENTITY_H */

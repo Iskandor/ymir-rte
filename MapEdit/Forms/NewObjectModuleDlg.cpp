@@ -33,6 +33,8 @@ NewObjectModuleDlg::NewObjectModuleDlg() {
   
   object_image = NULL;
   
+  RefreshListView();
+  
 }
 
 NewObjectModuleDlg::~NewObjectModuleDlg() {
@@ -55,8 +57,7 @@ void NewObjectModuleDlg::RefreshListView() {
 }
 
 void NewObjectModuleDlg::RefreshImage(QString _filename) {
-  QString filename(IMAGE_PATH_OBJECTS);
-  filename.append(_filename);
+  QString filename(_filename);
   
   if (object_image != NULL) {
     delete object_image;
@@ -153,7 +154,7 @@ void NewObjectModuleDlg::chooseFile() {
 
   
   QStringList str_list = usersfilename.split("/");
-  usersfilename = str_list.last();
+  usersfilename = IMAGE_PATH_OBJECTS + str_list.last();
           
   widget.leFilename->setText(usersfilename);
   

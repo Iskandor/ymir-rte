@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CObject.o \
 	${OBJECTDIR}/src/CObjectEntity.o \
 	${OBJECTDIR}/src/CObjectManager.o \
+	${OBJECTDIR}/src/CPlayer.o \
 	${OBJECTDIR}/src/CRace.o \
 	${OBJECTDIR}/src/CStrUtils.o \
 	${OBJECTDIR}/src/CTile.o \
@@ -99,6 +100,11 @@ ${OBJECTDIR}/src/CObjectManager.o: src/CObjectManager.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CObjectManager.o src/CObjectManager.cpp
+
+${OBJECTDIR}/src/CPlayer.o: src/CPlayer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CPlayer.o src/CPlayer.cpp
 
 ${OBJECTDIR}/src/CRace.o: src/CRace.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
