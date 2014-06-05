@@ -9,7 +9,7 @@
 #include "GlobalDefine.h"
 #include "CUtils.h"
 
-CMapRender::CMapRender(SDL_Rect* display_rect, CMap* map, CTileRender* tile_render, CUnitRender* unit_render) {
+CMapRender::CMapRender(SDL_Rect* display_rect, CMap* map, CTileRender* tile_render, CUnitRender* unit_render, CObjectRender* object_render) {
   camera.x = 0;
   camera.y = 0;
   camera.w = 20 * (TILE_W / MAP_ELEM);
@@ -19,8 +19,9 @@ CMapRender::CMapRender(SDL_Rect* display_rect, CMap* map, CTileRender* tile_rend
   
   map_segments.clear();
   this->map = map;
-  this->tile_render = tile_render;
-  this->unit_render = unit_render;
+  this->tile_render   = tile_render;
+  this->unit_render   = unit_render;
+  this->object_render = object_render;
   
   for(int i = 0; i < map->getMapSizeY(sizemode_segment); i++) {
     for(int j = 0; j < map->getMapSizeX(sizemode_segment); j++) {
@@ -62,15 +63,17 @@ void CMapRender::OnRender(SDL_Surface* dest) {
     }   
   }
   
-  CUnitManager *unit_manager = map->GetUnitManager();
+  CObjectManager *object_manager = (CObjectManager*)map;
+  multimap<double, CObjectEntity*, less<double> >* ytree = object_manager->GetYSortedTree();
+  multimap<double, CObjectEntity*, less<double> >::iterator it;
 
-  for(int i = 0; i < unit_manager->GetUnitListSize(); i++) {
-    CUnitEntity* unit_entity = unit_manager->getUnit(i);
+  for(it = ytree->begin(); it != ytree->end(); it++) {
+    CObjectEntity* object_entity = it->second;
 
-    pair<int, int> point(unit_entity->GetX(), unit_entity->GetY());
+    pair<int, int> point(object_entity->GetX(), object_entity->GetY());
 
-    int x = (unit_entity->GetX() * MAP_ELEM) - (camera.x * MAP_ELEM);
-    int y = (unit_entity->GetY() * MAP_ELEM) - (camera.y * MAP_ELEM);
+    int x = (object_entity->GetX() * MAP_ELEM) - (camera.x * MAP_ELEM);
+    int y = (object_entity->GetY() * MAP_ELEM) - (camera.y * MAP_ELEM);
 
     SDL_Rect camera_border;
     
@@ -80,9 +83,9 @@ void CMapRender::OnRender(SDL_Surface* dest) {
     camera_border.h = camera.h + 8;
     
     if (CUtils::PointIsInArea(point, camera_border)) {
-      unit_render->OnRender(dest, unit_entity, x, y);
-    }
-  }   
+      object_render->OnRender(dest, object_entity, x, y);
+    }    
+  }
 }
 
 SDL_Rect* CMapRender::GetCamera() {

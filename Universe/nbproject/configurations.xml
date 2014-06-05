@@ -9,6 +9,7 @@
       <itemPath>include/CMapControls.h</itemPath>
       <itemPath>include/CMapRender.h</itemPath>
       <itemPath>include/CMapSegment.h</itemPath>
+      <itemPath>include/CObjectRender.h</itemPath>
       <itemPath>include/CSprite.h</itemPath>
       <itemPath>include/CTileRender.h</itemPath>
       <itemPath>include/CUnitControls.h</itemPath>
@@ -26,6 +27,7 @@
       <itemPath>src/CMapControls.cpp</itemPath>
       <itemPath>src/CMapRender.cpp</itemPath>
       <itemPath>src/CMapSegment.cpp</itemPath>
+      <itemPath>src/CObjectRender.cpp</itemPath>
       <itemPath>src/CSprite.cpp</itemPath>
       <itemPath>src/CTileRender.cpp</itemPath>
       <itemPath>src/CUnitControls.cpp</itemPath>
@@ -111,6 +113,8 @@
       </item>
       <item path="include/CMapSegment.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CObjectRender.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CSprite.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CTileRender.h" ex="false" tool="3" flavor2="0">
@@ -128,6 +132,8 @@
       <item path="src/CMapRender.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMapSegment.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CObjectRender.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CSprite.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -171,6 +177,8 @@
       </item>
       <item path="include/CMapSegment.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CObjectRender.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CSprite.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CTileRender.h" ex="false" tool="3" flavor2="0">
@@ -188,6 +196,8 @@
       <item path="src/CMapRender.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMapSegment.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CObjectRender.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CSprite.cpp" ex="false" tool="1" flavor2="0">
       </item>

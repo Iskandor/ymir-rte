@@ -14,12 +14,13 @@
 #include "CMapSegment.h"
 #include "CTileRender.h"
 #include "CUnitRender.h"
+#include "CObjectRender.h"
 
 using namespace std;
 
 class CMapRender {
 public:
-  CMapRender(SDL_Rect* ,CMap* map, CTileRender* tile_render, CUnitRender* unit_render);
+  CMapRender(SDL_Rect* ,CMap* map, CTileRender* tile_render, CUnitRender* unit_render, CObjectRender* object_render);
   CMapRender(const CMapRender& orig);
   virtual ~CMapRender();
   
@@ -39,6 +40,7 @@ private:
   CMap*           map;
   CTileRender*    tile_render;
   CUnitRender*    unit_render;
+  CObjectRender*  object_render;
   
   vector<CMapSegment*>  map_segments;
 };

@@ -9,11 +9,11 @@
 #define	CSPRITE_H
 
 #include <SDL/SDL.h>
-#include "CUnit.h"
+#include "CObject.h"
 
 class CSprite {
 public:
-  CSprite(SDL_Surface* source, CUnit* unit);
+  CSprite(SDL_Surface* source, CObject* unit);
   CSprite(const CSprite& orig);
   virtual ~CSprite();
   
@@ -22,7 +22,9 @@ public:
 private:
   SDL_Surface** surface_map;
   int*          anim_indexer;
+  int           anim_size;
   int*          dir_indexer;
+  int           dir_size;
 };
 
 #endif	/* CSPRITE_H */

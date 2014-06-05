@@ -32,7 +32,7 @@ bool CUnitRender::LoadSurfaces() {
   
   for(int i = 0; i < unit_module->GetSize(); i++) {
     CUnit unit = unit_module->GetUnit(i);
-    string path = IMAGE_PATH_UNITS + unit.GetImage();
+    string path = unit.GetImage();
     
     SDL_Surface *new_surf;   
     
@@ -52,7 +52,7 @@ bool CUnitRender::LoadSurfaces() {
 void CUnitRender::OnRender(SDL_Surface* dest, CUnitEntity* unit_entity, int x, int y) {
   CUnit* unit = unit_entity->GetRootUnit();
   SDL_Surface* surf = unit_sprite[unit->GetID()]->GetSurface(unit_entity->GetDirection(),0,0);
-  SDL_Rect rect = {x, y, surf->w, surf->h};
+  SDL_Rect rect = {(Sint16)x, (Sint16)y, (Uint16)surf->w, (Uint16)surf->h};
   SDL_BlitSurface(surf, NULL, dest, &rect);  
 }
 

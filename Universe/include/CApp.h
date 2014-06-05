@@ -38,6 +38,7 @@ private:
   CUnitRender     *unit_render;
   CUnitControls   *unit_controls;
   CModule<CObject> object_module;
+  CObjectRender   *object_render;
   
   bool running;
 

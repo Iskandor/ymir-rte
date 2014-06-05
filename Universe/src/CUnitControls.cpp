@@ -29,10 +29,9 @@ void CUnitControls::OnEvent(SDL_Event* event) {
         CUnitEntity* unit_entity = NULL;
         SDL_Rect     unit_rect;
         SDL_Rect*    camera;
+        int i = 0;
         
-        selected_unit = NULL;
-        
-        for(int i = 0; i < map->GetUnitManager()->GetUnitListSize(); i++) {
+        for(i = 0; i < map->GetUnitManager()->GetUnitListSize(); i++) {
           unit_entity = map->GetUnitManager()->getUnit(i);
           unit_rect.x = unit_entity->GetX();
           unit_rect.y = unit_entity->GetY();
@@ -47,17 +46,33 @@ void CUnitControls::OnEvent(SDL_Event* event) {
           click.second = (event->button.y / MAP_ELEM) + camera->y;
           
           if (CUtils::PointIsInArea(click, unit_rect)) {
+            if (selected_unit != NULL) {
+              map->remObject(selected_unit->GetRefObject()->GetID());
+              selected_unit->SetRefObject(NULL);
+            }
+            CObjectEntity* selector = map->addObject(unit_entity->GetX(), unit_entity->GetY(), BOTTOM, 0);
+            unit_entity->SetRefObject(selector);
             selected_unit = unit_entity;
+            break;
           }
+        }
+        if (i == map->GetUnitManager()->GetUnitListSize()) {
+          if (selected_unit != NULL) {
+            map->remObject(selected_unit->GetRefObject()->GetID());
+            selected_unit->SetRefObject(NULL);
+            selected_unit = NULL;
+          }          
         }
       }
       if (event->button.button == SDL_BUTTON_RIGHT) {
-        SDL_Rect*    camera = map_render->GetCamera();
-        int x = (event->button.x / MAP_ELEM) + camera->x;
-        int y = (event->button.y / MAP_ELEM) + camera->y;
-        map->Unblock(selected_unit);
-        selected_unit->Move(map->GetCostMap(), map->getMapSizeX(sizemode_elem), map->getMapSizeY(sizemode_elem), x, y);
-        map->Block(selected_unit);
+        if (selected_unit != NULL) {
+          SDL_Rect*    camera = map_render->GetCamera();
+          int x = (event->button.x / MAP_ELEM) + camera->x - (selected_unit->GetRootObject()->GetXSize() / 2);
+          int y = (event->button.y / MAP_ELEM) + camera->y - (selected_unit->GetRootObject()->GetYSize() - 1);
+          map->Unblock(selected_unit);
+          selected_unit->Move(map->GetCostMap(), map->getMapSizeX(sizemode_elem), map->getMapSizeY(sizemode_elem), x, y);
+          map->Block(selected_unit);
+        }
       }
     break;
   }
@@ -73,6 +88,10 @@ void CUnitControls::OnLoop() {
       map->Unblock(unit_entity);
       unit_entity->Move();
       map->Block(unit_entity);
+      map->SortObjects(unit_entity);
+      if (unit_entity->GetRefObject() != NULL) {
+        map->SortObjects(unit_entity->GetRefObject());
+      }
     }
   }
 }

@@ -61,11 +61,17 @@ int CApp::OnInit() {
   tile_module.LoadFromXML("data/tiles", "tiles", "tile");
   tile_render = new CTileRender(&tile_module);
   
+  object_module.LoadFromXML("data/objects", "objects", "object"); 
   unit_module.LoadFromXML("data/units", "units", "unit");
+  
+  for(int i = 0; i < unit_module.GetSize(); i++) {
+    CObject object = unit_module.GetUnit(i);
+    object_module.AddUnit(object);
+  }
+  
+  object_render = new CObjectRender(&object_module);  
   unit_render = new CUnitRender(&unit_module);
-  
-  object_module.LoadFromXML("data/objects", "objects", "object");
-  
+    
   map = new CMap(&tile_module, &unit_module, &object_module);
   map->Load("data/maps/mapa1.map");
   map->addUnit(5, 5, 1);
@@ -73,7 +79,7 @@ int CApp::OnInit() {
   map->addUnit(10, 9, 3);
   map->addUnit(3, 7, 4);
   
-  map_render = new CMapRender(&rectDisplay, map, tile_render, unit_render);
+  map_render = new CMapRender(&rectDisplay, map, tile_render, unit_render, object_render);
   map_controls = new CMapControls(map_render);
   unit_controls = new CUnitControls(map_render);
   

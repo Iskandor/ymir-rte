@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CMapControls.o \
 	${OBJECTDIR}/src/CMapRender.o \
 	${OBJECTDIR}/src/CMapSegment.o \
+	${OBJECTDIR}/src/CObjectRender.o \
 	${OBJECTDIR}/src/CSprite.o \
 	${OBJECTDIR}/src/CTileRender.o \
 	${OBJECTDIR}/src/CUnitControls.o \
@@ -95,6 +96,11 @@ ${OBJECTDIR}/src/CMapSegment.o: src/CMapSegment.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CMapSegment.o src/CMapSegment.cpp
+
+${OBJECTDIR}/src/CObjectRender.o: src/CObjectRender.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CObjectRender.o src/CObjectRender.cpp
 
 ${OBJECTDIR}/src/CSprite.o: src/CSprite.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
