@@ -21,6 +21,8 @@
 #include "CMapRender.h"
 #include "CMapControls.h"
 #include "CObject.h"
+#include "CPlayer.h"
+#include "CPlayerManager.h"
 
 class CApp {
 public:
@@ -39,6 +41,7 @@ private:
   CUnitControls   *unit_controls;
   CModule<CObject> object_module;
   CObjectRender   *object_render;
+  CPlayerManager  player_manager;
   
   bool running;
 

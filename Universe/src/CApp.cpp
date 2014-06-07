@@ -74,10 +74,14 @@ int CApp::OnInit() {
     
   map = new CMap(&tile_module, &unit_module, &object_module);
   map->Load("data/maps/mapa1.map");
-  map->addUnit(5, 5, 1);
-  map->addUnit(7, 4, 2);
-  map->addUnit(10, 9, 3);
-  map->addUnit(3, 7, 4);
+  player_manager.AddPlayer("Drow01", "");
+  player_manager.AddPlayer("Drow02", "");
+  map->SetPlayerManager(&player_manager);
+  
+  map->addUnit(5, 5, 1, 0);
+  map->addUnit(7, 4, 2, 0);
+  map->addUnit(10, 9, 3, 0);
+  map->addUnit(3, 7, 4, 1);
   
   map_render = new CMapRender(&rectDisplay, map, tile_render, unit_render, object_render);
   map_controls = new CMapControls(map_render);

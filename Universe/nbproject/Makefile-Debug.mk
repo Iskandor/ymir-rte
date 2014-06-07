@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/CApp.o \
 	${OBJECTDIR}/src/CDataManager.o \
+	${OBJECTDIR}/src/CGameControls.o \
 	${OBJECTDIR}/src/CMapControls.o \
 	${OBJECTDIR}/src/CMapRender.o \
 	${OBJECTDIR}/src/CMapSegment.o \
@@ -83,6 +84,11 @@ ${OBJECTDIR}/src/CDataManager.o: src/CDataManager.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
 	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CDataManager.o src/CDataManager.cpp
+
+${OBJECTDIR}/src/CGameControls.o: src/CGameControls.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CGameControls.o src/CGameControls.cpp
 
 ${OBJECTDIR}/src/CMapControls.o: src/CMapControls.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

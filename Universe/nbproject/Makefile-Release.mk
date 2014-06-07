@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/CApp.o \
 	${OBJECTDIR}/src/CDataManager.o \
+	${OBJECTDIR}/src/CGameControls.o \
 	${OBJECTDIR}/src/CMapControls.o \
 	${OBJECTDIR}/src/CMapRender.o \
 	${OBJECTDIR}/src/CMapSegment.o \
@@ -81,6 +82,11 @@ ${OBJECTDIR}/src/CDataManager.o: src/CDataManager.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CDataManager.o src/CDataManager.cpp
+
+${OBJECTDIR}/src/CGameControls.o: src/CGameControls.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CGameControls.o src/CGameControls.cpp
 
 ${OBJECTDIR}/src/CMapControls.o: src/CMapControls.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

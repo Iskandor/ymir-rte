@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>include/CApp.h</itemPath>
       <itemPath>include/CDataManager.h</itemPath>
+      <itemPath>include/CGameControls.h</itemPath>
       <itemPath>include/CMapControls.h</itemPath>
       <itemPath>include/CMapRender.h</itemPath>
       <itemPath>include/CMapSegment.h</itemPath>
@@ -24,6 +25,7 @@
                    projectFiles="true">
       <itemPath>src/CApp.cpp</itemPath>
       <itemPath>src/CDataManager.cpp</itemPath>
+      <itemPath>src/CGameControls.cpp</itemPath>
       <itemPath>src/CMapControls.cpp</itemPath>
       <itemPath>src/CMapRender.cpp</itemPath>
       <itemPath>src/CMapSegment.cpp</itemPath>
@@ -107,6 +109,8 @@
       </item>
       <item path="include/CDataManager.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CGameControls.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CMapControls.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CMapRender.h" ex="false" tool="3" flavor2="0">
@@ -126,6 +130,8 @@
       <item path="src/CApp.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CDataManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CGameControls.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMapControls.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -171,6 +177,8 @@
       </item>
       <item path="include/CDataManager.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CGameControls.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CMapControls.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CMapRender.h" ex="false" tool="3" flavor2="0">
@@ -190,6 +198,8 @@
       <item path="src/CApp.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CDataManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CGameControls.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMapControls.cpp" ex="false" tool="1" flavor2="0">
       </item>
