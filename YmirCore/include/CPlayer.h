@@ -14,21 +14,37 @@
 
 using namespace std;
 
-class CPlayer {
+class CPlayer { 
+  
 public:
+  
+  enum E_RELATION {
+    ALLY,
+    ENEMY
+  };
+  
   CPlayer();
-  CPlayer(string name);
+  CPlayer(int id, string name, string avatar);
   CPlayer(const CPlayer& orig);
   virtual ~CPlayer();
 private:
+  int     id;
   string  name;
+  string  avatar;
   map<int, CUnitEntity*> unit_tree;
+  vector<pair<int, E_RELATION> > diplomacy;
   
 public:
   void SetName(string name) { this->name = name; };
   string GetName() { return name; };
   
+  void SetAvatar(string avatar) { this->avatar = avatar; };
+  string GetAvatar() { return avatar; };
+
+  int GetID() { return id; };
+  
   void AddUnit(CUnitEntity* unit_entity);
+  void RemoveUnit(int id);
   CUnitEntity* GetUnit(int id);
 };
 

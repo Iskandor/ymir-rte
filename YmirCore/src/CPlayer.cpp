@@ -8,11 +8,15 @@
 #include "CPlayer.h"
 
 CPlayer::CPlayer() {
+  id = 0;
   name = "";
+  avatar = "";
 }
 
-CPlayer::CPlayer(string name) {
+CPlayer::CPlayer(int player_id, string name, string avatar) {
+  this->id = player_id;
   this->name = name;
+  this->avatar = avatar;
 }
 
 CPlayer::CPlayer(const CPlayer& orig) {
@@ -25,6 +29,10 @@ CPlayer::~CPlayer() {
 
 void CPlayer::AddUnit(CUnitEntity* unit_entity) {
   unit_tree[unit_entity->GetID()] = unit_entity;
+}
+
+void CPlayer::RemoveUnit(int id) {
+  unit_tree.erase(id);
 }
 
 CUnitEntity* CPlayer::GetUnit(int id) {

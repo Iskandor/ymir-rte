@@ -299,9 +299,10 @@ void CMap::normalize_tile(CTile* p_tile) {
   return;
 }
 
-void CMap::addUnit(int x, int y, int id)  {
-  CUnitEntity* unit_entity = unit_manager->addUnit(x, y, id);
+void CMap::addUnit(int x, int y, int id, int player_id)  {
+  CUnitEntity* unit_entity = unit_manager->addUnit(x, y, id, player_id);
   Block(unit_entity);
+  player_manager->GetPlayer(player_id)->AddUnit(unit_entity);
 }
 
 int CMap::getMapSizeX(SizeMode mode) {

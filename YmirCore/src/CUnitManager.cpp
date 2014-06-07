@@ -21,10 +21,10 @@ CUnitManager::CUnitManager(const CUnitManager& orig) {
 CUnitManager::~CUnitManager() {
 }
 
-CUnitEntity* CUnitManager::addUnit(int x, int y, int id) {
+CUnitEntity* CUnitManager::addUnit(int x, int y, int id, int player_id) {
   CObjectEntity* unit = NULL;
   
-  unit = new CUnitEntity(unit_module->GetUnitPtr(id), 0, x, y);
+  unit = new CUnitEntity(unit_module->GetUnitPtr(id), 0, player_id, x, y);
   
   object_manager->addObject(unit);
   unit_list.push_back(reinterpret_cast<CUnitEntity*>(unit));

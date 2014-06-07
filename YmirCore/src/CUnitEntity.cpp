@@ -12,9 +12,9 @@
 #include "CMathUtils.h"
 #include "CMap.h"
 
-CUnitEntity::CUnitEntity(CUnit* unit, int inner_id, int x, int y) : CObjectEntity(unit, inner_id, x, y, 0) {
+CUnitEntity::CUnitEntity(CUnit* unit, int inner_id, int player_id, int x, int y) : CObjectEntity(unit, inner_id, x, y, 0) {
   root_unit = unit;
-  
+  this->player_id = player_id;
   //generateProps();
   max_hp = 0;
   hp = max_hp;
@@ -26,7 +26,7 @@ CUnitEntity::CUnitEntity(CUnit* unit, int inner_id, int x, int y) : CObjectEntit
 
 CUnitEntity::CUnitEntity(const CUnitEntity& orig) : CObjectEntity(orig) {
   root_unit = orig.root_unit;
-  
+  player_id = orig.player_id;
   max_hp = orig.max_hp;
   max_mp = orig.max_mp;
   hp = orig.hp;

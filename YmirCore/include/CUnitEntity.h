@@ -18,12 +18,13 @@ using namespace std;
 
 class CUnitEntity : public CObjectEntity {
 public:
-  CUnitEntity(CUnit* unit, int inner_id, int x, int y);
+  CUnitEntity(CUnit* unit, int inner_id, int player_id, int x, int y);
   CUnitEntity(const CUnitEntity& orig);
   virtual ~CUnitEntity();
   
 public:
   CUnit*  GetRootUnit();
+  int     GetPlayerID() { return player_id; };
   
   void Move(double* block_map, int size_x, int size_y, int x, int y);
   void Move();
@@ -36,6 +37,8 @@ private:
 private:
   /* unit root variable */
   CUnit*  root_unit;
+  
+  int player_id;
   /* generated props */
   int hp;
   int max_hp;

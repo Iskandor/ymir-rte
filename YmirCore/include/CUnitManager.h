@@ -24,7 +24,7 @@ public:
   virtual ~CUnitManager();
 
 public:
-  CUnitEntity*  addUnit(int x, int y, int id);
+  CUnitEntity*  addUnit(int x, int y, int id, int player_id);
   CUnitEntity*  getUnit(int index);
   void          remUnit(int index);
   

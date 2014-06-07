@@ -15,6 +15,7 @@
 #include "CTile.h"
 #include "CObjectManager.h"
 #include "CUnitManager.h"
+#include "CPlayerManager.h"
 
 using namespace std;
 
@@ -35,6 +36,7 @@ private:
   CModule<CUnit>    *unit_module;
   CModule<CObject>  *object_module;
   CUnitManager      *unit_manager;
+  CPlayerManager    *player_manager;
   
   string  name;
   string  filename;
@@ -66,6 +68,9 @@ public:
 
   void setName(string name) {this->name = name;};
   string getName() { return this->name;};
+  
+  void SetPlayerManager(CPlayerManager* player_manager) { this->player_manager = player_manager; };
+  CPlayerManager* GetPlayerManager() { return player_manager; };
 
   CTile**  getTilePtr() { return this->pTile; };
   double*  GetCostMap() { return this->move_cost_map; };
@@ -75,7 +80,7 @@ public:
   
   CUnitManager* GetUnitManager() { return unit_manager; };
   
-  void addUnit(int x, int y, int id);
+  void addUnit(int x, int y, int id, int player_id);
   
   void Block(CUnitEntity* unit_entity);
   void Unblock(CUnitEntity* unit_entity);

@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CObjectEntity.o \
 	${OBJECTDIR}/src/CObjectManager.o \
 	${OBJECTDIR}/src/CPlayer.o \
+	${OBJECTDIR}/src/CPlayerManager.o \
 	${OBJECTDIR}/src/CRace.o \
 	${OBJECTDIR}/src/CStrUtils.o \
 	${OBJECTDIR}/src/CTile.o \
@@ -105,6 +106,11 @@ ${OBJECTDIR}/src/CPlayer.o: src/CPlayer.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CPlayer.o src/CPlayer.cpp
+
+${OBJECTDIR}/src/CPlayerManager.o: src/CPlayerManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CPlayerManager.o src/CPlayerManager.cpp
 
 ${OBJECTDIR}/src/CRace.o: src/CRace.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
