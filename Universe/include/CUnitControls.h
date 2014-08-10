@@ -12,6 +12,7 @@
 
 #include "CMap.h"
 #include "CMapRender.h"
+#include "CUnitEntity.h"
 
 class CUnitControls {
 public:
@@ -21,6 +22,9 @@ public:
   
   void OnEvent(SDL_Event* event);
   void OnLoop();
+  
+private:
+  pair<int, int>  GetAttackPosition(CUnitEntity* attacker, CUnitEntity* target);
   
 private:
   CMapRender*   map_render;

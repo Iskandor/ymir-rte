@@ -48,6 +48,6 @@ bool CTileRender::LoadSurfaces() {
 }
   
 void CTileRender::OnRender(SDL_Surface* dest, CTile* tile, int x, int y) {
-  SDL_Rect rect = {x, y, TILE_W, TILE_H};
+  SDL_Rect rect = {(Sint16)x, (Sint16)y, TILE_W, TILE_H};
   SDL_BlitSurface(tile_surface[tile->GetID()], NULL, dest, &rect);
 }

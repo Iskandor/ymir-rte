@@ -28,6 +28,7 @@ public:
 private:
   CModule<CObject>                  *object_module;
   map<int, CSprite*>                object_sprite;
+  map<int, SDL_Surface*>            insignia_bckg;
 };
 
 #endif	/* COBJECTRENDER_H */

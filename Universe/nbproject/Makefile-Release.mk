@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CApp.o \
 	${OBJECTDIR}/src/CDataManager.o \
 	${OBJECTDIR}/src/CGameControls.o \
+	${OBJECTDIR}/src/CGuiManager.o \
 	${OBJECTDIR}/src/CMapControls.o \
 	${OBJECTDIR}/src/CMapRender.o \
 	${OBJECTDIR}/src/CMapSegment.o \
@@ -87,6 +88,11 @@ ${OBJECTDIR}/src/CGameControls.o: src/CGameControls.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CGameControls.o src/CGameControls.cpp
+
+${OBJECTDIR}/src/CGuiManager.o: src/CGuiManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CGuiManager.o src/CGuiManager.cpp
 
 ${OBJECTDIR}/src/CMapControls.o: src/CMapControls.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

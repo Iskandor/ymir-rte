@@ -31,6 +31,7 @@ public:
 private:
   CModule<CUnit>          *unit_module;
   map<int, CSprite*>      unit_sprite;
+  map<int, SDL_Surface*>  insignia_bckg;
 
 };
 

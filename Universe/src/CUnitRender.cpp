@@ -26,6 +26,8 @@ CUnitRender::~CUnitRender() {
 }
 
 bool CUnitRender::LoadSurfaces() {
+  SDL_Surface *new_surf = NULL;
+  
   if (unit_module == NULL) {
     return false;
   }
@@ -33,9 +35,7 @@ bool CUnitRender::LoadSurfaces() {
   for(int i = 0; i < unit_module->GetSize(); i++) {
     CUnit unit = unit_module->GetUnit(i);
     string path = unit.GetImage();
-    
-    SDL_Surface *new_surf;   
-    
+
     new_surf = IMG_Load(path.c_str());
     if (new_surf == NULL) {
       return false;

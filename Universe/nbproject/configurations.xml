@@ -7,6 +7,7 @@
       <itemPath>include/CApp.h</itemPath>
       <itemPath>include/CDataManager.h</itemPath>
       <itemPath>include/CGameControls.h</itemPath>
+      <itemPath>include/CGuiManager.h</itemPath>
       <itemPath>include/CMapControls.h</itemPath>
       <itemPath>include/CMapRender.h</itemPath>
       <itemPath>include/CMapSegment.h</itemPath>
@@ -26,6 +27,7 @@
       <itemPath>src/CApp.cpp</itemPath>
       <itemPath>src/CDataManager.cpp</itemPath>
       <itemPath>src/CGameControls.cpp</itemPath>
+      <itemPath>src/CGuiManager.cpp</itemPath>
       <itemPath>src/CMapControls.cpp</itemPath>
       <itemPath>src/CMapRender.cpp</itemPath>
       <itemPath>src/CMapSegment.cpp</itemPath>
@@ -64,6 +66,8 @@
             <pElem>../YmirCore/include</pElem>
             <pElem>include</pElem>
             <pElem>/usr/include/qt4</pElem>
+            <pElem>/usr/local/include/guichan</pElem>
+            <pElem>/usr/include/SDL</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
@@ -90,6 +94,8 @@
             <linkerOptionItem>`pkg-config --libs QtCore`</linkerOptionItem>
             <linkerOptionItem>`pkg-config --libs QtGui`</linkerOptionItem>
             <linkerOptionItem>`pkg-config --libs QtXml`</linkerOptionItem>
+            <linkerLibLibItem>guichan</linkerLibLibItem>
+            <linkerLibLibItem>guichan_sdl</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
         <requiredProjects>
@@ -110,6 +116,8 @@
       <item path="include/CDataManager.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CGameControls.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CGuiManager.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CMapControls.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -132,6 +140,8 @@
       <item path="src/CDataManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CGameControls.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CGuiManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMapControls.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -179,6 +189,8 @@
       </item>
       <item path="include/CGameControls.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CGuiManager.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CMapControls.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CMapRender.h" ex="false" tool="3" flavor2="0">
@@ -200,6 +212,8 @@
       <item path="src/CDataManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CGameControls.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CGuiManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMapControls.cpp" ex="false" tool="1" flavor2="0">
       </item>

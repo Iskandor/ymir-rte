@@ -58,6 +58,11 @@ int CApp::OnInit() {
     return -2;
   }
   
+  gui_manager = new CGuiManager(surfDisplay);
+  if (gui_manager->OnInit() != 0) {
+    return -3;
+  }
+  
   tile_module.LoadFromXML("data/tiles", "tiles", "tile");
   tile_render = new CTileRender(&tile_module);
   
@@ -109,13 +114,13 @@ void CApp::OnEvent(SDL_Event* event) {
     } break;
   }
   map_controls->OnEvent(event);
-  
   unit_controls->OnEvent(event);
 }
 
 void CApp::OnRender() {
   SDL_FillRect(surfDisplay, NULL, SDL_MapRGB(surfDisplay->format, 0, 0, 0));
   map_render->OnRender(surfDisplay);
+  gui_manager->OnRender();
   SDL_Flip(surfDisplay);
 }
 

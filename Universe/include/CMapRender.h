@@ -32,10 +32,16 @@ public:
   CMap*      GetMap();
   
 private:
+  void render_possible_loc(SDL_Surface* dest, CUnitEntity* unit_entity);
+  
+private:
   SDL_Rect      camera;
   
   SDL_Surface*  main_surf;
 	SDL_Rect*     main_rect;
+  
+  SDL_Surface*  tech_surface;
+  SDL_Rect      tech_rect;
   
   CMap*           map;
   CTileRender*    tile_render;

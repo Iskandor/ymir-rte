@@ -10,7 +10,6 @@
 
 #include <SDL/SDL.h>
 
-
 #include "CModule.h"
 #include "CTile.h"
 #include "CTileRender.h"
@@ -21,8 +20,8 @@
 #include "CMapRender.h"
 #include "CMapControls.h"
 #include "CObject.h"
-#include "CPlayer.h"
 #include "CPlayerManager.h"
+#include "CGuiManager.h"
 
 class CApp {
 public:
@@ -42,6 +41,7 @@ private:
   CModule<CObject> object_module;
   CObjectRender   *object_render;
   CPlayerManager  player_manager;
+  CGuiManager     *gui_manager;
   
   bool running;
 

@@ -9,6 +9,7 @@
 #include "CMapRender.h"
 #include "GlobalDefine.h"
 #include "CUtils.h"
+#include "CMathUtils.h"
 
 CUnitControls::CUnitControls(CMapRender* map_render) {
   this->map_render = map_render; 
@@ -49,10 +50,14 @@ void CUnitControls::OnEvent(SDL_Event* event) {
             if (selected_unit != NULL) {
               map->remObject(selected_unit->GetRefObject()->GetID());
               selected_unit->SetRefObject(NULL);
+              selected_unit->SetSelected(false);
             }
             CObjectEntity* selector = map->addObject(unit_entity->GetX(), unit_entity->GetY(), BOTTOM, 0);
             unit_entity->SetRefObject(selector);
             selected_unit = unit_entity;
+            map->Unblock(selected_unit);
+            selected_unit->OnClick(map->GetCostMap(), map->getMapSizeX(sizemode_elem), map->getMapSizeY(sizemode_elem));
+            map->Block(selected_unit);
             break;
           }
         }
@@ -60,18 +65,34 @@ void CUnitControls::OnEvent(SDL_Event* event) {
           if (selected_unit != NULL) {
             map->remObject(selected_unit->GetRefObject()->GetID());
             selected_unit->SetRefObject(NULL);
+            selected_unit->SetSelected(false);            
             selected_unit = NULL;
+
           }          
         }
       }
       if (event->button.button == SDL_BUTTON_RIGHT) {
         if (selected_unit != NULL) {
           SDL_Rect*    camera = map_render->GetCamera();
-          int x = (event->button.x / MAP_ELEM) + camera->x - (selected_unit->GetRootObject()->GetXSize() / 2);
-          int y = (event->button.y / MAP_ELEM) + camera->y - (selected_unit->GetRootObject()->GetYSize() - 1);
-          map->Unblock(selected_unit);
-          selected_unit->Move(map->GetCostMap(), map->getMapSizeX(sizemode_elem), map->getMapSizeY(sizemode_elem), x, y);
-          map->Block(selected_unit);
+          int x = (event->button.x / MAP_ELEM) + camera->x;
+          int y = (event->button.y / MAP_ELEM) + camera->y;
+          CUnitEntity* other_unit = map->GetUnitManager()->getUnit(x, y);
+          
+          if (other_unit != NULL) {
+            pair<int, int> target_pos = GetAttackPosition(selected_unit, other_unit);
+            map->Unblock(selected_unit);
+            selected_unit->Move(map->GetCostMap(), map->getMapSizeX(sizemode_elem), map->getMapSizeY(sizemode_elem), target_pos.first, target_pos.second);
+            map->Block(selected_unit);            
+          }
+          else
+          {
+            x = (event->button.x / MAP_ELEM) + camera->x - (selected_unit->GetRootObject()->GetXSize() / 2);
+            y = (event->button.y / MAP_ELEM) + camera->y - (selected_unit->GetRootObject()->GetYSize() - 1);
+             
+            map->Unblock(selected_unit);
+            selected_unit->Move(map->GetCostMap(), map->getMapSizeX(sizemode_elem), map->getMapSizeY(sizemode_elem), x, y);
+            map->Block(selected_unit);
+          }
         }
       }
     break;
@@ -94,5 +115,40 @@ void CUnitControls::OnLoop() {
       }
     }
   }
+}
+
+pair<int, int> CUnitControls::GetAttackPosition(CUnitEntity* attacker, CUnitEntity* target) {
+  pair<double, double> target_pos = target->GetBlockCenter();
+  pair<double, double> attacker_pos = attacker->GetBlockCenter();
+  
+  target_pos.first += target->GetX();
+  target_pos.second += target->GetY();
+  
+  attacker_pos.first = attacker->GetX();
+  attacker_pos.second = attacker->GetY();
+  
+  double min_value = 999;
+  double min_x = 0;
+  double min_y = 0;
+  double act_value = min_value;
+  double range_value = 0;
+  
+  for(int i = -attacker->GetRootUnit()->getAttackRange(); i < attacker->GetRootUnit()->getAttackRange(); i++) {
+    for(int j = -attacker->GetRootUnit()->getAttackRange(); j < attacker->GetRootUnit()->getAttackRange(); j++) {
+      act_value = CMathUtils::euclidian_distance(target_pos.first + j, target_pos.second + i, attacker_pos.first, attacker_pos.second);
+      if (act_value < min_value) {
+        range_value = CMathUtils::euclidian_distance(target_pos.first + j, target_pos.second + i, target_pos.first, target_pos.second);
+        if (round(range_value) == attacker->GetRootUnit()->getAttackRange()) {
+          if (map->IsPlaceFree(attacker, target->GetX() + j, target->GetY() + i)) {
+            min_value = act_value;
+            min_x = j;
+            min_y = i;
+          }
+        }
+      }
+    }    
+  }
+  
+  return pair<int, int>(min_x + target->GetX(), min_y + target->GetY());
 }
 

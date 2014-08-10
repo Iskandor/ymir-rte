@@ -15,7 +15,15 @@ CMapRender::CMapRender(SDL_Rect* display_rect, CMap* map, CTileRender* tile_rend
   camera.w = 20 * (TILE_W / MAP_ELEM);
   camera.h = 6 * (TILE_H / MAP_ELEM);
  
-  main_rect = display_rect;  
+  main_rect = display_rect;
+
+  tech_surface = SDL_CreateRGBSurface(SDL_SWSURFACE, MAP_ELEM, MAP_ELEM, 32, 0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff);
+  SDL_FillRect(tech_surface, NULL, SDL_MapRGB(tech_surface->format, 128, 128, 0)); 
+  SDL_SetAlpha(tech_surface, SDL_SRCALPHA, 64);
+  tech_surface = SDL_DisplayFormat(tech_surface);
+  
+  tech_rect.w = MAP_ELEM;
+  tech_rect.h = MAP_ELEM;  
   
   map_segments.clear();
   this->map = map;
@@ -37,6 +45,7 @@ CMapRender::CMapRender(const CMapRender& orig) {
 }
 
 CMapRender::~CMapRender() {
+  SDL_FreeSurface(tech_surface);
 }
 
 void CMapRender::OnRender(SDL_Surface* dest) {
@@ -63,6 +72,12 @@ void CMapRender::OnRender(SDL_Surface* dest) {
     }   
   }
   
+  CUnitEntity* selected_unit = map->GetUnitManager()->getSelectedUnit();
+  
+  if (selected_unit != NULL) {
+    render_possible_loc(dest, selected_unit);
+  }
+  
   CObjectManager *object_manager = (CObjectManager*)map;
   multimap<double, CObjectEntity*, less<double> >* ytree = object_manager->GetYSortedTree();
   multimap<double, CObjectEntity*, less<double> >::iterator it;
@@ -72,8 +87,8 @@ void CMapRender::OnRender(SDL_Surface* dest) {
 
     pair<int, int> point(object_entity->GetX(), object_entity->GetY());
 
-    int x = (object_entity->GetX() * MAP_ELEM) - (camera.x * MAP_ELEM);
-    int y = (object_entity->GetY() * MAP_ELEM) - (camera.y * MAP_ELEM);
+    int x = (object_entity->GetX() - camera.x) * MAP_ELEM;
+    int y = (object_entity->GetY() - camera.y) * MAP_ELEM;
 
     SDL_Rect camera_border;
     
@@ -85,6 +100,20 @@ void CMapRender::OnRender(SDL_Surface* dest) {
     if (CUtils::PointIsInArea(point, camera_border)) {
       object_render->OnRender(dest, object_entity, x, y);
     }    
+  }
+}
+
+void CMapRender::render_possible_loc(SDL_Surface* dest, CUnitEntity* unit_entity) {
+  set<pair<int, int> > *possible_loc = unit_entity->GetPossibleLoc();
+  set<pair<int, int> >::iterator it;
+  
+  for(it = possible_loc->begin(); it != possible_loc->end(); it++) {
+    pair<int, int> loc = *it;
+    if (CUtils::PointIsInArea(loc, camera)) {
+      tech_rect.x = (loc.first - camera.x) * MAP_ELEM;
+      tech_rect.y = (loc.second - camera.y) * MAP_ELEM;
+      SDL_BlitSurface(tech_surface, NULL, dest, &tech_rect); 
+    }
   }
 }
 
