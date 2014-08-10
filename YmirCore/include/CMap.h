@@ -84,6 +84,7 @@ public:
   
   void Block(CUnitEntity* unit_entity);
   void Unblock(CUnitEntity* unit_entity);
+  bool IsPlaceFree(CUnitEntity* unit_entity, int x, int y);
   
   static pair<int, int> decompose_node(int mixed, int size_x);
   static int            compose_node(pair<int, int> node, int size_x);

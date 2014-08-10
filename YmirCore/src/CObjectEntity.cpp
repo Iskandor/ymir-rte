@@ -13,7 +13,8 @@ CObjectEntity::CObjectEntity(int inner_id) {
   z_index = 0;
   root_object = NULL;
   state = IDLE;
-  direction = CObjectEntity::RIGHT;  
+  direction = CObjectEntity::RIGHT;
+class_name = "object_entity";  
 }
 
 CObjectEntity::CObjectEntity(CObject* object, int inner_id, int x, int y, double z_index) {
@@ -22,7 +23,8 @@ CObjectEntity::CObjectEntity(CObject* object, int inner_id, int x, int y, double
   this->z_index = z_index;
   root_object = object;
   state = IDLE;
-  direction = CObjectEntity::RIGHT;  
+  direction = CObjectEntity::RIGHT;
+  class_name = "object_entity";
 }
 
 CObjectEntity::CObjectEntity(const CObjectEntity& orig) {
@@ -33,7 +35,8 @@ CObjectEntity::CObjectEntity(const CObjectEntity& orig) {
   root_object = orig.root_object;
   
   state = orig.state;
-  direction = orig.direction;  
+  direction = orig.direction;
+  class_name = orig.class_name;  
 }
 
 CObjectEntity::~CObjectEntity() {
@@ -42,6 +45,35 @@ CObjectEntity::~CObjectEntity() {
 void CObjectEntity::setPosition(int x, int y) {
   this->x = x;
   this->y = y;
+}
+
+pair<int, int> CObjectEntity::FindFirstBlocked() {
+  for(int i = 0; i < root_object->GetYSize(); i++) {
+    for(int j = 0; j < root_object->GetXSize(); j++) {
+      if (root_object->GetBlockMap()[i*root_object->GetXSize()+j] > 0) {
+        return pair<int, int>(j, i);
+      }
+    }
+  }
+  return pair<int, int>(-1, -1);
+}
+
+pair<double, double> CObjectEntity::GetBlockCenter() {
+  pair<double, double> result = FindFirstBlocked();
+  
+  for(int i = 0; i < root_object->GetYSize(); i++) {
+    for(int j = 0; j < root_object->GetXSize(); j++) {
+      if (root_object->GetBlockMap()[i*root_object->GetXSize()+j] > 0) {
+        result.first += j;
+        result.second += i;
+        
+        result.first /= 2;
+        result.second /= 2;
+      }
+    }
+  }
+  
+  return result;
 }
 
 int CObjectEntity::GetX() {

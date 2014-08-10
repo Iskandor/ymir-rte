@@ -14,6 +14,7 @@
 #define IMAGE_PATH_UNITS "data/image/units/"
 #define IMAGE_PATH_OBJECTS "data/image/objects/"
 #define IMAGE_PATH_TILES "data/image/terrain/"
+#define IMAGE_PATH_INSIGNIA "data/image/insignia/"
 
 #ifdef	__cplusplus
 extern "C" {
@@ -26,6 +27,8 @@ const int TILE_PER_SEGMENT = 16;
 const int ELEM_PER_TILE = 4;
 const double BOTTOM  = -0.1;
 const double TOP     = 0.1;
+const double SQRT2   = 1.4142;
+const int MAX_PLAYER = 3;
 
 
 #ifdef	__cplusplus

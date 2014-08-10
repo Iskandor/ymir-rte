@@ -72,20 +72,15 @@ CObjectEntity* CObjectManager::addObject(CObjectEntity* object_entity) {
 }
 
 void CObjectManager::remObject(int id) {
-  multimap<double, CObjectEntity*, less< double > >::iterator it;
-  pair<multimap<double, CObjectEntity*, less< double > >::iterator,
-       multimap<double, CObjectEntity*, less< double > >::iterator> boundries;
-
-  double key = object_tree[id]->GetY() + object_tree[id]->GetZIndex();  
-  boundries = ysorted_tree.equal_range(key);
+  multimap<double, CObjectEntity*, less< double > >::iterator it; 
   
-  for(it = boundries.first; it != boundries.second; it++) {
+  for(it = ysorted_tree.begin(); it != ysorted_tree.end(); it++) {
     if (it->second->GetID() == id) {
       break;
     }
   }
   
-  if (it != boundries.second) {
+  if (it != ysorted_tree.end()) {
     ysorted_tree.erase(it);
   }
   object_tree.erase(id);

@@ -36,6 +36,29 @@ CUnitEntity* CUnitManager::getUnit(int index) {
   return unit_list[index];
 }
 
+CUnitEntity* CUnitManager::getUnit(int x, int y) {
+  CUnitEntity* result = NULL;
+  
+  for(int i = 0; i < unit_list.size(); i++) {
+    result = unit_list[i];
+    if (result->GetX() <= x && result->GetX() + result->GetRootUnit()->GetXSize() >= x &&
+        result->GetY() <= y && result->GetY() + result->GetRootUnit()->GetYSize() >= y) {
+      return result;
+    }   
+  }
+  
+  return NULL;
+}
+
+CUnitEntity* CUnitManager::getSelectedUnit() {
+  for(int i = 0; i < unit_list.size(); i++) {
+    if (unit_list[i]->GetSelected()) {
+      return unit_list[i];
+    }
+  }
+  return NULL;
+}
+
 void CUnitManager::remUnit(int index) {
   int i = 0;
   

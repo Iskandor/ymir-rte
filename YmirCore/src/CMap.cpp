@@ -362,3 +362,15 @@ void CMap::Unblock(CUnitEntity* unit_entity) {
     }
   }  
 }
+
+bool CMap::IsPlaceFree(CUnitEntity* unit_entity, int x, int y) {
+  for(int i = 0; i < unit_entity->GetRootObject()->GetYSize(); i++) {
+    for(int j = 0; j < unit_entity->GetRootObject()->GetXSize(); j++) {
+      int node = CMap::compose_node(pair<int, int>(x + j, y + i), map_elemsize_x);
+      if (move_cost_map[node] == 99) {
+        return false;
+      }
+    }
+  }
+  return true;
+}

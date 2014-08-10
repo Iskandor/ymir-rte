@@ -39,14 +39,21 @@ protected:
   
   CObject*  root_object;
   CObjectEntity*  ref_object_entity;
+  
+  string class_name;
+  
+protected:
+  pair<int, int> FindFirstBlocked();
 
 public:  
   void SetID(unsigned int id) { this->id = id; };
   unsigned int GetID();
   int GetX();
   int GetY();
+  string GetClassName() { return class_name; };
   
   void setPosition(int x, int y);
+  pair<double, double> GetBlockCenter();
 
   bool operator< (CObjectEntity& ent);  
   

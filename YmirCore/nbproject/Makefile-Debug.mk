@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/CAction.o \
 	${OBJECTDIR}/src/CMap.o \
 	${OBJECTDIR}/src/CMathUtils.o \
 	${OBJECTDIR}/src/CObject.o \
@@ -76,6 +77,11 @@ LDLIBSOPTIONS=-L/usr/lib -lSDL
 bin/libYmirCore.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p bin
 	${LINK.cc} -o bin/libYmirCore.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
+
+${OBJECTDIR}/src/CAction.o: src/CAction.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CAction.o src/CAction.cpp
 
 ${OBJECTDIR}/src/CMap.o: src/CMap.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

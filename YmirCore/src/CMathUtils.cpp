@@ -18,7 +18,11 @@ CMathUtils::~CMathUtils() {
 }
 
 double CMathUtils::euclidian_distance(int x1, int y1, int x2, int y2) {
-  int sum;
+  return euclidian_distance((double)x1, (double)y1, (double)x2, (double)y2);
+}
+
+double CMathUtils::euclidian_distance(double x1, double y1, double x2, double y2) {
+  double sum;
 
   sum = pow((x1 - x2), 2) + pow((y1 - y2), 2);
 

@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>include/CAction.h</itemPath>
       <itemPath>include/CMap.h</itemPath>
       <itemPath>include/CMathUtils.h</itemPath>
       <itemPath>include/CModule.h</itemPath>
@@ -32,6 +33,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>src/CAction.cpp</itemPath>
       <itemPath>src/CMap.cpp</itemPath>
       <itemPath>src/CMathUtils.cpp</itemPath>
       <itemPath>src/CObject.cpp</itemPath>
@@ -97,6 +99,8 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="include/CAction.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CMap.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CMathUtils.h" ex="false" tool="3" flavor2="0">
@@ -132,6 +136,8 @@
       <item path="include/CXmlSerializable.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/GlobalDefine.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/CAction.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMap.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -187,6 +193,8 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="include/CAction.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CMap.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CMathUtils.h" ex="false" tool="3" flavor2="0">
@@ -222,6 +230,8 @@
       <item path="include/CXmlSerializable.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/GlobalDefine.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/CAction.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMap.cpp" ex="false" tool="1" flavor2="0">
       </item>
