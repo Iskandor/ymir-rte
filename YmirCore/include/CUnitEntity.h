@@ -10,6 +10,7 @@
 
 #include "CObjectEntity.h"
 #include "CUnit.h"
+#include "CAction.h"
 #include <string>
 #include <vector>
 #include <queue>
@@ -31,16 +32,16 @@ public:
   bool    GetSelected() { return selected; };
   int     GetHP() { return hp; };
   int     GetMaxHP() { return max_hp; };
+  void    AddAction(CAction action) { action_queue.push(action); };
+  CAction GetAction();
+  
   
   void OnClick(double* block_map, int size_x, int size_y);
-  void Move(double* block_map, int size_x, int size_y, int x, int y);
-  void Move();
   
 private:
   void generate_props();
-  void generate_path(double* block_map, int size_x, int size_y, int x, int y);
   void generate_possible_loc(double* block_map, int size_x, int size_y);
-  queue< pair<int, int> > reconstruct_path(int* came_from, int length, int current_node, int size_x);
+  
   
 private:
   /* unit root variable */
@@ -56,7 +57,7 @@ private:
   double max_sp;
   double as;
   
-  queue< pair<int, int> > path;
+  queue<CAction>          action_queue;
   set< pair<int, int> >   possible_loc;
   bool  selected;
 };

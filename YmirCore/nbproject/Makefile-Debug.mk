@@ -80,88 +80,88 @@ bin/libYmirCore.${CND_DLIB_EXT}: ${OBJECTFILES}
 
 ${OBJECTDIR}/src/CAction.o: src/CAction.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CAction.o src/CAction.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CAction.o src/CAction.cpp
 
 ${OBJECTDIR}/src/CMap.o: src/CMap.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CMap.o src/CMap.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CMap.o src/CMap.cpp
 
 ${OBJECTDIR}/src/CMathUtils.o: src/CMathUtils.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CMathUtils.o src/CMathUtils.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CMathUtils.o src/CMathUtils.cpp
 
 ${OBJECTDIR}/src/CObject.o: src/CObject.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CObject.o src/CObject.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CObject.o src/CObject.cpp
 
 ${OBJECTDIR}/src/CObjectEntity.o: src/CObjectEntity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CObjectEntity.o src/CObjectEntity.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CObjectEntity.o src/CObjectEntity.cpp
 
 ${OBJECTDIR}/src/CObjectManager.o: src/CObjectManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CObjectManager.o src/CObjectManager.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CObjectManager.o src/CObjectManager.cpp
 
 ${OBJECTDIR}/src/CPlayer.o: src/CPlayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CPlayer.o src/CPlayer.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CPlayer.o src/CPlayer.cpp
 
 ${OBJECTDIR}/src/CPlayerManager.o: src/CPlayerManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CPlayerManager.o src/CPlayerManager.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CPlayerManager.o src/CPlayerManager.cpp
 
 ${OBJECTDIR}/src/CRace.o: src/CRace.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CRace.o src/CRace.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CRace.o src/CRace.cpp
 
 ${OBJECTDIR}/src/CStrUtils.o: src/CStrUtils.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CStrUtils.o src/CStrUtils.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CStrUtils.o src/CStrUtils.cpp
 
 ${OBJECTDIR}/src/CTile.o: src/CTile.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CTile.o src/CTile.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CTile.o src/CTile.cpp
 
 ${OBJECTDIR}/src/CUnit.o: src/CUnit.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CUnit.o src/CUnit.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUnit.o src/CUnit.cpp
 
 ${OBJECTDIR}/src/CUnitEntity.o: src/CUnitEntity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CUnitEntity.o src/CUnitEntity.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUnitEntity.o src/CUnitEntity.cpp
 
 ${OBJECTDIR}/src/CUnitManager.o: src/CUnitManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CUnitManager.o src/CUnitManager.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUnitManager.o src/CUnitManager.cpp
 
 ${OBJECTDIR}/src/CUnitModuleManager.o: src/CUnitModuleManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CUnitModuleManager.o src/CUnitModuleManager.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUnitModuleManager.o src/CUnitModuleManager.cpp
 
 ${OBJECTDIR}/src/CUtils.o: src/CUtils.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CUtils.o src/CUtils.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUtils.o src/CUtils.cpp
 
 ${OBJECTDIR}/src/CXmlSerializable.o: src/CXmlSerializable.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CXmlSerializable.o src/CXmlSerializable.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CXmlSerializable.o src/CXmlSerializable.cpp
 
 # Subprojects
 .build-subprojects:
