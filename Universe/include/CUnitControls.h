@@ -24,7 +24,15 @@ public:
   void OnLoop();
   
 private:
-  pair<int, int>  GetAttackPosition(CUnitEntity* attacker, CUnitEntity* target);
+  void CreatePath(CUnitEntity* unit_entity, CAction* action);
+  void CreatePath(CUnitEntity* unit_entity, int x, int y);
+  void Move(CUnitEntity* unit_entity, CAction* action);
+  void Attack(CUnitEntity* unit_entity, CAction* action);
+  
+  pair<int, int>          GetAttackPosition(CUnitEntity* attacker, CUnitEntity* target);
+  queue< pair<int, int> > GeneratePath(CUnitEntity* unit_entity, int x, int y);
+  queue< pair<int, int> > ReconstructPath(int* came_from, int length, int current_node, int size_x);
+  
   
 private:
   CMapRender*   map_render;
