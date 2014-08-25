@@ -19,8 +19,9 @@ public:
   CUtils(const CUtils& orig);
   virtual ~CUtils();
   
-  static int  rollDice(int k, int n);
-  static bool PointIsInArea(pair<int, int> point, SDL_Rect area);
+  static int    rollDice(int k, int n);
+  static double Probability(int r);
+  static bool   PointIsInArea(pair<int, int> point, SDL_Rect area);
 };
 
 #endif	/* CUTILS_H */

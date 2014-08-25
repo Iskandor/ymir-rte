@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'EntryForm.ui'
 **
-** Created: Sat May 10 22:55:30 2014
-**      by: Qt User Interface Compiler version 4.8.3
+** Created: Fri Aug 22 19:40:24 2014
+**      by: Qt User Interface Compiler version 4.8.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/

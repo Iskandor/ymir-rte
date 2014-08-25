@@ -26,6 +26,10 @@ int CUtils::rollDice(int k, int n) {
   
   return result;
 }
+
+double CUtils::Probability(int r) {
+    return ((double) rand() / (RAND_MAX)) * r;
+}
         
 bool CUtils::PointIsInArea(pair<int,int> point, SDL_Rect area) {
   if (point.first >= area.x && point.first <= area.x + area.w) {

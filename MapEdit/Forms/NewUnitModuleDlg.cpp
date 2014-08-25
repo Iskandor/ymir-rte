@@ -161,8 +161,8 @@ void NewUnitModuleDlg::accept() {
 void NewUnitModuleDlg::FormToModel() {
   vector<int>     prop(N_PROP);
   vector<int>     elem(N_ELEM);
-  vector<double>  att(N_ATTACK);
-  vector<double>  def(N_ATTACK);
+  vector<int>     att(N_ATTACK);
+  vector<int>     def(N_ATTACK);
   
   unit_model.setClass(widget.NameLed->text().toStdString());
   unit_model.setRace(widget.RaceCbx->currentText().toStdString());
@@ -187,20 +187,22 @@ void NewUnitModuleDlg::FormToModel() {
   
   unit_model.setElem(elem);
   
-  att[BLUNT_IND] = (double)widget.BluntASbx->value() / 100;
-  att[SLASH_IND] = (double)widget.SlashASbx->value() / 100;
-  att[STAB_IND]  = (double)widget.StabASbx->value() / 100;
+  att[BLUNT_IND] = widget.BluntASbx->value();
+  att[SLASH_IND] = widget.SlashASbx->value();
+  att[STAB_IND]  = widget.StabASbx->value();
   
   unit_model.setAVP(att);
   
-  def[BLUNT_IND] = (double)widget.BluntDSbx->value() / 100;
-  def[SLASH_IND] = (double)widget.SlashDSbx->value() / 100;
-  def[STAB_IND]  = (double)widget.StabDSbx->value() / 100;
+  def[BLUNT_IND] = widget.BluntDSbx->value();
+  def[SLASH_IND] = widget.SlashDSbx->value();
+  def[STAB_IND]  = widget.StabDSbx->value();
   
   unit_model.setRVP(def);
   
   unit_model.SetXSize(widget.SizeXSb->value());
   unit_model.SetYSize(widget.SizeYSb->value());
+  
+  unit_model.setInsigniaPos(pair<int, int>(widget.InsXSb->value(), widget.InsYSb->value()));
 }
 
 void NewUnitModuleDlg::ModelToForm() {
@@ -226,16 +228,19 @@ void NewUnitModuleDlg::ModelToForm() {
   widget.AirSbx->setValue(unit_model.getElem()[AIR_IND]);
   widget.FireSbx->setValue(unit_model.getElem()[FIR_IND]);
   
-  widget.BluntASbx->setValue((int)(unit_model.getAVP()[BLUNT_IND]*100));
-  widget.SlashASbx->setValue((int)(unit_model.getAVP()[SLASH_IND]*100));
-  widget.StabASbx->setValue((int)(unit_model.getAVP()[STAB_IND]*100));
+  widget.BluntASbx->setValue(unit_model.getAVP()[BLUNT_IND]);
+  widget.SlashASbx->setValue(unit_model.getAVP()[SLASH_IND]);
+  widget.StabASbx->setValue(unit_model.getAVP()[STAB_IND]);
   
-  widget.BluntDSbx->setValue((int)(unit_model.getRVP()[BLUNT_IND]*100));
-  widget.SlashDSbx->setValue((int)(unit_model.getRVP()[SLASH_IND]*100));
-  widget.StabDSbx->setValue((int)(unit_model.getRVP()[STAB_IND]*100));
+  widget.BluntDSbx->setValue(unit_model.getRVP()[BLUNT_IND]);
+  widget.SlashDSbx->setValue(unit_model.getRVP()[SLASH_IND]);
+  widget.StabDSbx->setValue(unit_model.getRVP()[STAB_IND]);
  
   widget.SizeXSb->setValue(unit_model.GetXSize());
   widget.SizeYSb->setValue(unit_model.GetYSize());
+  
+  widget.InsXSb->setValue(unit_model.getInsigniaPos().first);
+  widget.InsYSb->setValue(unit_model.getInsigniaPos().second);
 }
 
 void NewUnitModuleDlg::DrawGrid(QPixmap* pixmap) {

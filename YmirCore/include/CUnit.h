@@ -54,24 +54,28 @@ public:
     string getRace();
     void setElem(vector<int> _elem);
     vector<int> getElem();
-    void setAVP(vector<double> _avp);
-    vector<double> getAVP();
-    void setRVP(vector<double> _rvp);
-    vector<double> getRVP();
+    void setAVP(vector<int> _avp);
+    vector<int> getAVP();
+    int GetAttackType(double probability);
+    void setRVP(vector<int> _rvp);
+    vector<int> getRVP();
     void setSight(int _sr);
     int getSight();
     void setAttackRange(int _ar);
     int getAttackRange();
     void setDamageArea(int _aa);
     int getDamageArea();
+    void setInsigniaPos(pair<int, int> pos);
+    pair<int, int> getInsigniaPos();
     
 private:
   int sr;
   int ar;
   int aa;
   vector<int>     elements;
-  vector<double>  avp;
-  vector<double>  rvp;
+  vector<int>     avp;
+  vector<int>     rvp;
+  pair<int, int>  insignia_pos;
   
   string unit_class;
   string unit_race;

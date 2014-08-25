@@ -23,6 +23,7 @@ public:
   };
   
   CAction();
+  CAction(E_TYPE type, int cost);
   CAction(E_TYPE type, int x, int y, int cost);
   CAction(E_TYPE type, CUnitEntity* target, int cost);
   CAction(const CAction& orig);

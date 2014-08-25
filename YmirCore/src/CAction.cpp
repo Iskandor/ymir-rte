@@ -15,6 +15,14 @@ CAction::CAction() {
     this->target = 0;
 }
 
+CAction::CAction(E_TYPE type, int cost) {
+    this->type = type;
+    this->cost = cost;
+    this->x = 0;
+    this->y = 0;
+    this->target = 0;
+}
+
 CAction::CAction(E_TYPE type, int x, int y, int cost) {
     this->type = type;
     this->cost = cost;

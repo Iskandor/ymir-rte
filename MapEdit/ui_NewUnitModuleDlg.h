@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'NewUnitModuleDlg.ui'
 **
-** Created: Sat May 10 22:55:30 2014
-**      by: Qt User Interface Compiler version 4.8.3
+** Created: Fri Aug 22 19:40:24 2014
+**      by: Qt User Interface Compiler version 4.8.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -106,13 +106,19 @@ public:
     QLabel *label_25;
     QLineEdit *ImageLed;
     QLabel *label_26;
-    QPushButton *ChooseBtn;
-    QClickLabel *ImageLb;
     QHBoxLayout *horizontalLayout;
     QLabel *label_27;
     QSpinBox *SizeXSb;
     QLabel *label_28;
     QSpinBox *SizeYSb;
+    QPushButton *ChooseBtn;
+    QClickLabel *ImageLb;
+    QLabel *label_29;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label_30;
+    QSpinBox *InsXSb;
+    QLabel *label_31;
+    QSpinBox *InsYSb;
 
     void setupUi(QDialog *NewUnitModuleDlg)
     {
@@ -444,16 +450,6 @@ public:
 
         formLayout_3->setWidget(1, QFormLayout::LabelRole, label_26);
 
-        ChooseBtn = new QPushButton(formLayoutWidget_3);
-        ChooseBtn->setObjectName(QString::fromUtf8("ChooseBtn"));
-
-        formLayout_3->setWidget(2, QFormLayout::FieldRole, ChooseBtn);
-
-        ImageLb = new QClickLabel(formLayoutWidget_3);
-        ImageLb->setObjectName(QString::fromUtf8("ImageLb"));
-
-        formLayout_3->setWidget(3, QFormLayout::FieldRole, ImageLb);
-
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         label_27 = new QLabel(formLayoutWidget_3);
@@ -479,13 +475,55 @@ public:
 
         formLayout_3->setLayout(1, QFormLayout::FieldRole, horizontalLayout);
 
+        ChooseBtn = new QPushButton(formLayoutWidget_3);
+        ChooseBtn->setObjectName(QString::fromUtf8("ChooseBtn"));
+
+        formLayout_3->setWidget(3, QFormLayout::FieldRole, ChooseBtn);
+
+        ImageLb = new QClickLabel(formLayoutWidget_3);
+        ImageLb->setObjectName(QString::fromUtf8("ImageLb"));
+
+        formLayout_3->setWidget(4, QFormLayout::FieldRole, ImageLb);
+
+        label_29 = new QLabel(formLayoutWidget_3);
+        label_29->setObjectName(QString::fromUtf8("label_29"));
+
+        formLayout_3->setWidget(2, QFormLayout::LabelRole, label_29);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        label_30 = new QLabel(formLayoutWidget_3);
+        label_30->setObjectName(QString::fromUtf8("label_30"));
+
+        horizontalLayout_2->addWidget(label_30);
+
+        InsXSb = new QSpinBox(formLayoutWidget_3);
+        InsXSb->setObjectName(QString::fromUtf8("InsXSb"));
+        InsXSb->setSingleStep(16);
+
+        horizontalLayout_2->addWidget(InsXSb);
+
+        label_31 = new QLabel(formLayoutWidget_3);
+        label_31->setObjectName(QString::fromUtf8("label_31"));
+
+        horizontalLayout_2->addWidget(label_31);
+
+        InsYSb = new QSpinBox(formLayoutWidget_3);
+        InsYSb->setObjectName(QString::fromUtf8("InsYSb"));
+        InsYSb->setSingleStep(16);
+
+        horizontalLayout_2->addWidget(InsYSb);
+
+
+        formLayout_3->setLayout(2, QFormLayout::FieldRole, horizontalLayout_2);
+
         tabWidget->addTab(tab_3, QString());
 
         retranslateUi(NewUnitModuleDlg);
         QObject::connect(buttonBox, SIGNAL(accepted()), NewUnitModuleDlg, SLOT(accept()));
         QObject::connect(buttonBox, SIGNAL(rejected()), NewUnitModuleDlg, SLOT(reject()));
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(NewUnitModuleDlg);
@@ -526,10 +564,13 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("NewUnitModuleDlg", "Advanced", 0, QApplication::UnicodeUTF8));
         label_25->setText(QApplication::translate("NewUnitModuleDlg", "Filename", 0, QApplication::UnicodeUTF8));
         label_26->setText(QApplication::translate("NewUnitModuleDlg", "Size", 0, QApplication::UnicodeUTF8));
-        ChooseBtn->setText(QApplication::translate("NewUnitModuleDlg", "Choose file", 0, QApplication::UnicodeUTF8));
-        ImageLb->setText(QApplication::translate("NewUnitModuleDlg", "Image", 0, QApplication::UnicodeUTF8));
         label_27->setText(QApplication::translate("NewUnitModuleDlg", "X", 0, QApplication::UnicodeUTF8));
         label_28->setText(QApplication::translate("NewUnitModuleDlg", "Y", 0, QApplication::UnicodeUTF8));
+        ChooseBtn->setText(QApplication::translate("NewUnitModuleDlg", "Choose file", 0, QApplication::UnicodeUTF8));
+        ImageLb->setText(QApplication::translate("NewUnitModuleDlg", "Image", 0, QApplication::UnicodeUTF8));
+        label_29->setText(QApplication::translate("NewUnitModuleDlg", "Insignia", 0, QApplication::UnicodeUTF8));
+        label_30->setText(QApplication::translate("NewUnitModuleDlg", "X", 0, QApplication::UnicodeUTF8));
+        label_31->setText(QApplication::translate("NewUnitModuleDlg", "Y", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("NewUnitModuleDlg", "Data", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

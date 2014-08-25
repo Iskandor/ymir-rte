@@ -30,6 +30,7 @@ public:
   set< pair<int, int> >* GetPossibleLoc() { return &possible_loc; };
   void    SetSelected(bool value) { selected = value; };
   bool    GetSelected() { return selected; };
+  void    SetHP(int value) { hp = value; };
   int     GetHP() { return hp; };
   int     GetMaxHP() { return max_hp; };
   void    AddAction(CAction action) { action_queue.push(action); };

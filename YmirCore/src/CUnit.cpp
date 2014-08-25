@@ -77,13 +77,16 @@ CUnit::CUnit(map<string,string> data) : CObject(data){
   
   for(unsigned int i = 0; i < N_ATTACK; i++) {
     sprintf(key, "avp%i", i);
-    avp.push_back(atof(data[key].c_str()));
+    avp.push_back(stoi(data[key]));
   }
 
   for(unsigned int i = 0; i < N_ATTACK; i++) {
     sprintf(key, "rvp%i", i);
-    rvp.push_back(atof(data[key].c_str()));
+    rvp.push_back(stoi(data[key]));
   }
+  
+  insignia_pos.first = atoi(data["ins_x"].c_str());
+  insignia_pos.second = atoi(data["ins_y"].c_str());
 }
 
 CUnit::CUnit(const CUnit& orig) : CObject(orig) {
@@ -96,6 +99,7 @@ CUnit::CUnit(const CUnit& orig) : CObject(orig) {
   this->unit_class = orig.unit_class;
   this->unit_props = orig.unit_props;
   this->unit_race = orig.unit_race;
+  this->insignia_pos = orig.insignia_pos;
 }
 
 CUnit::~CUnit() {
@@ -133,15 +137,16 @@ map<string, string> CUnit::exportMap() {
   
   for(unsigned int i = 0; i < avp.size(); i++) {
     sprintf(key, "avp%i", i);
-    sprintf(val, "%f", avp[i]);
-    result[key] = val;
+    result[key] = to_string(avp[i]);
   }
 
   for(unsigned int i = 0; i < rvp.size(); i++) {
     sprintf(key, "rvp%i", i);
-    sprintf(val, "%f", rvp[i]);
-    result[key] = val;
+    result[key] = to_string(rvp[i]);
   }
+  
+  result["ins_x"] = to_string(insignia_pos.first);
+  result["ins_y"] = to_string(insignia_pos.second);
 
   return result;
 }
@@ -178,19 +183,32 @@ vector<int> CUnit::getElem() {
   return elements;
 }
 
-void CUnit::setAVP(vector<double> _avp) {
+void CUnit::setAVP(vector<int> _avp) {
   this->avp = _avp;
 }
 
-vector<double> CUnit::getAVP() {
+vector<int> CUnit::getAVP() {
   return avp;
 }
 
-void CUnit::setRVP(vector<double> _rvp) {
+int CUnit::GetAttackType(double probability) {
+  int avp_prob = 0;
+  
+  for(int i = 0; i < N_ATTACK; i++) {
+    if (probability >= avp_prob && probability < (avp_prob + avp[i])) {
+      return i;
+    }
+    avp_prob += avp[i];
+  }
+  
+  return -1;
+}
+
+void CUnit::setRVP(vector<int> _rvp) {
   this->rvp = _rvp;
 }
 
-vector<double> CUnit::getRVP() {
+vector<int> CUnit::getRVP() {
   return rvp;
 }
 
@@ -216,4 +234,12 @@ void CUnit::setDamageArea(int _aa) {
 
 int CUnit::getDamageArea() {
   return aa;
+}
+
+void CUnit::setInsigniaPos(pair<int,int> pos) {
+  this->insignia_pos = pos;
+}
+
+pair<int, int> CUnit::getInsigniaPos() {
+  return insignia_pos;
 }
