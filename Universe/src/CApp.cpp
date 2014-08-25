@@ -74,7 +74,7 @@ int CApp::OnInit() {
     object_module.AddUnit(object);
   }
   
-  object_render = new CObjectRender(&object_module);  
+  object_render = new CObjectRender(&object_module, &unit_module);  
   unit_render = new CUnitRender(&unit_module);
     
   map = new CMap(&tile_module, &unit_module, &object_module);

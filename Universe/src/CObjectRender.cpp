@@ -12,8 +12,9 @@
 #include <iostream>
 #include <SDL_gfxPrimitives.h>
 
-CObjectRender::CObjectRender(CModule<CObject> *object_module) {
+CObjectRender::CObjectRender(CModule<CObject> *object_module, CModule<CUnit> *unit_module) {
   this->object_module = object_module;
+  this->unit_module = unit_module;
   
   if (!LoadSurfaces()) {
     cout << "Error in loading object surfaces" << endl;
@@ -22,6 +23,10 @@ CObjectRender::CObjectRender(CModule<CObject> *object_module) {
 
 CObjectRender::CObjectRender(const CObjectRender& orig) {
   object_module = orig.object_module;
+  unit_module = orig.unit_module;
+  object_sprite = orig.object_sprite;
+  insignia_bckg = orig.insignia_bckg;
+  insignia = orig.insignia;
 }
 
 CObjectRender::~CObjectRender() {
@@ -67,7 +72,30 @@ bool CObjectRender::LoadSurfaces() {
       return false;
     }
   }
-          
+
+  path = IMAGE_PATH_INSIGNIA;
+  path.append("insignia.png");
+  
+  new_surf = IMG_Load(path.c_str());
+
+  if (new_surf == NULL) {
+    return false;
+  }
+  
+  for(int i = 0; i < unit_module->GetSize(); i++) {
+    CUnit unit = unit_module->GetUnit(i);
+    
+    insignia[unit.GetID()] = SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_RLEACCEL, MAP_ELEM, MAP_ELEM, 32, 0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff);
+    SDL_SetColorKey(insignia[unit.GetID()], SDL_SRCCOLORKEY, SDL_MapRGB(insignia[unit.GetID()]->format, 255, 0, 255));
+    SDL_SetAlpha(insignia[unit.GetID()], SDL_SRCALPHA, 96);
+    insignia[unit.GetID()] = SDL_DisplayFormat(insignia[unit.GetID()]);
+    
+    SDL_Rect rect_src = {(Sint16)unit.getInsigniaPos().first, (Sint16)unit.getInsigniaPos().second, MAP_ELEM, MAP_ELEM};
+    if (SDL_BlitSurface(new_surf, &rect_src, insignia[unit.GetID()], NULL) != 0) {
+      return false;
+    }    
+  }  
+  
   SDL_FreeSurface(new_surf);
   
   return true;
@@ -81,6 +109,8 @@ void CObjectRender::OnRender(SDL_Surface* dest, CObjectEntity* object_entity, in
     double hp_bar = ((CUnitEntity*)object_entity)->GetHP() / ((CUnitEntity*)object_entity)->GetMaxHP();
     SDL_Rect insignia_rect = {0, 8, MAP_ELEM, MAP_ELEM};
     SDL_BlitSurface(insignia_bckg[((CUnitEntity*)object_entity)->GetPlayerID()], NULL, surf, &insignia_rect);
+
+    SDL_BlitSurface(insignia[object_entity->GetRootObject()->GetID()], NULL, surf, &insignia_rect);
     
     rectangleRGBA(surf, 0, 0, MAP_ELEM, 6, 64, 64, 64, 255);
     switch(((CUnitEntity*)object_entity)->GetPlayerID()) {
