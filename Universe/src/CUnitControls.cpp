@@ -52,7 +52,7 @@ void CUnitControls::OnEvent(SDL_Event* event) {
               selected_unit->SetRefObject(NULL);
               selected_unit->SetSelected(false);
             }
-            CObjectEntity* selector = map->addObject(unit_entity->GetX(), unit_entity->GetY(), BOTTOM, 0);
+            CObjectEntity* selector = map->addObject(unit_entity->GetX()+(unit_entity->GetRootUnit()->GetXSize()-4), unit_entity->GetY()+(unit_entity->GetRootUnit()->GetYSize()-4), BOTTOM, 0);
             unit_entity->SetRefObject(selector);
             selected_unit = unit_entity;
             /*
@@ -151,9 +151,12 @@ void CUnitControls::Move(CUnitEntity* unit_entity, CAction* action) {
       unit_entity->SetDirection(CUnitEntity::RIGHT);
     }
     
+    int dx = action->GetX() - unit_entity->GetX();
+    int dy = action->GetY() - unit_entity->GetY();
+    
     unit_entity->setPosition(action->GetX(), action->GetY());
     if (unit_entity->GetRefObject() != NULL) {
-      unit_entity->GetRefObject()->setPosition(action->GetX(), action->GetY());
+      unit_entity->GetRefObject()->setPosition(unit_entity->GetRefObject()->GetX()+dx, unit_entity->GetRefObject()->GetY()+dy);
     }
 
     
@@ -164,14 +167,16 @@ void CUnitControls::Move(CUnitEntity* unit_entity, CAction* action) {
     }    
 }
 void CUnitControls::Attack(CUnitEntity* unit_entity, CAction* action) {
-  pair<double, double> target_pos = action->GetTarget()->GetBlockCenter();
-  pair<double, double> attacker_pos = unit_entity->GetBlockCenter();
+  pair<double, double> attacker_pos = unit_entity->GetNearestBlocked(action->GetTarget());
+
+  attacker_pos.first = attacker_pos.first + unit_entity->GetX();
+  attacker_pos.second = attacker_pos.second + unit_entity->GetY();  
+
+  pair<double, double> target_pos = action->GetTarget()->GetNearestBlocked(unit_entity);  
   
-  target_pos.first += action->GetTarget()->GetX();
-  target_pos.second += action->GetTarget()->GetY();
+  target_pos.first = target_pos.first + action->GetTarget()->GetX();
+  target_pos.second = target_pos.second + action->GetTarget()->GetY();
   
-  attacker_pos.first += unit_entity->GetX();
-  attacker_pos.second += unit_entity->GetY();  
   
   if (unit_entity->GetRootUnit()->getAttackRange() >= round(CMathUtils::euclidian_distance(target_pos.first, target_pos.second, attacker_pos.first, attacker_pos.second))) {
     Fight(unit_entity, action->GetTarget());
@@ -188,32 +193,30 @@ void CUnitControls::Attack(CUnitEntity* unit_entity, CAction* action) {
 }
 
 pair<int, int> CUnitControls::GetAttackPosition(CUnitEntity* attacker, CUnitEntity* target) {
-  pair<double, double> target_pos = target->GetBlockCenter();
-  pair<double, double> attacker_pos = attacker->GetBlockCenter();
-  
   list< pair<int, int> > range_list;
   list< pair<int, int> >::iterator it;
+
+  pair<double, double> attacker_pos = attacker->GetNearestBlocked(target);
+  pair<double, double> target_pos = target->GetNearestBlocked(attacker);  
   
-  target_pos.first += target->GetX();
-  target_pos.second += target->GetY();
-  
-  attacker_pos.first += attacker->GetX();
-  attacker_pos.second += attacker->GetY();
-  
+  int new_x = 0;
+  int new_y = 0;
   double range_value = 0;
   
   for(int i = -attacker->GetRootUnit()->getAttackRange(); i < attacker->GetRootUnit()->getAttackRange(); i++) {
     for(int j = -attacker->GetRootUnit()->getAttackRange(); j < attacker->GetRootUnit()->getAttackRange(); j++) {
-      range_value = CMathUtils::euclidian_distance(target_pos.first + j, target_pos.second + i, target_pos.first, target_pos.second);
+      range_value = CMathUtils::euclidian_distance(target->GetX() + target_pos.first + j, target->GetY() + target_pos.second + i, target->GetX() + target_pos.first, target->GetY() + target_pos.second);
       if (round(range_value) <= attacker->GetRootUnit()->getAttackRange()) {
-        if (map->IsPlaceFree(attacker, target->GetX() + j, target->GetY() + i)) {
-          range_list.push_back(pair<int, int>(target->GetX() + j, target->GetY() + i));
+        new_x = target->GetX() + target_pos.first + j - attacker_pos.first;
+        new_y = target->GetY() + target_pos.second + i - attacker_pos.second;
+        
+        if (map->IsPlaceFree(attacker, new_x, new_y)) {
+          range_list.push_back(pair<int, int>(new_x, new_y));
         }
       }
     }
   }
-
-
+  
   double min_value = 999;
   double min_x = 0;
   double min_y = 0;
@@ -224,7 +227,7 @@ pair<int, int> CUnitControls::GetAttackPosition(CUnitEntity* attacker, CUnitEnti
     pos = *it;
     
     act_value = CMathUtils::euclidian_distance(pos.first, pos.second, attacker->GetX(), attacker->GetY());
-    if (act_value < min_value) {
+    if (act_value <= min_value) {
       min_value = act_value;
       min_x = pos.first;
       min_y = pos.second;
@@ -237,8 +240,8 @@ pair<int, int> CUnitControls::GetAttackPosition(CUnitEntity* attacker, CUnitEnti
 void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target) {
   int attack_type = unit_entity->GetRootUnit()->GetAttackType(CUtils::Probability(100));
 
-  double attack_str = unit_entity->GetRootUnit()->getProp()[STR_IND] + CUtils::rollDice(unit_entity->GetRootUnit()->getProp()[STR_IND], 1);
-  double dexterity_def = target->GetRootUnit()->getProp()[AGL_IND] + CUtils::rollDice(target->GetRootUnit()->getProp()[AGL_IND], 1);
+  double attack_str = CUtils::rollDice(unit_entity->GetRootUnit()->getWeapon(), 1) + (unit_entity->GetRootUnit()->getProp()[STR_IND] / 2) - 2;
+  double dexterity_def = unit_entity->GetRootUnit()->getArmor() + (unit_entity->GetRootUnit()->getProp()[AGL_IND] / 2) - 2;
 
   double damage = (attack_str - dexterity_def) * ((double)(100-target->GetRootUnit()->getRVP()[attack_type])/100.0);
 
