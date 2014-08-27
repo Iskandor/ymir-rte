@@ -6,6 +6,7 @@
  */
 
 #include "CObjectEntity.h"
+#include "CMathUtils.h"
 
 CObjectEntity::CObjectEntity(int inner_id) {
   id = inner_id;
@@ -74,6 +75,36 @@ pair<double, double> CObjectEntity::GetBlockCenter() {
   }
   
   return result;
+}
+
+pair<double, double> CObjectEntity::GetNearestBlocked(CObjectEntity* object_entity) {
+  pair<double, double> result = FindFirstBlocked();
+  
+  int _x = object_entity->GetX();
+  int _y = object_entity->GetY();
+  
+  double min_value = CMathUtils::euclidian_distance(result.first, result.second, (double)_x, (double)_y);
+  double act_value = min_value;
+  
+  for(int i = 0; i < root_object->GetYSize(); i++) {
+    for(int j = 0; j < root_object->GetXSize(); j++) {
+      if (root_object->GetBlockMap()[i*root_object->GetXSize()+j] > 0) {
+        for(int k = 0; k < object_entity->GetRootObject()->GetYSize(); k++) {
+          for(int l = 0; l < object_entity->GetRootObject()->GetXSize(); l++) {
+            if (object_entity->GetRootObject()->GetBlockMap()[k*object_entity->GetRootObject()->GetXSize()+l] > 0) {
+              act_value = CMathUtils::euclidian_distance(x+j, y+i, _x+l, _y+k);
+              if (min_value >= act_value) {
+                result = pair<double, double>(j, i);
+                min_value = act_value;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  return result;  
 }
 
 int CObjectEntity::GetX() {

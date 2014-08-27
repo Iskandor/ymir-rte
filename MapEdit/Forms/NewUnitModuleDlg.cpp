@@ -203,6 +203,9 @@ void NewUnitModuleDlg::FormToModel() {
   unit_model.SetYSize(widget.SizeYSb->value());
   
   unit_model.setInsigniaPos(pair<int, int>(widget.InsXSb->value(), widget.InsYSb->value()));
+  
+  unit_model.setWeapon(widget.AttSbx->value());
+  unit_model.setArmor(widget.DefSbx->value());
 }
 
 void NewUnitModuleDlg::ModelToForm() {
@@ -241,6 +244,9 @@ void NewUnitModuleDlg::ModelToForm() {
   
   widget.InsXSb->setValue(unit_model.getInsigniaPos().first);
   widget.InsYSb->setValue(unit_model.getInsigniaPos().second);
+  
+  widget.AttSbx->setValue(unit_model.getWeapon());
+  widget.DefSbx->setValue(unit_model.getArmor());
 }
 
 void NewUnitModuleDlg::DrawGrid(QPixmap* pixmap) {

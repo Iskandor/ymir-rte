@@ -39,7 +39,7 @@ CUnitEntity::~CUnitEntity() {
 void CUnitEntity::generate_props() {
   vector< int > props = root_unit->getProp();
   
-  max_hp = CUtils::rollDice(4, props[STR_IND]) + CUtils::rollDice(5, props[END_IND]);
+  max_hp = props[END_IND]*5 + CUtils::rollDice(props[STR_IND], 1);
   hp = max_hp;
   max_mp = 0;
   mp = max_mp;

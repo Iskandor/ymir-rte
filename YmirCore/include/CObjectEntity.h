@@ -54,6 +54,7 @@ public:
   
   void setPosition(int x, int y);
   pair<double, double> GetBlockCenter();
+  pair<double, double> GetNearestBlocked(CObjectEntity* object_entity);
 
   bool operator< (CObjectEntity& ent);  
   

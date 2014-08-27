@@ -18,6 +18,8 @@ CUnit::CUnit() : CObject() {
   this->sr = 0;
   this->unit_class = "";
   this->unit_race = "";
+  this->weapon = 0;
+  this->armor = 0;
   
   for(unsigned int i = 0; i < N_PROP; i++) {
     unit_props.push_back(0);
@@ -40,6 +42,9 @@ CUnit::CUnit(int id) : CObject(id)  {
   this->sr = 0;
   this->unit_class = "";
   this->unit_race = "";
+  this->weapon = 0;
+  this->armor = 0;
+ 
   
   for(unsigned int i = 0; i < N_PROP; i++) {
     unit_props.push_back(0);
@@ -87,6 +92,9 @@ CUnit::CUnit(map<string,string> data) : CObject(data){
   
   insignia_pos.first = atoi(data["ins_x"].c_str());
   insignia_pos.second = atoi(data["ins_y"].c_str());
+  
+  weapon = stoi(data["weapon"]);
+  armor = stoi(data["armor"]);
 }
 
 CUnit::CUnit(const CUnit& orig) : CObject(orig) {
@@ -100,6 +108,8 @@ CUnit::CUnit(const CUnit& orig) : CObject(orig) {
   this->unit_props = orig.unit_props;
   this->unit_race = orig.unit_race;
   this->insignia_pos = orig.insignia_pos;
+  this->weapon = orig.weapon;
+  this->armor = orig.armor;
 }
 
 CUnit::~CUnit() {
@@ -147,6 +157,9 @@ map<string, string> CUnit::exportMap() {
   
   result["ins_x"] = to_string(insignia_pos.first);
   result["ins_y"] = to_string(insignia_pos.second);
+  
+  result["weapon"] = to_string(weapon);
+  result["armor"] = to_string(armor);
 
   return result;
 }

@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'NewUnitModuleDlg.ui'
 **
-** Created: Fri Aug 22 19:40:24 2014
-**      by: Qt User Interface Compiler version 4.8.4
+** Created by: Qt User Interface Compiler version 4.8.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -100,6 +99,10 @@ public:
     QSpinBox *StabDSbx;
     QSpinBox *SlashDSbx;
     QLabel *label_20;
+    QLabel *label_32;
+    QLabel *label_33;
+    QSpinBox *AttSbx;
+    QSpinBox *DefSbx;
     QWidget *tab_3;
     QWidget *formLayoutWidget_3;
     QFormLayout *formLayout_3;
@@ -124,15 +127,15 @@ public:
     {
         if (NewUnitModuleDlg->objectName().isEmpty())
             NewUnitModuleDlg->setObjectName(QString::fromUtf8("NewUnitModuleDlg"));
-        NewUnitModuleDlg->resize(782, 476);
+        NewUnitModuleDlg->resize(782, 490);
         buttonBox = new QDialogButtonBox(NewUnitModuleDlg);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setGeometry(QRect(420, 440, 341, 32));
+        buttonBox->setGeometry(QRect(420, 450, 341, 32));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
         UnitListView = new QListView(NewUnitModuleDlg);
         UnitListView->setObjectName(QString::fromUtf8("UnitListView"));
-        UnitListView->setGeometry(QRect(30, 60, 171, 351));
+        UnitListView->setGeometry(QRect(30, 60, 171, 381));
         UMLineEdit = new QLineEdit(NewUnitModuleDlg);
         UMLineEdit->setObjectName(QString::fromUtf8("UMLineEdit"));
         UMLineEdit->setGeometry(QRect(30, 30, 171, 27));
@@ -165,7 +168,7 @@ public:
 
         tabWidget = new QTabWidget(NewUnitModuleDlg);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
-        tabWidget->setGeometry(QRect(370, 30, 391, 381));
+        tabWidget->setGeometry(QRect(370, 30, 391, 411));
         tab = new QWidget();
         tab->setObjectName(QString::fromUtf8("tab"));
         formLayoutWidget = new QWidget(tab);
@@ -260,7 +263,7 @@ public:
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
         formLayoutWidget_2 = new QWidget(tab_2);
         formLayoutWidget_2->setObjectName(QString::fromUtf8("formLayoutWidget_2"));
-        formLayoutWidget_2->setGeometry(QRect(10, 10, 371, 331));
+        formLayoutWidget_2->setGeometry(QRect(10, 10, 371, 365));
         formLayout_2 = new QFormLayout(formLayoutWidget_2);
         formLayout_2->setObjectName(QString::fromUtf8("formLayout_2"));
         formLayout_2->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
@@ -303,12 +306,12 @@ public:
         label_21 = new QLabel(formLayoutWidget_2);
         label_21->setObjectName(QString::fromUtf8("label_21"));
 
-        formLayout_2->setWidget(4, QFormLayout::LabelRole, label_21);
+        formLayout_2->setWidget(5, QFormLayout::LabelRole, label_21);
 
         label_24 = new QLabel(formLayoutWidget_2);
         label_24->setObjectName(QString::fromUtf8("label_24"));
 
-        formLayout_2->setWidget(5, QFormLayout::LabelRole, label_24);
+        formLayout_2->setWidget(7, QFormLayout::LabelRole, label_24);
 
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
@@ -388,7 +391,7 @@ public:
         gridLayout_3->addWidget(label_23, 0, 0, 1, 1);
 
 
-        formLayout_2->setLayout(4, QFormLayout::FieldRole, gridLayout_3);
+        formLayout_2->setLayout(5, QFormLayout::FieldRole, gridLayout_3);
 
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
@@ -423,7 +426,27 @@ public:
         gridLayout_2->addWidget(label_20, 0, 0, 1, 1);
 
 
-        formLayout_2->setLayout(5, QFormLayout::FieldRole, gridLayout_2);
+        formLayout_2->setLayout(7, QFormLayout::FieldRole, gridLayout_2);
+
+        label_32 = new QLabel(formLayoutWidget_2);
+        label_32->setObjectName(QString::fromUtf8("label_32"));
+
+        formLayout_2->setWidget(4, QFormLayout::LabelRole, label_32);
+
+        label_33 = new QLabel(formLayoutWidget_2);
+        label_33->setObjectName(QString::fromUtf8("label_33"));
+
+        formLayout_2->setWidget(6, QFormLayout::LabelRole, label_33);
+
+        AttSbx = new QSpinBox(formLayoutWidget_2);
+        AttSbx->setObjectName(QString::fromUtf8("AttSbx"));
+
+        formLayout_2->setWidget(4, QFormLayout::FieldRole, AttSbx);
+
+        DefSbx = new QSpinBox(formLayoutWidget_2);
+        DefSbx->setObjectName(QString::fromUtf8("DefSbx"));
+
+        formLayout_2->setWidget(6, QFormLayout::FieldRole, DefSbx);
 
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
@@ -523,7 +546,7 @@ public:
         QObject::connect(buttonBox, SIGNAL(accepted()), NewUnitModuleDlg, SLOT(accept()));
         QObject::connect(buttonBox, SIGNAL(rejected()), NewUnitModuleDlg, SLOT(reject()));
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(NewUnitModuleDlg);
@@ -561,6 +584,8 @@ public:
         label_17->setText(QApplication::translate("NewUnitModuleDlg", "Stab", 0, QApplication::UnicodeUTF8));
         label_18->setText(QApplication::translate("NewUnitModuleDlg", "Slash", 0, QApplication::UnicodeUTF8));
         label_20->setText(QApplication::translate("NewUnitModuleDlg", "Blunt", 0, QApplication::UnicodeUTF8));
+        label_32->setText(QApplication::translate("NewUnitModuleDlg", "Weapon", 0, QApplication::UnicodeUTF8));
+        label_33->setText(QApplication::translate("NewUnitModuleDlg", "Armor", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("NewUnitModuleDlg", "Advanced", 0, QApplication::UnicodeUTF8));
         label_25->setText(QApplication::translate("NewUnitModuleDlg", "Filename", 0, QApplication::UnicodeUTF8));
         label_26->setText(QApplication::translate("NewUnitModuleDlg", "Size", 0, QApplication::UnicodeUTF8));

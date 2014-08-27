@@ -67,11 +67,17 @@ public:
     int getDamageArea();
     void setInsigniaPos(pair<int, int> pos);
     pair<int, int> getInsigniaPos();
+    void  setWeapon(int value) { weapon = value; };
+    int   getWeapon() { return weapon; };
+    void  setArmor(int value) {armor = value; };
+    int   getArmor() { return armor; };
     
 private:
   int sr;
   int ar;
   int aa;
+  int weapon;
+  int armor;
   vector<int>     elements;
   vector<int>     avp;
   vector<int>     rvp;
