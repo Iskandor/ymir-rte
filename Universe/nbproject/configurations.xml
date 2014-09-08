@@ -9,13 +9,7 @@
       <itemPath>include/CGameControls.h</itemPath>
       <itemPath>include/CGuiManager.h</itemPath>
       <itemPath>include/CMapControls.h</itemPath>
-      <itemPath>include/CMapRender.h</itemPath>
-      <itemPath>include/CMapSegment.h</itemPath>
-      <itemPath>include/CObjectRender.h</itemPath>
-      <itemPath>include/CSprite.h</itemPath>
-      <itemPath>include/CTileRender.h</itemPath>
       <itemPath>include/CUnitControls.h</itemPath>
-      <itemPath>include/CUnitRender.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -29,13 +23,7 @@
       <itemPath>src/CGameControls.cpp</itemPath>
       <itemPath>src/CGuiManager.cpp</itemPath>
       <itemPath>src/CMapControls.cpp</itemPath>
-      <itemPath>src/CMapRender.cpp</itemPath>
-      <itemPath>src/CMapSegment.cpp</itemPath>
-      <itemPath>src/CObjectRender.cpp</itemPath>
-      <itemPath>src/CSprite.cpp</itemPath>
-      <itemPath>src/CTileRender.cpp</itemPath>
       <itemPath>src/CUnitControls.cpp</itemPath>
-      <itemPath>src/CUnitRender.cpp</itemPath>
       <itemPath>src/main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -67,6 +55,7 @@
             <pElem>/usr/include/qt4</pElem>
             <pElem>/usr/local/include/guichan</pElem>
             <pElem>/usr/include/SDL</pElem>
+            <pElem>../YmirEngine/include</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
@@ -95,6 +84,18 @@
             <linkerOptionItem>`pkg-config --libs QtXml`</linkerOptionItem>
             <linkerLibLibItem>guichan</linkerLibLibItem>
             <linkerLibLibItem>guichan_sdl</linkerLibLibItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../YmirEngine"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../YmirEngine"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="bin/libYmirEngine.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
           </linkerLibItems>
         </linkerTool>
         <requiredProjects>
@@ -108,6 +109,16 @@
                         CC="${MAKE}  -f Makefile CONF=Debug clean"
                         OP="bin/libYmirCore.${CND_DLIB_EXT}">
           </makeArtifact>
+          <makeArtifact PL="../YmirEngine"
+                        CT="2"
+                        CN="Debug"
+                        AC="true"
+                        BL="true"
+                        WD="../YmirEngine"
+                        BC="${MAKE}  -f Makefile CONF=Debug"
+                        CC="${MAKE}  -f Makefile CONF=Debug clean"
+                        OP="bin/libYmirEngine.${CND_DLIB_EXT}">
+          </makeArtifact>
         </requiredProjects>
       </compileType>
       <item path="include/CApp.h" ex="false" tool="3" flavor2="0">
@@ -120,19 +131,7 @@
       </item>
       <item path="include/CMapControls.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="include/CMapRender.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="include/CMapSegment.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="include/CObjectRender.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="include/CSprite.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="include/CTileRender.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="include/CUnitControls.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="include/CUnitRender.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/CApp.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -144,19 +143,7 @@
       </item>
       <item path="src/CMapControls.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/CMapRender.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/CMapSegment.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/CObjectRender.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/CSprite.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/CTileRender.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="src/CUnitControls.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/CUnitRender.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -191,19 +178,7 @@
       </item>
       <item path="include/CMapControls.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="include/CMapRender.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="include/CMapSegment.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="include/CObjectRender.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="include/CSprite.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="include/CTileRender.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="include/CUnitControls.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="include/CUnitRender.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/CApp.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -215,19 +190,7 @@
       </item>
       <item path="src/CMapControls.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/CMapRender.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/CMapSegment.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/CObjectRender.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/CSprite.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/CTileRender.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="src/CUnitControls.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/CUnitRender.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>

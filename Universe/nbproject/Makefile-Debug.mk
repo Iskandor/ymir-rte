@@ -40,13 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CGameControls.o \
 	${OBJECTDIR}/src/CGuiManager.o \
 	${OBJECTDIR}/src/CMapControls.o \
-	${OBJECTDIR}/src/CMapRender.o \
-	${OBJECTDIR}/src/CMapSegment.o \
-	${OBJECTDIR}/src/CObjectRender.o \
-	${OBJECTDIR}/src/CSprite.o \
-	${OBJECTDIR}/src/CTileRender.o \
 	${OBJECTDIR}/src/CUnitControls.o \
-	${OBJECTDIR}/src/CUnitRender.o \
 	${OBJECTDIR}/src/main.o
 
 
@@ -64,13 +58,15 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-Wl,-rpath,../YmirCore/bin -L../YmirCore/bin -lYmirCore -lSDL -lSDLmain -lSDL_gfx -lSDL_image -lSDL_mixer -lSDL_ttf `pkg-config --libs QtCore` `pkg-config --libs QtGui` `pkg-config --libs QtXml` -lguichan -lguichan_sdl  
+LDLIBSOPTIONS=-Wl,-rpath,../YmirCore/bin -L../YmirCore/bin -lYmirCore -lSDL -lSDLmain -lSDL_gfx -lSDL_image -lSDL_mixer -lSDL_ttf `pkg-config --libs QtCore` `pkg-config --libs QtGui` `pkg-config --libs QtXml` -lguichan -lguichan_sdl -Wl,-rpath,../YmirEngine/bin -L../YmirEngine/bin -lYmirEngine  
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk bin/universe
 
 bin/universe: ../YmirCore/bin/libYmirCore.so
+
+bin/universe: ../YmirEngine/bin/libYmirEngine.so
 
 bin/universe: ${OBJECTFILES}
 	${MKDIR} -p bin
@@ -79,72 +75,44 @@ bin/universe: ${OBJECTFILES}
 ${OBJECTDIR}/src/CApp.o: src/CApp.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CApp.o src/CApp.cpp
+	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL -I../YmirEngine/include `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CApp.o src/CApp.cpp
 
 ${OBJECTDIR}/src/CDataManager.o: src/CDataManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CDataManager.o src/CDataManager.cpp
+	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL -I../YmirEngine/include `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CDataManager.o src/CDataManager.cpp
 
 ${OBJECTDIR}/src/CGameControls.o: src/CGameControls.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CGameControls.o src/CGameControls.cpp
+	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL -I../YmirEngine/include `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CGameControls.o src/CGameControls.cpp
 
 ${OBJECTDIR}/src/CGuiManager.o: src/CGuiManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CGuiManager.o src/CGuiManager.cpp
+	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL -I../YmirEngine/include `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CGuiManager.o src/CGuiManager.cpp
 
 ${OBJECTDIR}/src/CMapControls.o: src/CMapControls.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CMapControls.o src/CMapControls.cpp
-
-${OBJECTDIR}/src/CMapRender.o: src/CMapRender.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CMapRender.o src/CMapRender.cpp
-
-${OBJECTDIR}/src/CMapSegment.o: src/CMapSegment.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CMapSegment.o src/CMapSegment.cpp
-
-${OBJECTDIR}/src/CObjectRender.o: src/CObjectRender.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CObjectRender.o src/CObjectRender.cpp
-
-${OBJECTDIR}/src/CSprite.o: src/CSprite.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CSprite.o src/CSprite.cpp
-
-${OBJECTDIR}/src/CTileRender.o: src/CTileRender.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CTileRender.o src/CTileRender.cpp
+	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL -I../YmirEngine/include `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CMapControls.o src/CMapControls.cpp
 
 ${OBJECTDIR}/src/CUnitControls.o: src/CUnitControls.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUnitControls.o src/CUnitControls.cpp
-
-${OBJECTDIR}/src/CUnitRender.o: src/CUnitRender.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUnitRender.o src/CUnitRender.cpp
+	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL -I../YmirEngine/include `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUnitControls.o src/CUnitControls.cpp
 
 ${OBJECTDIR}/src/main.o: src/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/main.o src/main.cpp
+	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL -I../YmirEngine/include `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/main.o src/main.cpp
 
 # Subprojects
 .build-subprojects:
 	cd ../YmirCore && ${MAKE}  -f Makefile CONF=Debug
+	cd ../YmirEngine && ${MAKE}  -f Makefile CONF=Debug
 	cd ../YmirCore && ${MAKE}  -f Makefile CONF=Debug
+	cd ../YmirEngine && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
@@ -154,7 +122,9 @@ ${OBJECTDIR}/src/main.o: src/main.cpp
 # Subprojects
 .clean-subprojects:
 	cd ../YmirCore && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../YmirEngine && ${MAKE}  -f Makefile CONF=Debug clean
 	cd ../YmirCore && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../YmirEngine && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl
