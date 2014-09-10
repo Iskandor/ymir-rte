@@ -29,6 +29,7 @@ private:
   void Move(CUnitEntity* unit_entity, CAction* action);
   void Attack(CUnitEntity* unit_entity, CAction* action);
   void Fight(CUnitEntity* unit_entity, CUnitEntity* target);
+  void Die(CUnitEntity* unit_entity);
   
   pair<int, int>          GetAttackPosition(CUnitEntity* attacker, CUnitEntity* target);
   queue< pair<int, int> > GeneratePath(CUnitEntity* unit_entity, int x, int y);

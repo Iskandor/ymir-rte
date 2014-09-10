@@ -118,6 +118,7 @@ void CUnitControls::OnLoop() {
             Attack(unit_entity, &action);
             break;
         case CAction::DIE:
+            Die(unit_entity);
             break;
     }
   }
@@ -363,5 +364,13 @@ queue< pair<int, int> > CUnitControls::ReconstructPath(int* came_from, int lengt
     p.push(CMap::decompose_node(current_node, size_x));
     return p;
   }
+}
+
+void CUnitControls::Die(CUnitEntity* unit_entity) {
+  if (unit_entity->GetRefObject() != NULL) {
+    
+  }
+  map->GetUnitManager()->remUnit(unit_entity);
+  map->remObject(unit_entity->GetID());
 }
 
