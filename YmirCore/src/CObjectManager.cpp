@@ -88,9 +88,10 @@ void CObjectManager::remObject(int id) {
   for(vector< unique_ptr<CObjectEntity> >::iterator i = object_list.begin(); i != object_list.end(); i++) {
     CObjectEntity* object_entity = NULL;
     if (((CObjectEntity)(**i)).GetID() == id) {
-      object_list.erase(i);
       object_entity = (*i).release();
+      object_list.erase(i);
       delete object_entity;
+      
       break;
     }
   }

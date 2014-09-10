@@ -73,6 +73,20 @@ void CUnitManager::remUnit(int index) {
    * */
 }
 
+void CUnitManager::remUnit(CUnitEntity* unit_entity) {
+  vector<CUnitEntity*>::iterator i = unit_list.end();
+  
+  for(i = unit_list.begin(); i != unit_list.end(); i++) {
+    if (*i == unit_entity) {
+      break;
+    }
+  }
+  
+  if (i != unit_list.end()) {
+    unit_list.erase(i);
+  }
+}
+
 int CUnitManager::GetUnitListSize() {
   return unit_list.size();
 }

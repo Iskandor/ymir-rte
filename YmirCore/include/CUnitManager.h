@@ -29,6 +29,7 @@ public:
   CUnitEntity*  getUnit(int x, int y);
   CUnitEntity*  getSelectedUnit();
   void          remUnit(int index);
+  void          remUnit(CUnitEntity* unit_entity);
   
   int             GetUnitListSize();
   
