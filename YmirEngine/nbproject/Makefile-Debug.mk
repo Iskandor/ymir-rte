@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/CFontRender.o \
 	${OBJECTDIR}/src/CMapRender.o \
 	${OBJECTDIR}/src/CMapSegment.o \
 	${OBJECTDIR}/src/CObjectRender.o \
@@ -68,6 +69,11 @@ bin/libYmirEngine.${CND_DLIB_EXT}: ../YmirCore/bin/libYmirCore.so
 bin/libYmirEngine.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p bin
 	${LINK.cc} -o bin/libYmirEngine.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
+
+${OBJECTDIR}/src/CFontRender.o: src/CFontRender.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I../YmirCore/include -I/usr/include/qt4 -I/usr/include/SDL `pkg-config --cflags SDL_gfx` `pkg-config --cflags SDL_image` `pkg-config --cflags SDL_mixer` `pkg-config --cflags SDL_net` `pkg-config --cflags SDL_ttf` -std=c++11  -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFontRender.o src/CFontRender.cpp
 
 ${OBJECTDIR}/src/CMapRender.o: src/CMapRender.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
