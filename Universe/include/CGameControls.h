@@ -10,11 +10,12 @@
 
 #include <SDL/SDL.h>
 #include "CPlayerManager.h"
+#include "CUnitControls.h"
 
 
 class CGameControls {
 public:
-  CGameControls(CPlayerManager* player_manager);
+  CGameControls(CPlayerManager* player_manager, CUnitControls* unit_controls);
   CGameControls(const CGameControls& orig);
   virtual ~CGameControls();
   
@@ -23,6 +24,7 @@ public:
   
 private:
   CPlayerManager* player_manager;
+  CUnitControls*  unit_controls;
   int current_player_id;
   int turn;
   

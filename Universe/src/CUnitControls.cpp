@@ -34,33 +34,35 @@ void CUnitControls::OnEvent(SDL_Event* event) {
         
         for(i = 0; i < map->GetUnitManager()->GetUnitListSize(); i++) {
           unit_entity = map->GetUnitManager()->getUnit(i);
-          unit_rect.x = unit_entity->GetX();
-          unit_rect.y = unit_entity->GetY();
-          unit_rect.w = 4;
-          unit_rect.h = 4;
+          if (unit_entity->GetPlayerID() == current_player_id) {
+            unit_rect.x = unit_entity->GetX();
+            unit_rect.y = unit_entity->GetY();
+            unit_rect.w = 4;
+            unit_rect.h = 4;
 
-          camera = map_render->GetCamera();
+            camera = map_render->GetCamera();
 
-          pair<int, int> click;
+            pair<int, int> click;
 
-          click.first = (event->button.x / MAP_ELEM) + camera->x;
-          click.second = (event->button.y / MAP_ELEM) + camera->y;
-          
-          if (CUtils::PointIsInArea(click, unit_rect)) {
-            if (selected_unit != NULL) {
-              map->remObject(selected_unit->GetRefObject()->GetID());
-              selected_unit->SetRefObject(NULL);
-              selected_unit->SetSelected(false);
+            click.first = (event->button.x / MAP_ELEM) + camera->x;
+            click.second = (event->button.y / MAP_ELEM) + camera->y;
+
+            if (CUtils::PointIsInArea(click, unit_rect)) {
+              if (selected_unit != NULL) {
+                map->remObject(selected_unit->GetRefObject()->GetID());
+                selected_unit->SetRefObject(NULL);
+                selected_unit->SetSelected(false);
+              }
+              CObjectEntity* selector = map->addObject(unit_entity->GetX()+(unit_entity->GetRootUnit()->GetXSize()-4), unit_entity->GetY()+(unit_entity->GetRootUnit()->GetYSize()-4), BOTTOM, 0);
+              unit_entity->SetRefObject(selector);
+              selected_unit = unit_entity;
+              /*
+              map->Unblock(selected_unit);
+              selected_unit->OnClick(map->GetCostMap(), map->getMapSizeX(sizemode_elem), map->getMapSizeY(sizemode_elem));
+              map->Block(selected_unit);
+               * */
+              break;
             }
-            CObjectEntity* selector = map->addObject(unit_entity->GetX()+(unit_entity->GetRootUnit()->GetXSize()-4), unit_entity->GetY()+(unit_entity->GetRootUnit()->GetYSize()-4), BOTTOM, 0);
-            unit_entity->SetRefObject(selector);
-            selected_unit = unit_entity;
-            /*
-            map->Unblock(selected_unit);
-            selected_unit->OnClick(map->GetCostMap(), map->getMapSizeX(sizemode_elem), map->getMapSizeY(sizemode_elem));
-            map->Block(selected_unit);
-             * */
-            break;
           }
         }
         if (i == map->GetUnitManager()->GetUnitListSize()) {
@@ -81,7 +83,9 @@ void CUnitControls::OnEvent(SDL_Event* event) {
           CUnitEntity* other_unit = map->GetUnitManager()->getUnit(x, y);
           
           if (other_unit != NULL) {
+            if (other_unit->GetPlayerID() != current_player_id) {
               selected_unit->AddAction(CAction(CAction::ATTACK, other_unit, 1));
+            }
           }
           else
           {
@@ -124,6 +128,16 @@ void CUnitControls::OnLoop() {
   }
 }
 
+bool CUnitControls::PerformAction(CUnitEntity* unit_entity, CAction* action) {
+  if (unit_entity->GetSP() >= action->GetCost()) {
+    unit_entity->DecreaseSP(action->GetCost());
+    return true;
+  }
+  else {
+    return false;
+  }  
+}
+
 void CUnitControls::CreatePath(CUnitEntity* unit_entity, CAction* action) {
     CreatePath(unit_entity, action->GetX(), action->GetY());
 }
@@ -143,31 +157,35 @@ void CUnitControls::CreatePath(CUnitEntity* unit_entity, int x, int y) {
 }
 
 void CUnitControls::Move(CUnitEntity* unit_entity, CAction* action) {
-    map->Unblock(unit_entity);
+  if (!PerformAction(unit_entity, action)) {
+    return;
+  }
 
-    if (unit_entity->GetX() > action->GetX()) {
-      unit_entity->SetDirection(CUnitEntity::LEFT);
-    }
-    if (unit_entity->GetX() < action->GetX()) {
-      unit_entity->SetDirection(CUnitEntity::RIGHT);
-    }
-    
-    int dx = action->GetX() - unit_entity->GetX();
-    int dy = action->GetY() - unit_entity->GetY();
-    
-    unit_entity->setPosition(action->GetX(), action->GetY());
-    if (unit_entity->GetRefObject() != NULL) {
-      unit_entity->GetRefObject()->setPosition(unit_entity->GetRefObject()->GetX()+dx, unit_entity->GetRefObject()->GetY()+dy);
-    }
+  map->Unblock(unit_entity);
 
-    
-    map->Block(unit_entity);
-    map->SortObjects(unit_entity);
-    if (unit_entity->GetRefObject() != NULL) {
-      map->SortObjects(unit_entity->GetRefObject());
-    }    
+  if (unit_entity->GetX() > action->GetX()) {
+    unit_entity->SetDirection(CUnitEntity::LEFT);
+  }
+  if (unit_entity->GetX() < action->GetX()) {
+    unit_entity->SetDirection(CUnitEntity::RIGHT);
+  }
+
+  int dx = action->GetX() - unit_entity->GetX();
+  int dy = action->GetY() - unit_entity->GetY();
+
+  unit_entity->setPosition(action->GetX(), action->GetY());
+  if (unit_entity->GetRefObject() != NULL) {
+    unit_entity->GetRefObject()->setPosition(unit_entity->GetRefObject()->GetX()+dx, unit_entity->GetRefObject()->GetY()+dy);
+  }
+
+
+  map->Block(unit_entity);
+  map->SortObjects(unit_entity);
+  if (unit_entity->GetRefObject() != NULL) {
+    map->SortObjects(unit_entity->GetRefObject());
+  }    
 }
-void CUnitControls::Attack(CUnitEntity* unit_entity, CAction* action) {
+void CUnitControls::Attack(CUnitEntity* unit_entity, CAction* action) { 
   pair<double, double> attacker_pos = unit_entity->GetNearestBlocked(action->GetTarget());
 
   attacker_pos.first = attacker_pos.first + unit_entity->GetX();
@@ -180,6 +198,9 @@ void CUnitControls::Attack(CUnitEntity* unit_entity, CAction* action) {
   
   
   if (unit_entity->GetRootUnit()->getAttackRange() >= round(CMathUtils::euclidian_distance(target_pos.first, target_pos.second, attacker_pos.first, attacker_pos.second))) {
+    if (!PerformAction(unit_entity, action)) {
+      return;
+    }  
     Fight(unit_entity, action->GetTarget());
   }
   else
@@ -238,7 +259,7 @@ pair<int, int> CUnitControls::GetAttackPosition(CUnitEntity* attacker, CUnitEnti
   return pair<int, int>(min_x, min_y);
 }
 
-void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target) {
+void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target) {  
   int attack_type = unit_entity->GetRootUnit()->GetAttackType(CUtils::Probability(100));
 
   double attack_str = CUtils::rollDice(unit_entity->GetRootUnit()->getWeapon(), 1) + (unit_entity->GetRootUnit()->getProp()[STR_IND] / 2) - 2;
@@ -367,10 +388,6 @@ queue< pair<int, int> > CUnitControls::ReconstructPath(int* came_from, int lengt
 }
 
 void CUnitControls::Die(CUnitEntity* unit_entity) {
-  if (unit_entity->GetRefObject() != NULL) {
-    
-  }
-  map->GetUnitManager()->remUnit(unit_entity);
-  map->remObject(unit_entity->GetID());
+  map->remUnit(unit_entity);
 }
 

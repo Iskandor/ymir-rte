@@ -9,6 +9,7 @@
 #define	CAPP_H
 
 #include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
 
 #include "CModule.h"
 #include "CTile.h"
@@ -22,6 +23,7 @@
 #include "CObject.h"
 #include "CPlayerManager.h"
 #include "CGuiManager.h"
+#include "CGameControls.h"
 
 class CApp {
 public:
@@ -42,6 +44,7 @@ private:
   CObjectRender   *object_render;
   CPlayerManager  player_manager;
   CGuiManager     *gui_manager;
+  CGameControls   *game_controls;
   
   bool running;
 

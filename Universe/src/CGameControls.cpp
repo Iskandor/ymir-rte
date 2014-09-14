@@ -7,14 +7,16 @@
 
 #include "CGameControls.h"
 
-CGameControls::CGameControls(CPlayerManager* player_manager) {
+CGameControls::CGameControls(CPlayerManager* player_manager, CUnitControls* unit_controls) {
   this->player_manager = player_manager;
+  this->unit_controls = unit_controls;
   current_player_id = 0;
   turn = 0;
 }
 
 CGameControls::CGameControls(const CGameControls& orig) {
   player_manager = orig.player_manager;
+  unit_controls = orig.unit_controls;
   current_player_id = orig.current_player_id;
   turn = orig.turn;
 }
@@ -42,5 +44,7 @@ void CGameControls::NextPlayer() {
     current_player_id = -current_player_id;
     turn++;
   }
+  unit_controls->SetCurrentPlayerID(current_player_id);
+  player_manager->GetPlayer(current_player_id)->RestoreUnitSP();
 }
 

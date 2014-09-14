@@ -23,7 +23,10 @@ public:
   void OnEvent(SDL_Event* event);
   void OnLoop();
   
+  void SetCurrentPlayerID(int value) { current_player_id = value; };
+  
 private:
+  bool PerformAction(CUnitEntity* unit_entity, CAction* action);
   void CreatePath(CUnitEntity* unit_entity, CAction* action);
   void CreatePath(CUnitEntity* unit_entity, int x, int y);
   void Move(CUnitEntity* unit_entity, CAction* action);
@@ -41,6 +44,7 @@ private:
   CMap*         map;
   
   CUnitEntity*  selected_unit;
+  int           current_player_id;
 };
 
 #endif	/* CUNITCONTROLS_H */

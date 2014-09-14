@@ -50,6 +50,10 @@ int CApp::OnInit() {
     return -1;
   }
   
+  if( TTF_Init() == -1 ) {
+    return -2; 
+  }  
+  
   rectDisplay.x = rectDisplay.y = 0;
   rectDisplay.w = 1280;
   rectDisplay.h = 720;
@@ -87,6 +91,7 @@ int CApp::OnInit() {
   map->addUnit(7, 4, 2, 0);
   map->addUnit(10, 9, 3, 0);
   map->addUnit(3, 7, 4, 0);
+  map->addUnit(4, 12, 6, 0);
 
   map->addUnit(15, 8, 5, 1);
   map->addUnit(17, 4, 5, 1);
@@ -94,6 +99,9 @@ int CApp::OnInit() {
   map_render = new CMapRender(&rectDisplay, map, tile_render, unit_render, object_render);
   map_controls = new CMapControls(map_render);
   unit_controls = new CUnitControls(map_render);
+  unit_controls->SetCurrentPlayerID(0);
+  
+  game_controls = new CGameControls(&player_manager, unit_controls);
   
   return 0;
 }
@@ -118,6 +126,7 @@ void CApp::OnEvent(SDL_Event* event) {
   }
   map_controls->OnEvent(event);
   unit_controls->OnEvent(event);
+  game_controls->OnEvent(event);
 }
 
 void CApp::OnRender() {
