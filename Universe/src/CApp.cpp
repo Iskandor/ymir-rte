@@ -52,7 +52,9 @@ int CApp::OnInit() {
   
   if( TTF_Init() == -1 ) {
     return -2; 
-  }  
+  }
+
+  font_render = new CFontRender();
   
   rectDisplay.x = rectDisplay.y = 0;
   rectDisplay.w = 1280;
@@ -62,7 +64,7 @@ int CApp::OnInit() {
     return -2;
   }
   
-  gui_manager = new CGuiManager(surfDisplay);
+  gui_manager = new CGuiManager(surfDisplay, font_render);
   if (gui_manager->OnInit() != 0) {
     return -3;
   }
@@ -133,11 +135,18 @@ void CApp::OnRender() {
   SDL_FillRect(surfDisplay, NULL, SDL_MapRGB(surfDisplay->format, 0, 0, 0));
   map_render->OnRender(surfDisplay);
   gui_manager->OnRender();
+  
+  SDL_Rect   player_rect = {0, 0, 200, 32};
+  SDL_Color  player_color = {255, 255, 255}; 
+  
+  font_render->RenderText(surfDisplay, player_rect, player_manager.GetPlayer(game_controls->GetCurrentPlayerID())->GetName(), player_color);
+  
   SDL_Flip(surfDisplay);
 }
 
 void CApp::OnCleanup() {
   SDL_Quit();
+  TTF_Quit();
 }
 
 

@@ -22,6 +22,9 @@ public:
   void OnEvent(SDL_Event* event);
   void OnLoop();
   
+  
+  int GetCurrentPlayerID() { return current_player_id; };
+  
 private:
   CPlayerManager* player_manager;
   CUnitControls*  unit_controls;

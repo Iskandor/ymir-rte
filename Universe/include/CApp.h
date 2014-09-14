@@ -24,6 +24,7 @@
 #include "CPlayerManager.h"
 #include "CGuiManager.h"
 #include "CGameControls.h"
+#include "CFontRender.h"
 
 class CApp {
 public:
@@ -45,6 +46,7 @@ private:
   CPlayerManager  player_manager;
   CGuiManager     *gui_manager;
   CGameControls   *game_controls;
+  CFontRender     *font_render;
   
   bool running;
 

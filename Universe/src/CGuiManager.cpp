@@ -7,12 +7,14 @@
 
 #include "CGuiManager.h"
 
-CGuiManager::CGuiManager(SDL_Surface* surface) {
+CGuiManager::CGuiManager(SDL_Surface* surface, CFontRender* font_render) {
   screen = surface;
+  this->font_render = font_render;
 }
 
 CGuiManager::CGuiManager(const CGuiManager& orig) {
   screen = orig.screen;
+  font_render = orig.font_render;
 }
 
 CGuiManager::~CGuiManager() {

@@ -17,12 +17,14 @@
 #include <QtCore/QXmlStreamWriter>
 #include <QtCore/QFile>
 
+#include "CFontRender.h"
+
 using namespace gcn;
 using namespace std;
 
 class CGuiManager {
 public:
-  CGuiManager(SDL_Surface* surface);
+  CGuiManager(SDL_Surface* surface, CFontRender* font_render);
   CGuiManager(const CGuiManager& orig);
   virtual ~CGuiManager();
   
@@ -41,6 +43,8 @@ private:
   Container*  top;
   ImageFont*  font;
   Label*      label;
+  
+  CFontRender* font_render;
 };
 
 #endif	/* CGUIMANAGER_H */
