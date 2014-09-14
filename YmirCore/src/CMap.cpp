@@ -305,6 +305,16 @@ void CMap::addUnit(int x, int y, int id, int player_id)  {
   player_manager->GetPlayer(player_id)->AddUnit(unit_entity);
 }
 
+void CMap::remUnit(CUnitEntity* unit_entity) {
+  if (unit_entity->GetRefObject() != NULL) {
+    remObject(unit_entity->GetRefObject()->GetID());
+  }
+  Unblock(unit_entity);
+  unit_manager->remUnit(unit_entity);
+  player_manager->GetPlayer(unit_entity->GetPlayerID())->RemoveUnit(unit_entity->GetID());
+  remObject(unit_entity->GetID());
+}
+
 int CMap::getMapSizeX(SizeMode mode) {
   if (mode == sizemode_segment) {
     return this->map_segsize_x;

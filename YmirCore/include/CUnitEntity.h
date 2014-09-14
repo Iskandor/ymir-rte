@@ -35,8 +35,13 @@ public:
   int     GetMaxHP() { return max_hp; };
   void    AddAction(CAction action) { action_queue.push(action); };
   CAction GetAction();
+  void    ClearActionQueue();
   
-  
+  void    DecreaseSP(double value) { sp -= value; };
+  void    SetSP(double value) { sp = value; };
+  double  GetSP() { return sp; };
+  double  GetMaxSP() { return max_sp; };
+    
   void OnClick(double* block_map, int size_x, int size_y);
   
 private:

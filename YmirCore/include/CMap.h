@@ -81,6 +81,7 @@ public:
   CUnitManager* GetUnitManager() { return unit_manager; };
   
   void addUnit(int x, int y, int id, int player_id);
+  void remUnit(CUnitEntity* unit_entity);
   
   void Block(CUnitEntity* unit_entity);
   void Unblock(CUnitEntity* unit_entity);

@@ -117,12 +117,18 @@ void CUnitEntity::generate_possible_loc(double* block_map, int size_x, int size_
 }
 
 CAction CUnitEntity::GetAction() {
-    CAction result;
-    
-    if (!action_queue.empty()) {
-        result = action_queue.front();
-        action_queue.pop();
-    }
-    
-    return result;
+  CAction result;
+
+  if (!action_queue.empty()) {
+      result = action_queue.front();
+      action_queue.pop();
+  }
+
+  return result;
+}
+
+void CUnitEntity::ClearActionQueue() {
+  while(!action_queue.empty()) {
+    action_queue.pop();
+  }
 }

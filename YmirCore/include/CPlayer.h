@@ -35,17 +35,18 @@ private:
   vector<pair<int, E_RELATION> > diplomacy;
   
 public:
-  void SetName(string name) { this->name = name; };
-  string GetName() { return name; };
+  void    SetName(string name) { this->name = name; };
+  string  GetName() { return name; };
   
-  void SetAvatar(string avatar) { this->avatar = avatar; };
-  string GetAvatar() { return avatar; };
+  void    SetAvatar(string avatar) { this->avatar = avatar; };
+  string  GetAvatar() { return avatar; };
 
   int GetID() { return id; };
   
-  void AddUnit(CUnitEntity* unit_entity);
-  void RemoveUnit(int id);
+  void  AddUnit(CUnitEntity* unit_entity);
+  void  RemoveUnit(int id);
   CUnitEntity* GetUnit(int id);
+  void  RestoreUnitSP();
 };
 
 #endif	/* CPLAYER_H */

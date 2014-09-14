@@ -38,3 +38,11 @@ void CPlayer::RemoveUnit(int id) {
 CUnitEntity* CPlayer::GetUnit(int id) {
   return unit_tree[id];  
 }
+
+void CPlayer::RestoreUnitSP() {
+  for(map<int, CUnitEntity*>::iterator it = unit_tree.begin(); it != unit_tree.end(); it++) {
+    pair<int, CUnitEntity*> p = *it;
+    p.second->SetSP(p.second->GetMaxSP());
+    p.second->ClearActionQueue();
+  }
+}
