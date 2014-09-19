@@ -12,9 +12,10 @@
 #include <iostream>
 #include <SDL_gfxPrimitives.h>
 
-CObjectRender::CObjectRender(CModule<CObject> *object_module, CModule<CUnit> *unit_module) {
+CObjectRender::CObjectRender(CModule<CObject> *object_module, CModule<CUnit> *unit_module, CModule<CProjectile> *projectile_module) {
   this->object_module = object_module;
   this->unit_module = unit_module;
+  this->projectile_module = projectile_module;
   
   if (!LoadSurfaces()) {
     cout << "Error in loading object surfaces" << endl;
@@ -24,6 +25,7 @@ CObjectRender::CObjectRender(CModule<CObject> *object_module, CModule<CUnit> *un
 CObjectRender::CObjectRender(const CObjectRender& orig) {
   object_module = orig.object_module;
   unit_module = orig.unit_module;
+  projectile_module = orig.projectile_module;
   object_sprite = orig.object_sprite;
   insignia_bckg = orig.insignia_bckg;
   insignia = orig.insignia;
@@ -98,6 +100,10 @@ bool CObjectRender::LoadSurfaces() {
   
   SDL_FreeSurface(new_surf);
   
+  if (projectile_module == NULL) {
+    return false;
+  }
+  
   return true;
 }
 
@@ -105,7 +111,7 @@ void CObjectRender::OnRender(SDL_Surface* dest, CObjectEntity* object_entity, in
   CObject* object = object_entity->GetRootObject();
   SDL_Surface* surf = object_sprite[object->GetID()]->GetSurface(object_entity->GetDirection(),0,0);
    
-  if (object_entity->GetClassName() == "unit_entity") {
+  if (object->GetClass() == CObject::UNIT) {
     double  hp_bar = (double)((CUnitEntity*)object_entity)->GetHP() / (double)((CUnitEntity*)object_entity)->GetMaxHP();
     Sint16  x1 = x + 1;
     Sint16  y1 = y + 1;

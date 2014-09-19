@@ -16,10 +16,11 @@
 #include "CModule.h"
 #include "CSprite.h"
 #include "CUnit.h"
+#include "CProjectile.h"
 
 class CObjectRender {
 public:
-  CObjectRender(CModule<CObject> *object_module, CModule<CUnit> *unit_module);
+  CObjectRender(CModule<CObject> *object_module, CModule<CUnit> *unit_module, CModule<CProjectile> *projectile_module);
   CObjectRender(const CObjectRender& orig);
   virtual ~CObjectRender();
 
@@ -29,9 +30,11 @@ public:
 private:
   CModule<CObject>                  *object_module;
   CModule<CUnit>                    *unit_module;
-  map<int, CSprite*>                object_sprite;
+  CModule<CProjectile>              *projectile_module;
+  
   map<int, SDL_Surface*>            insignia_bckg;
   map<int, SDL_Surface*>            insignia;
+  map<int, CSprite*>  object_sprite;
 };
 
 #endif	/* COBJECTRENDER_H */

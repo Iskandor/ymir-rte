@@ -72,7 +72,7 @@ void CMapRender::OnRender(SDL_Surface* dest) {
     }   
   }
   
-  CUnitEntity* selected_unit = map->GetUnitManager()->getSelectedUnit();
+  CUnitEntity* selected_unit = map->GetUnitManager()->GetSelectedUnit();
   
   if (selected_unit != NULL) {
     render_possible_loc(dest, selected_unit);
