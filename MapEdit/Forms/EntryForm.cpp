@@ -11,6 +11,7 @@
 #include "NewUnitModuleDlg.h"
 #include "NewTileModuleDlg.h"
 #include "NewObjectModuleDlg.h"
+#include "NewProjModuleDlg.h"
 
 EntryForm::EntryForm() {
   widget.setupUi(this);
@@ -23,6 +24,7 @@ EntryForm::EntryForm() {
   connect(widget.actionUnit_Module, SIGNAL(triggered()), this, SLOT(openUnitModule()));
   connect(widget.actionTile_Module, SIGNAL(triggered()), this, SLOT(openTileModule()));
   connect(widget.actionObject_Modules, SIGNAL(triggered()), this, SLOT(openObjectModule()));
+  connect(widget.actionProjectile_Modules, SIGNAL(triggered()), this, SLOT(openProjectileModule()));
 
   connect(widget.horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(moveCameraX(int)));
   connect(widget.verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(moveCameraY(int)));
@@ -31,7 +33,7 @@ EntryForm::EntryForm() {
   map_render = new CMapRender(widget.drawingWidget);
   
   tile_module.LoadFromXML("data/tiles", "tiles", "tile");
-  unit_module.LoadFromXML("data/default", "units", "unit");
+  //unit_module.LoadFromXML("data/default", "units", "unit");
 }
 
 EntryForm::~EntryForm() {
@@ -111,6 +113,14 @@ void EntryForm::openTileModule() {
 
 void EntryForm::openObjectModule() {
   NewObjectModuleDlg  dlg;
+  
+  if (dlg.exec()) {
+    //tile_module.LoadFromXML("data/tiles", "tiles", "tile");
+  }
+}
+
+void EntryForm::openProjectileModule() {
+  NewProjModuleDlg  dlg;
   
   if (dlg.exec()) {
     //tile_module.LoadFromXML("data/tiles", "tiles", "tile");

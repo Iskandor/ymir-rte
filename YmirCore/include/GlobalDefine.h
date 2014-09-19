@@ -11,8 +11,10 @@
 #define UNIT_LIST  "units"
 #define TILE_LIST  "tiles"
 #define OBJECT_LIST "objects"
+#define PROJECTILES_LIST "projectiles"
 #define IMAGE_PATH_UNITS "data/image/units/"
 #define IMAGE_PATH_OBJECTS "data/image/objects/"
+#define IMAGE_PATH_PROJECTILES "data/image/objects/"
 #define IMAGE_PATH_TILES "data/image/terrain/"
 #define IMAGE_PATH_INSIGNIA "data/image/insignia/"
 
@@ -28,7 +30,7 @@ const int ELEM_PER_TILE = 4;
 const double BOTTOM  = -0.1;
 const double TOP     = 0.1;
 const double SQRT2   = 1.4142;
-const int MAX_PLAYER = 3;
+const int MAX_PLAYER = 2;
 
 
 #ifdef	__cplusplus

@@ -31,7 +31,8 @@ public:
   double getFire();
   string getName();
   string getFilename();
-  int    GetID();    
+  int    GetID();
+  int    GetTypeID() { return id; };
   
   void setEarth(double value);
   void setWater(double value);

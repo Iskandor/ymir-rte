@@ -16,6 +16,7 @@
 #include "CObjectManager.h"
 #include "CUnitManager.h"
 #include "CPlayerManager.h"
+#include "CProjectileManager.h"
 
 using namespace std;
 
@@ -27,17 +28,19 @@ enum SizeMode {
 
 class CMap : public CObjectManager {
 public:
-  CMap(CModule<CTile> *tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module);
-  CMap(int x, int y, int default_tile, CModule<CTile> *tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module);
+  CMap(CModule<CTile> *tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module, CModule<CProjectile> *projectile_module);
+  CMap(int x, int y, int default_tile, CModule<CTile> *tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module, CModule<CProjectile> *projectile_module);
   CMap(const CMap& orig);
   virtual ~CMap();
 private:
-  CModule<CTile>    *tile_module;
-  CModule<CUnit>    *unit_module;
-  CModule<CObject>  *object_module;
-  CUnitManager      *unit_manager;
-  CPlayerManager    *player_manager;
-  
+  CModule<CTile>        *tile_module;
+  CModule<CUnit>        *unit_module;
+  CModule<CObject>      *object_module;
+  CModule<CProjectile>  *projectile_module;
+  CUnitManager          *unit_manager;
+  CPlayerManager        *player_manager;
+  CProjectileManager    *projectile_manager;
+    
   string  name;
   string  filename;
 
@@ -79,9 +82,12 @@ public:
   int getMapSizeY(SizeMode mode);
   
   CUnitManager* GetUnitManager() { return unit_manager; };
+  CProjectileManager* GetProjectileManager() { return projectile_manager; };
   
   void addUnit(int x, int y, int id, int player_id);
   void remUnit(CUnitEntity* unit_entity);
+  void addProj(int x, int y, int id, int target_x, int target_y);
+  void remProj(CProjectileEntity* projectile_entity);
   
   void Block(CUnitEntity* unit_entity);
   void Unblock(CUnitEntity* unit_entity);

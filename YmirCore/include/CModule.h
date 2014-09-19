@@ -8,8 +8,7 @@
 #ifndef CUNITMODULE_H
 #define	CUNITMODULE_H
 
-#include "CXmlSerializable.h"
-
+#include <map>
 #include <vector>
 #include <string>
 #include <QtCore/QXmlStreamWriter>
@@ -39,10 +38,12 @@ public:
   virtual ~CModule() {
   };
   
-  void   AddUnit    (T unit) {
+  int   AddUnit    (T unit) {
     unit.SetID(next_id);
     next_id++;
     buffer.push_back(unit);
+    
+    return unit.GetID();
   };
   
   void   EditUnit   (int index, T unit) {
@@ -68,7 +69,7 @@ public:
   
   T* GetUnitPtr (unsigned int id) {
     for(int i = 0; i < buffer.size(); i++) {
-      if (buffer[i].GetID() == id) {
+      if (buffer[i].GetTypeID() == id) {
         return &buffer[i];
       }
     }

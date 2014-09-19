@@ -64,18 +64,7 @@ public:
     QSpinBox *ChrSbx;
     QSpinBox *EndSbx;
     QSpinBox *AglSbx;
-    QWidget *tab_2;
-    QWidget *formLayoutWidget_2;
-    QFormLayout *formLayout_2;
-    QLabel *label_9;
-    QSpinBox *SightSbx;
-    QLabel *label_10;
-    QSpinBox *AttRngSbx;
-    QLabel *label_11;
-    QSpinBox *DamSbx;
     QLabel *label_16;
-    QLabel *label_21;
-    QLabel *label_24;
     QGridLayout *gridLayout;
     QLabel *label_13;
     QSpinBox *EarthSbx;
@@ -85,6 +74,18 @@ public:
     QSpinBox *AirSbx;
     QSpinBox *FireSbx;
     QLabel *label_12;
+    QWidget *tab_2;
+    QWidget *formLayoutWidget_2;
+    QFormLayout *formLayout_2;
+    QLabel *label_9;
+    QSpinBox *SightSbx;
+    QLabel *label_10;
+    QSpinBox *AttRngSbx;
+    QLabel *label_11;
+    QSpinBox *DamSbx;
+    QLabel *label_32;
+    QSpinBox *AttSbx;
+    QLabel *label_21;
     QGridLayout *gridLayout_3;
     QLabel *label_19;
     QSpinBox *BluntASbx;
@@ -92,6 +93,9 @@ public:
     QSpinBox *StabASbx;
     QSpinBox *SlashASbx;
     QLabel *label_23;
+    QLabel *label_33;
+    QSpinBox *DefSbx;
+    QLabel *label_24;
     QGridLayout *gridLayout_2;
     QLabel *label_17;
     QSpinBox *BluntDSbx;
@@ -99,10 +103,8 @@ public:
     QSpinBox *StabDSbx;
     QSpinBox *SlashDSbx;
     QLabel *label_20;
-    QLabel *label_32;
-    QLabel *label_33;
-    QSpinBox *AttSbx;
-    QSpinBox *DefSbx;
+    QLabel *label_34;
+    QComboBox *cbProjectile;
     QWidget *tab_3;
     QWidget *formLayoutWidget_3;
     QFormLayout *formLayout_3;
@@ -258,6 +260,56 @@ public:
 
         formLayout->setWidget(7, QFormLayout::FieldRole, AglSbx);
 
+        label_16 = new QLabel(formLayoutWidget);
+        label_16->setObjectName(QString::fromUtf8("label_16"));
+
+        formLayout->setWidget(8, QFormLayout::LabelRole, label_16);
+
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        label_13 = new QLabel(formLayoutWidget);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+
+        gridLayout->addWidget(label_13, 2, 0, 1, 1);
+
+        EarthSbx = new QSpinBox(formLayoutWidget);
+        EarthSbx->setObjectName(QString::fromUtf8("EarthSbx"));
+
+        gridLayout->addWidget(EarthSbx, 0, 1, 1, 1);
+
+        label_14 = new QLabel(formLayoutWidget);
+        label_14->setObjectName(QString::fromUtf8("label_14"));
+
+        gridLayout->addWidget(label_14, 0, 2, 1, 1);
+
+        WaterSbx = new QSpinBox(formLayoutWidget);
+        WaterSbx->setObjectName(QString::fromUtf8("WaterSbx"));
+
+        gridLayout->addWidget(WaterSbx, 2, 1, 1, 1);
+
+        label_15 = new QLabel(formLayoutWidget);
+        label_15->setObjectName(QString::fromUtf8("label_15"));
+
+        gridLayout->addWidget(label_15, 2, 2, 1, 1);
+
+        AirSbx = new QSpinBox(formLayoutWidget);
+        AirSbx->setObjectName(QString::fromUtf8("AirSbx"));
+
+        gridLayout->addWidget(AirSbx, 0, 3, 1, 1);
+
+        FireSbx = new QSpinBox(formLayoutWidget);
+        FireSbx->setObjectName(QString::fromUtf8("FireSbx"));
+
+        gridLayout->addWidget(FireSbx, 2, 3, 1, 1);
+
+        label_12 = new QLabel(formLayoutWidget);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+
+        gridLayout->addWidget(label_12, 0, 0, 1, 1);
+
+
+        formLayout->setLayout(8, QFormLayout::FieldRole, gridLayout);
+
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
@@ -291,72 +343,27 @@ public:
         label_11 = new QLabel(formLayoutWidget_2);
         label_11->setObjectName(QString::fromUtf8("label_11"));
 
-        formLayout_2->setWidget(2, QFormLayout::LabelRole, label_11);
+        formLayout_2->setWidget(3, QFormLayout::LabelRole, label_11);
 
         DamSbx = new QSpinBox(formLayoutWidget_2);
         DamSbx->setObjectName(QString::fromUtf8("DamSbx"));
 
-        formLayout_2->setWidget(2, QFormLayout::FieldRole, DamSbx);
+        formLayout_2->setWidget(3, QFormLayout::FieldRole, DamSbx);
 
-        label_16 = new QLabel(formLayoutWidget_2);
-        label_16->setObjectName(QString::fromUtf8("label_16"));
+        label_32 = new QLabel(formLayoutWidget_2);
+        label_32->setObjectName(QString::fromUtf8("label_32"));
 
-        formLayout_2->setWidget(3, QFormLayout::LabelRole, label_16);
+        formLayout_2->setWidget(4, QFormLayout::LabelRole, label_32);
+
+        AttSbx = new QSpinBox(formLayoutWidget_2);
+        AttSbx->setObjectName(QString::fromUtf8("AttSbx"));
+
+        formLayout_2->setWidget(4, QFormLayout::FieldRole, AttSbx);
 
         label_21 = new QLabel(formLayoutWidget_2);
         label_21->setObjectName(QString::fromUtf8("label_21"));
 
         formLayout_2->setWidget(5, QFormLayout::LabelRole, label_21);
-
-        label_24 = new QLabel(formLayoutWidget_2);
-        label_24->setObjectName(QString::fromUtf8("label_24"));
-
-        formLayout_2->setWidget(7, QFormLayout::LabelRole, label_24);
-
-        gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        label_13 = new QLabel(formLayoutWidget_2);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
-
-        gridLayout->addWidget(label_13, 2, 0, 1, 1);
-
-        EarthSbx = new QSpinBox(formLayoutWidget_2);
-        EarthSbx->setObjectName(QString::fromUtf8("EarthSbx"));
-
-        gridLayout->addWidget(EarthSbx, 0, 1, 1, 1);
-
-        label_14 = new QLabel(formLayoutWidget_2);
-        label_14->setObjectName(QString::fromUtf8("label_14"));
-
-        gridLayout->addWidget(label_14, 0, 2, 1, 1);
-
-        WaterSbx = new QSpinBox(formLayoutWidget_2);
-        WaterSbx->setObjectName(QString::fromUtf8("WaterSbx"));
-
-        gridLayout->addWidget(WaterSbx, 2, 1, 1, 1);
-
-        label_15 = new QLabel(formLayoutWidget_2);
-        label_15->setObjectName(QString::fromUtf8("label_15"));
-
-        gridLayout->addWidget(label_15, 2, 2, 1, 1);
-
-        AirSbx = new QSpinBox(formLayoutWidget_2);
-        AirSbx->setObjectName(QString::fromUtf8("AirSbx"));
-
-        gridLayout->addWidget(AirSbx, 0, 3, 1, 1);
-
-        FireSbx = new QSpinBox(formLayoutWidget_2);
-        FireSbx->setObjectName(QString::fromUtf8("FireSbx"));
-
-        gridLayout->addWidget(FireSbx, 2, 3, 1, 1);
-
-        label_12 = new QLabel(formLayoutWidget_2);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
-
-        gridLayout->addWidget(label_12, 0, 0, 1, 1);
-
-
-        formLayout_2->setLayout(3, QFormLayout::FieldRole, gridLayout);
 
         gridLayout_3 = new QGridLayout();
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
@@ -393,6 +400,21 @@ public:
 
         formLayout_2->setLayout(5, QFormLayout::FieldRole, gridLayout_3);
 
+        label_33 = new QLabel(formLayoutWidget_2);
+        label_33->setObjectName(QString::fromUtf8("label_33"));
+
+        formLayout_2->setWidget(6, QFormLayout::LabelRole, label_33);
+
+        DefSbx = new QSpinBox(formLayoutWidget_2);
+        DefSbx->setObjectName(QString::fromUtf8("DefSbx"));
+
+        formLayout_2->setWidget(6, QFormLayout::FieldRole, DefSbx);
+
+        label_24 = new QLabel(formLayoutWidget_2);
+        label_24->setObjectName(QString::fromUtf8("label_24"));
+
+        formLayout_2->setWidget(7, QFormLayout::LabelRole, label_24);
+
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         label_17 = new QLabel(formLayoutWidget_2);
@@ -428,25 +450,15 @@ public:
 
         formLayout_2->setLayout(7, QFormLayout::FieldRole, gridLayout_2);
 
-        label_32 = new QLabel(formLayoutWidget_2);
-        label_32->setObjectName(QString::fromUtf8("label_32"));
+        label_34 = new QLabel(formLayoutWidget_2);
+        label_34->setObjectName(QString::fromUtf8("label_34"));
 
-        formLayout_2->setWidget(4, QFormLayout::LabelRole, label_32);
+        formLayout_2->setWidget(2, QFormLayout::LabelRole, label_34);
 
-        label_33 = new QLabel(formLayoutWidget_2);
-        label_33->setObjectName(QString::fromUtf8("label_33"));
+        cbProjectile = new QComboBox(formLayoutWidget_2);
+        cbProjectile->setObjectName(QString::fromUtf8("cbProjectile"));
 
-        formLayout_2->setWidget(6, QFormLayout::LabelRole, label_33);
-
-        AttSbx = new QSpinBox(formLayoutWidget_2);
-        AttSbx->setObjectName(QString::fromUtf8("AttSbx"));
-
-        formLayout_2->setWidget(4, QFormLayout::FieldRole, AttSbx);
-
-        DefSbx = new QSpinBox(formLayoutWidget_2);
-        DefSbx->setObjectName(QString::fromUtf8("DefSbx"));
-
-        formLayout_2->setWidget(6, QFormLayout::FieldRole, DefSbx);
+        formLayout_2->setWidget(2, QFormLayout::FieldRole, cbProjectile);
 
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
@@ -567,25 +579,26 @@ public:
         label_6->setText(QApplication::translate("NewUnitModuleDlg", "Charism", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("NewUnitModuleDlg", "Endurance", 0, QApplication::UnicodeUTF8));
         label_8->setText(QApplication::translate("NewUnitModuleDlg", "Agility", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("NewUnitModuleDlg", "Basic", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("NewUnitModuleDlg", "Sight range", 0, QApplication::UnicodeUTF8));
-        label_10->setText(QApplication::translate("NewUnitModuleDlg", "Attack range", 0, QApplication::UnicodeUTF8));
-        label_11->setText(QApplication::translate("NewUnitModuleDlg", "Damage area", 0, QApplication::UnicodeUTF8));
         label_16->setText(QApplication::translate("NewUnitModuleDlg", "Elements", 0, QApplication::UnicodeUTF8));
-        label_21->setText(QApplication::translate("NewUnitModuleDlg", "Attack", 0, QApplication::UnicodeUTF8));
-        label_24->setText(QApplication::translate("NewUnitModuleDlg", "Defense", 0, QApplication::UnicodeUTF8));
         label_13->setText(QApplication::translate("NewUnitModuleDlg", "Water", 0, QApplication::UnicodeUTF8));
         label_14->setText(QApplication::translate("NewUnitModuleDlg", "Air", 0, QApplication::UnicodeUTF8));
         label_15->setText(QApplication::translate("NewUnitModuleDlg", "Fire", 0, QApplication::UnicodeUTF8));
         label_12->setText(QApplication::translate("NewUnitModuleDlg", "Earth", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("NewUnitModuleDlg", "Basic", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("NewUnitModuleDlg", "Sight range", 0, QApplication::UnicodeUTF8));
+        label_10->setText(QApplication::translate("NewUnitModuleDlg", "Attack range", 0, QApplication::UnicodeUTF8));
+        label_11->setText(QApplication::translate("NewUnitModuleDlg", "Damage area", 0, QApplication::UnicodeUTF8));
+        label_32->setText(QApplication::translate("NewUnitModuleDlg", "Weapon", 0, QApplication::UnicodeUTF8));
+        label_21->setText(QApplication::translate("NewUnitModuleDlg", "Attack", 0, QApplication::UnicodeUTF8));
         label_19->setText(QApplication::translate("NewUnitModuleDlg", "Stab", 0, QApplication::UnicodeUTF8));
         label_22->setText(QApplication::translate("NewUnitModuleDlg", "Slash", 0, QApplication::UnicodeUTF8));
         label_23->setText(QApplication::translate("NewUnitModuleDlg", "Blunt", 0, QApplication::UnicodeUTF8));
+        label_33->setText(QApplication::translate("NewUnitModuleDlg", "Armor", 0, QApplication::UnicodeUTF8));
+        label_24->setText(QApplication::translate("NewUnitModuleDlg", "Defense", 0, QApplication::UnicodeUTF8));
         label_17->setText(QApplication::translate("NewUnitModuleDlg", "Stab", 0, QApplication::UnicodeUTF8));
         label_18->setText(QApplication::translate("NewUnitModuleDlg", "Slash", 0, QApplication::UnicodeUTF8));
         label_20->setText(QApplication::translate("NewUnitModuleDlg", "Blunt", 0, QApplication::UnicodeUTF8));
-        label_32->setText(QApplication::translate("NewUnitModuleDlg", "Weapon", 0, QApplication::UnicodeUTF8));
-        label_33->setText(QApplication::translate("NewUnitModuleDlg", "Armor", 0, QApplication::UnicodeUTF8));
+        label_34->setText(QApplication::translate("NewUnitModuleDlg", "Projectile", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("NewUnitModuleDlg", "Advanced", 0, QApplication::UnicodeUTF8));
         label_25->setText(QApplication::translate("NewUnitModuleDlg", "Filename", 0, QApplication::UnicodeUTF8));
         label_26->setText(QApplication::translate("NewUnitModuleDlg", "Size", 0, QApplication::UnicodeUTF8));

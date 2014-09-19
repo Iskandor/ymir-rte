@@ -13,6 +13,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QComboBox>
 #include <QtGui/QDialog>
 #include <QtGui/QDialogButtonBox>
 #include <QtGui/QFormLayout>
@@ -35,6 +36,13 @@ class Ui_NewObjectModuleDlg
 public:
     QDialogButtonBox *buttonBox;
     QTabWidget *tabWidget;
+    QWidget *tab_2;
+    QWidget *formLayoutWidget_2;
+    QFormLayout *formLayout_2;
+    QLabel *label_5;
+    QLineEdit *leDesc;
+    QLabel *label_6;
+    QComboBox *cbClass;
     QWidget *tab;
     QWidget *formLayoutWidget;
     QFormLayout *formLayout;
@@ -48,11 +56,6 @@ public:
     QSpinBox *sbYSize;
     QPushButton *bChooseFile;
     QClickLabel *lImage;
-    QWidget *tab_2;
-    QWidget *formLayoutWidget_2;
-    QFormLayout *formLayout_2;
-    QLabel *label_5;
-    QLineEdit *leDesc;
     QLineEdit *leModuleName;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
@@ -75,6 +78,35 @@ public:
         tabWidget = new QTabWidget(NewObjectModuleDlg);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         tabWidget->setGeometry(QRect(352, 9, 401, 431));
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QString::fromUtf8("tab_2"));
+        formLayoutWidget_2 = new QWidget(tab_2);
+        formLayoutWidget_2->setObjectName(QString::fromUtf8("formLayoutWidget_2"));
+        formLayoutWidget_2->setGeometry(QRect(9, 9, 381, 381));
+        formLayout_2 = new QFormLayout(formLayoutWidget_2);
+        formLayout_2->setObjectName(QString::fromUtf8("formLayout_2"));
+        formLayout_2->setContentsMargins(0, 0, 0, 0);
+        label_5 = new QLabel(formLayoutWidget_2);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+
+        formLayout_2->setWidget(0, QFormLayout::LabelRole, label_5);
+
+        leDesc = new QLineEdit(formLayoutWidget_2);
+        leDesc->setObjectName(QString::fromUtf8("leDesc"));
+
+        formLayout_2->setWidget(0, QFormLayout::FieldRole, leDesc);
+
+        label_6 = new QLabel(formLayoutWidget_2);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        formLayout_2->setWidget(1, QFormLayout::LabelRole, label_6);
+
+        cbClass = new QComboBox(formLayoutWidget_2);
+        cbClass->setObjectName(QString::fromUtf8("cbClass"));
+
+        formLayout_2->setWidget(1, QFormLayout::FieldRole, cbClass);
+
+        tabWidget->addTab(tab_2, QString());
         tab = new QWidget();
         tab->setObjectName(QString::fromUtf8("tab"));
         formLayoutWidget = new QWidget(tab);
@@ -134,25 +166,6 @@ public:
         formLayout->setWidget(3, QFormLayout::FieldRole, lImage);
 
         tabWidget->addTab(tab, QString());
-        tab_2 = new QWidget();
-        tab_2->setObjectName(QString::fromUtf8("tab_2"));
-        formLayoutWidget_2 = new QWidget(tab_2);
-        formLayoutWidget_2->setObjectName(QString::fromUtf8("formLayoutWidget_2"));
-        formLayoutWidget_2->setGeometry(QRect(9, 9, 381, 381));
-        formLayout_2 = new QFormLayout(formLayoutWidget_2);
-        formLayout_2->setObjectName(QString::fromUtf8("formLayout_2"));
-        formLayout_2->setContentsMargins(0, 0, 0, 0);
-        label_5 = new QLabel(formLayoutWidget_2);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-
-        formLayout_2->setWidget(0, QFormLayout::LabelRole, label_5);
-
-        leDesc = new QLineEdit(formLayoutWidget_2);
-        leDesc->setObjectName(QString::fromUtf8("leDesc"));
-
-        formLayout_2->setWidget(0, QFormLayout::FieldRole, leDesc);
-
-        tabWidget->addTab(tab_2, QString());
         leModuleName = new QLineEdit(NewObjectModuleDlg);
         leModuleName->setObjectName(QString::fromUtf8("leModuleName"));
         leModuleName->setGeometry(QRect(10, 10, 161, 27));
@@ -199,6 +212,9 @@ public:
     void retranslateUi(QDialog *NewObjectModuleDlg)
     {
         NewObjectModuleDlg->setWindowTitle(QApplication::translate("NewObjectModuleDlg", "NewObjectModuleDlg", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("NewObjectModuleDlg", "Descriptor", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("NewObjectModuleDlg", "Class", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("NewObjectModuleDlg", "Basic", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("NewObjectModuleDlg", "Filename", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("NewObjectModuleDlg", "Size:", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("NewObjectModuleDlg", "X", 0, QApplication::UnicodeUTF8));
@@ -206,8 +222,6 @@ public:
         bChooseFile->setText(QApplication::translate("NewObjectModuleDlg", "Choose image file", 0, QApplication::UnicodeUTF8));
         lImage->setText(QApplication::translate("NewObjectModuleDlg", "Image", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("NewObjectModuleDlg", "Data", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("NewObjectModuleDlg", "Descriptor", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("NewObjectModuleDlg", "Basic", 0, QApplication::UnicodeUTF8));
         bAdd->setText(QApplication::translate("NewObjectModuleDlg", "Add", 0, QApplication::UnicodeUTF8));
         bEdit->setText(QApplication::translate("NewObjectModuleDlg", "Edit", 0, QApplication::UnicodeUTF8));
         bSave->setText(QApplication::translate("NewObjectModuleDlg", "Save", 0, QApplication::UnicodeUTF8));

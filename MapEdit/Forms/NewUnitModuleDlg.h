@@ -12,6 +12,7 @@
 #include "CModule.h"
 #include "CUnit.h"
 #include "CRace.h"
+#include "CProjectile.h"
 
 #include <qt4/QtGui/QStandardItemModel>
 #include <qt4/QtGui/QStringListModel>
@@ -35,10 +36,11 @@ private:
 private:
   Ui::NewUnitModuleDlg widget;
   
-  CModule<CUnit>*     unit_module;
-  CUnit               unit_model;
-  CRace*              race_list;
-  QPixmap*            unit_image; 
+  CModule<CUnit>*       unit_module;
+  CModule<CProjectile>  projectile_module;
+  CUnit                 unit_model;
+  CRace*                race_list;
+  QPixmap*              unit_image; 
   
   QStandardItemModel* listview_model;
   int                 selected_id;

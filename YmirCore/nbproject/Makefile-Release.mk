@@ -43,15 +43,16 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CObjectManager.o \
 	${OBJECTDIR}/src/CPlayer.o \
 	${OBJECTDIR}/src/CPlayerManager.o \
+	${OBJECTDIR}/src/CProjectile.o \
+	${OBJECTDIR}/src/CProjectileEntity.o \
+	${OBJECTDIR}/src/CProjectileManager.o \
 	${OBJECTDIR}/src/CRace.o \
 	${OBJECTDIR}/src/CStrUtils.o \
 	${OBJECTDIR}/src/CTile.o \
 	${OBJECTDIR}/src/CUnit.o \
 	${OBJECTDIR}/src/CUnitEntity.o \
 	${OBJECTDIR}/src/CUnitManager.o \
-	${OBJECTDIR}/src/CUnitModuleManager.o \
-	${OBJECTDIR}/src/CUtils.o \
-	${OBJECTDIR}/src/CXmlSerializable.o
+	${OBJECTDIR}/src/CUtils.o
 
 
 # C Compiler Flags
@@ -118,6 +119,21 @@ ${OBJECTDIR}/src/CPlayerManager.o: src/CPlayerManager.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CPlayerManager.o src/CPlayerManager.cpp
 
+${OBJECTDIR}/src/CProjectile.o: src/CProjectile.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CProjectile.o src/CProjectile.cpp
+
+${OBJECTDIR}/src/CProjectileEntity.o: src/CProjectileEntity.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CProjectileEntity.o src/CProjectileEntity.cpp
+
+${OBJECTDIR}/src/CProjectileManager.o: src/CProjectileManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CProjectileManager.o src/CProjectileManager.cpp
+
 ${OBJECTDIR}/src/CRace.o: src/CRace.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
@@ -148,20 +164,10 @@ ${OBJECTDIR}/src/CUnitManager.o: src/CUnitManager.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUnitManager.o src/CUnitManager.cpp
 
-${OBJECTDIR}/src/CUnitModuleManager.o: src/CUnitModuleManager.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUnitModuleManager.o src/CUnitModuleManager.cpp
-
 ${OBJECTDIR}/src/CUtils.o: src/CUtils.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUtils.o src/CUtils.cpp
-
-${OBJECTDIR}/src/CXmlSerializable.o: src/CXmlSerializable.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CXmlSerializable.o src/CXmlSerializable.cpp
 
 # Subprojects
 .build-subprojects:

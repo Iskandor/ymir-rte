@@ -14,18 +14,22 @@
 
 CObject::CObject() {
   id = 0;
+  type_id = 0;
   x_size = y_size = 0;
   block_map = NULL;
   image_filename = "";
   desc = "";
+  obj_class = CObject::TECH;
 }
 
 CObject::CObject(int id) {
   this->id = id;
+  type_id = id;
   x_size = y_size = 0;
   block_map = NULL;
   image_filename = "";
   desc = "";
+  obj_class = CObject::TECH;
 }
 
 CObject::CObject(const CObject& orig) {
@@ -36,12 +40,16 @@ CObject::CObject(const CObject& orig) {
   memcpy(block_map, orig.block_map, x_size*y_size*sizeof(int));
   image_filename = orig.image_filename;
   desc = orig.desc;
+  obj_class = orig.obj_class;
+  type_id = orig.type_id;
 }
 
 CObject::CObject(map<string, string> data) {
   block_map = NULL;
   
   id = atoi(data["id"].c_str());
+  type_id = id;
+  obj_class = (CObject::E_CLASSES)stoi(data["obj_class"]);
   image_filename = data["image_filename"];
   desc = data["desc"];
   x_size = atoi(data["x_size"].c_str());
@@ -60,7 +68,8 @@ map<string, string> CObject::exportMap() {
   char val[100+1];
   
   sprintf(val, "%i", id);
-  result["id"] = val;  
+  result["id"] = val;
+  result["obj_class"] = to_string(obj_class);
   
   result["image_filename"] = image_filename;
   result["desc"] = desc;
@@ -70,7 +79,7 @@ map<string, string> CObject::exportMap() {
   sprintf(val, "%i", y_size);
   result["y_size"] = val;
 
-  result["block_map"] = CStrUtils::ImplodeToString(block_map, x_size*y_size);  
+  result["block_map"] = CStrUtils::ImplodeToString(block_map, x_size*y_size); 
   
   return result;
 }

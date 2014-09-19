@@ -35,6 +35,7 @@ public:
     QAction *actionUnit_Module;
     QAction *actionTile_Module;
     QAction *actionObject_Modules;
+    QAction *actionProjectile_Modules;
     QWidget *centralwidget;
     QScrollBar *horizontalScrollBar;
     QScrollBar *verticalScrollBar;
@@ -70,6 +71,8 @@ public:
         actionTile_Module->setObjectName(QString::fromUtf8("actionTile_Module"));
         actionObject_Modules = new QAction(EntryForm);
         actionObject_Modules->setObjectName(QString::fromUtf8("actionObject_Modules"));
+        actionProjectile_Modules = new QAction(EntryForm);
+        actionProjectile_Modules->setObjectName(QString::fromUtf8("actionProjectile_Modules"));
         centralwidget = new QWidget(EntryForm);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalScrollBar = new QScrollBar(centralwidget);
@@ -122,6 +125,7 @@ public:
         menuUnits->addAction(actionUnit_Module);
         menuUnits->addAction(actionTile_Module);
         menuUnits->addAction(actionObject_Modules);
+        menuUnits->addAction(actionProjectile_Modules);
 
         retranslateUi(EntryForm);
 
@@ -140,6 +144,7 @@ public:
         actionUnit_Module->setText(QApplication::translate("EntryForm", "Unit Modules", 0, QApplication::UnicodeUTF8));
         actionTile_Module->setText(QApplication::translate("EntryForm", "Tile Modules", 0, QApplication::UnicodeUTF8));
         actionObject_Modules->setText(QApplication::translate("EntryForm", "Object Modules", 0, QApplication::UnicodeUTF8));
+        actionProjectile_Modules->setText(QApplication::translate("EntryForm", "Projectile Modules", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("EntryForm", "File", 0, QApplication::UnicodeUTF8));
         menuEdit->setTitle(QApplication::translate("EntryForm", "Edit", 0, QApplication::UnicodeUTF8));
         menuHelp->setTitle(QApplication::translate("EntryForm", "Help", 0, QApplication::UnicodeUTF8));

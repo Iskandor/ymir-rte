@@ -13,9 +13,10 @@ CObjectEntity::CObjectEntity(int inner_id) {
   x = y = 0;  
   z_index = 0;
   root_object = NULL;
+  ref_object_entity = NULL;
   state = IDLE;
   direction = CObjectEntity::RIGHT;
-class_name = "object_entity";  
+  class_name = "object_entity";  
 }
 
 CObjectEntity::CObjectEntity(CObject* object, int inner_id, int x, int y, double z_index) {
@@ -23,6 +24,7 @@ CObjectEntity::CObjectEntity(CObject* object, int inner_id, int x, int y, double
   setPosition(x, y);
   this->z_index = z_index;
   root_object = object;
+  ref_object_entity = NULL;
   state = IDLE;
   direction = CObjectEntity::RIGHT;
   class_name = "object_entity";
@@ -34,7 +36,7 @@ CObjectEntity::CObjectEntity(const CObjectEntity& orig) {
   y = orig.y;  
   z_index = orig.z_index;
   root_object = orig.root_object;
-  
+  ref_object_entity = orig.ref_object_entity;
   state = orig.state;
   direction = orig.direction;
   class_name = orig.class_name;  

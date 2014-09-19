@@ -12,11 +12,12 @@
 #include "CStrUtils.h"
 #include "CMathUtils.h"
 
-CMap::CMap(CModule<CTile>* tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module) 
+CMap::CMap(CModule<CTile>* tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module, CModule<CProjectile> *projectile_module) 
     : CObjectManager(object_module) {  
   this->tile_module = tile_module;
   this->unit_module = unit_module;
   this->object_module = object_module;
+  this->projectile_module = projectile_module;
   map_segsize_x = 0;
   map_segsize_y = 0;
   map_tilesize_x = 0;
@@ -28,9 +29,10 @@ CMap::CMap(CModule<CTile>* tile_module, CModule<CUnit> *unit_module, CModule<COb
   move_cost_map = NULL;
   
   unit_manager = new CUnitManager(unit_module, this);
+  projectile_manager = new CProjectileManager(projectile_module, this);
 }
 
-CMap::CMap(int x, int y, int default_tile, CModule<CTile> *tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module) 
+CMap::CMap(int x, int y, int default_tile, CModule<CTile> *tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module, CModule<CProjectile> *projectile_module) 
     : CObjectManager(object_module) {
   map_segsize_x = x;
   map_segsize_y = y;
@@ -42,6 +44,7 @@ CMap::CMap(int x, int y, int default_tile, CModule<CTile> *tile_module, CModule<
   this->tile_module = tile_module;
   this->unit_module = unit_module;
   this->object_module = object_module;
+  this->projectile_module = projectile_module;
 
   pTile = new CTile*[map_tilesize_x*map_tilesize_y];
   
@@ -52,6 +55,7 @@ CMap::CMap(int x, int y, int default_tile, CModule<CTile> *tile_module, CModule<
   move_cost_map = new double[map_elemsize_x*map_elemsize_y];
   memset(move_cost_map, 0, map_elemsize_x*map_elemsize_y*sizeof(double));
   unit_manager = new CUnitManager(unit_module, this);
+  projectile_manager = new CProjectileManager(projectile_module, this);
 }
 
 CMap::CMap(const CMap& orig) : CObjectManager(orig) {
@@ -65,8 +69,10 @@ CMap::CMap(const CMap& orig) : CObjectManager(orig) {
   move_cost_map = orig.move_cost_map;
   tile_module = orig.tile_module;
   unit_module = orig.unit_module;
+  projectile_module = orig.projectile_module;
   object_module = orig.object_module;
   unit_manager = orig.unit_manager;
+  projectile_manager = orig.projectile_manager;
 }
 
 CMap::~CMap() {
@@ -300,7 +306,7 @@ void CMap::normalize_tile(CTile* p_tile) {
 }
 
 void CMap::addUnit(int x, int y, int id, int player_id)  {
-  CUnitEntity* unit_entity = unit_manager->addUnit(x, y, id, player_id);
+  CUnitEntity* unit_entity = unit_manager->Add(x, y, id, player_id);
   Block(unit_entity);
   player_manager->GetPlayer(player_id)->AddUnit(unit_entity);
 }
@@ -310,9 +316,18 @@ void CMap::remUnit(CUnitEntity* unit_entity) {
     remObject(unit_entity->GetRefObject()->GetID());
   }
   Unblock(unit_entity);
-  unit_manager->remUnit(unit_entity);
+  unit_manager->Rem(unit_entity);
   player_manager->GetPlayer(unit_entity->GetPlayerID())->RemoveUnit(unit_entity->GetID());
   remObject(unit_entity->GetID());
+}
+
+void CMap::addProj(int x, int y, int id, int target_x, int target_y) {
+  CProjectileEntity* projectile_entity = projectile_manager->Add(x, y, id, target_x, target_y);
+}
+
+void CMap::remProj(CProjectileEntity* projectile_entity) {
+  projectile_manager->Rem(projectile_entity);
+  remObject(projectile_entity->GetID());
 }
 
 int CMap::getMapSizeX(SizeMode mode) {

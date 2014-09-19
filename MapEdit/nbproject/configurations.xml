@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="94">
+<configurationDescriptor version="95">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>CMapRender.h</itemPath>
+      <itemPath>include/CObjectClass.h</itemPath>
       <itemPath>Forms/EntryForm.h</itemPath>
       <itemPath>Forms/NewMapDlg.h</itemPath>
       <itemPath>Forms/NewObjectModuleDlg.h</itemPath>
+      <itemPath>NewProjModuleDlg.h</itemPath>
       <itemPath>Forms/NewTileModuleDlg.h</itemPath>
       <itemPath>Forms/NewUnitModuleDlg.h</itemPath>
       <itemPath>include/QClickLabel.h</itemPath>
@@ -18,6 +20,7 @@
       <itemPath>Forms/EntryForm.ui</itemPath>
       <itemPath>Forms/NewMapDlg.ui</itemPath>
       <itemPath>Forms/NewObjectModuleDlg.ui</itemPath>
+      <itemPath>Forms/NewProjModuleDlg.ui</itemPath>
       <itemPath>Forms/NewTileModuleDlg.ui</itemPath>
       <itemPath>Forms/NewUnitModuleDlg.ui</itemPath>
     </logicalFolder>
@@ -25,9 +28,11 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>CMapRender.cpp</itemPath>
+      <itemPath>src/CObjectClass.cpp</itemPath>
       <itemPath>Forms/EntryForm.cpp</itemPath>
       <itemPath>Forms/NewMapDlg.cpp</itemPath>
       <itemPath>Forms/NewObjectModuleDlg.cpp</itemPath>
+      <itemPath>NewProjModuleDlg.cpp</itemPath>
       <itemPath>Forms/NewTileModuleDlg.cpp</itemPath>
       <itemPath>Forms/NewUnitModuleDlg.cpp</itemPath>
       <itemPath>src/QClickLabel.cpp</itemPath>
@@ -119,6 +124,8 @@
       </item>
       <item path="Forms/NewObjectModuleDlg.ui" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Forms/NewProjModuleDlg.ui" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Forms/NewTileModuleDlg.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Forms/NewTileModuleDlg.h" ex="false" tool="3" flavor2="0">
@@ -131,9 +138,17 @@
       </item>
       <item path="Forms/NewUnitModuleDlg.ui" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="NewProjModuleDlg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NewProjModuleDlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CObjectClass.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/QClickLabel.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CObjectClass.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/QClickLabel.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -184,6 +199,8 @@
       </item>
       <item path="Forms/NewObjectModuleDlg.ui" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Forms/NewProjModuleDlg.ui" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Forms/NewTileModuleDlg.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Forms/NewTileModuleDlg.h" ex="false" tool="3" flavor2="0">
@@ -196,9 +213,17 @@
       </item>
       <item path="Forms/NewUnitModuleDlg.ui" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="NewProjModuleDlg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NewProjModuleDlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CObjectClass.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/QClickLabel.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CObjectClass.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/QClickLabel.cpp" ex="false" tool="1" flavor2="0">
       </item>

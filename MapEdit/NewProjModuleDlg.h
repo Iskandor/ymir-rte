@@ -1,41 +1,38 @@
 /* 
- * File:   NewObjectModuleDlg.h
- * Author: Matej Pechac
+ * File:   NewProjModuleDlh.h
+ * Author: matej
  *
- * Created on May 10, 2014, 2:33 PM
+ * Created on September 17, 2014, 8:45 PM
  */
 
-#ifndef _NEWOBJECTMODULEDLG_H
-#define	_NEWOBJECTMODULEDLG_H
+#ifndef NEWPROJMODULEDLG_H
+#define	NEWPROJMODULEDLG_H
 
-#include "ui_NewObjectModuleDlg.h"
+#include "ui_NewProjModuleDlg.h"
 #include "CModule.h"
-#include "CObject.h"
-#include "CObjectClass.h"
+#include "CProjectile.h"
 
 #include <qt4/QtGui/QStandardItemModel>
 #include <QPixmap>
 
-class NewObjectModuleDlg : public QDialog {
+class NewProjModuleDlg : public QDialog {
   Q_OBJECT
 public:
-  NewObjectModuleDlg();
-  virtual ~NewObjectModuleDlg();
+  NewProjModuleDlg();
+  virtual ~NewProjModuleDlg();
 private:
-  Ui::NewObjectModuleDlg widget;
+  Ui::NewProjModuleDlg widget;
   
-  CModule<CObject> *object_module;
-  CObject           object_model;
-  QPixmap*          object_image; 
+  CModule<CProjectile> *projectile_module;
+  CProjectile           projectile_model;
+  QPixmap*          projectile_image; 
   
   QStandardItemModel* listview_model;
-  CObjectClass        object_class;
   int                 selected_id;
   
 private:
   void DrawImage();
   void RefreshListView();
-  void RefreshComboBox();
   void RefreshImage(QString _filename);
   void DrawGrid(QPixmap* pixmap);
   
@@ -50,10 +47,10 @@ public slots:
   void saveObject();
   void chooseFile();
   void imageOnclick();
-  void ChangeClass(int val);
   
   void SizeXChanged(int val);
   void SizeYChanged(int val);    
 };
 
-#endif	/* _NEWOBJECTMODULEDLG_H */
+#endif	/* NEWPROJMODULEDLH_H */
+

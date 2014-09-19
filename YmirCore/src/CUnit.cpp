@@ -33,6 +33,8 @@ CUnit::CUnit() : CObject() {
     avp.push_back(0);
     rvp.push_back(0);
   }
+  
+  projectil_id = 0;
 }
 
 CUnit::CUnit(int id) : CObject(id)  {
@@ -58,11 +60,13 @@ CUnit::CUnit(int id) : CObject(id)  {
     avp.push_back(0);
     rvp.push_back(0);
   }
+  
+  projectil_id = 0;
 }
 
 CUnit::CUnit(map<string,string> data) : CObject(data){
   char key[100+1];
-    
+
   unit_class = data["unit_class"];
   unit_race = data["unit_race"];
     
@@ -95,6 +99,7 @@ CUnit::CUnit(map<string,string> data) : CObject(data){
   
   weapon = stoi(data["weapon"]);
   armor = stoi(data["armor"]);
+  projectil_id = stoi(data["projectile_id"]);
 }
 
 CUnit::CUnit(const CUnit& orig) : CObject(orig) {
@@ -110,6 +115,7 @@ CUnit::CUnit(const CUnit& orig) : CObject(orig) {
   this->insignia_pos = orig.insignia_pos;
   this->weapon = orig.weapon;
   this->armor = orig.armor;
+  this->projectil_id = orig.projectil_id;
 }
 
 CUnit::~CUnit() {
@@ -160,6 +166,8 @@ map<string, string> CUnit::exportMap() {
   
   result["weapon"] = to_string(weapon);
   result["armor"] = to_string(armor);
+  result["projectile_id"] = to_string(projectil_id);
+  
 
   return result;
 }

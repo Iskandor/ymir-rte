@@ -15,6 +15,12 @@ using namespace std;
 
 class CObject {
 public:
+  enum E_CLASSES {
+    TECH = 0,
+    PROJECTILE = 1,
+    UNIT = 2
+  };
+  
   CObject();
   CObject(int id);
   CObject(map<string, string> data);
@@ -29,7 +35,10 @@ public:
   string  GetDesc();
   
   void  SetID(int id);
-  int   GetID();  
+  int   GetID();
+  int   GetTypeID() { return type_id; }
+  void  SetClass(E_CLASSES value) { obj_class = value; };
+  int   GetClass() { return obj_class; };
   int   GetXSize();
   void  SetXSize(int x);
   int   GetYSize();
@@ -40,6 +49,8 @@ public:
   
 protected:
   int id;
+  int type_id;
+  E_CLASSES obj_class;
   int x_size;
   int y_size;
   int *block_map;

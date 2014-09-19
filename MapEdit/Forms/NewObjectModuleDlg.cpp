@@ -7,7 +7,9 @@
 
 #include "NewObjectModuleDlg.h"
 #include "GlobalDefine.h"
+
 #include <QFileDialog>
+#include <qt4/QtGui/QMessageBox>
 #include <qt4/Qt/qpainter.h>
 
 NewObjectModuleDlg::NewObjectModuleDlg() {
@@ -23,7 +25,9 @@ NewObjectModuleDlg::NewObjectModuleDlg() {
   connect(widget.lImage, SIGNAL(clicked()), this, SLOT(imageOnclick()));
 
   connect(widget.sbXSize, SIGNAL(valueChanged(int)), this, SLOT(SizeXChanged(int)));
-  connect(widget.sbYSize, SIGNAL(valueChanged(int)), this, SLOT(SizeYChanged(int)));  
+  connect(widget.sbYSize, SIGNAL(valueChanged(int)), this, SLOT(SizeYChanged(int)));
+
+  connect(widget.cbClass, SIGNAL(currentIndexChanged(int)), this, SLOT(ChangeClass(int)));
 
   object_module = new CModule<CObject>();
   object_module->LoadFromXML("data/objects", "objects", "object");
@@ -34,7 +38,7 @@ NewObjectModuleDlg::NewObjectModuleDlg() {
   object_image = NULL;
   
   RefreshListView();
-  
+  RefreshComboBox();
 }
 
 NewObjectModuleDlg::~NewObjectModuleDlg() {
@@ -54,6 +58,16 @@ void NewObjectModuleDlg::RefreshListView() {
   }
 
   widget.ObjectList->setModel(listview_model);  
+}
+
+void NewObjectModuleDlg::RefreshComboBox() {
+  widget.cbClass->clear();
+        
+  for(map<int, string>::iterator it = object_class.getClasses()->begin(); it != object_class.getClasses()->end(); it++) {
+    pair<int, string> obj_class = *it;
+    widget.cbClass->addItem(QString(obj_class.second.c_str()), QVariant(obj_class.first));
+  }  
+
 }
 
 void NewObjectModuleDlg::RefreshImage(QString _filename) {
@@ -138,11 +152,13 @@ void NewObjectModuleDlg::saveObject() {
 void NewObjectModuleDlg::FormToModel() {
   object_model.SetImage(widget.leFilename->text().toStdString());
   object_model.SetDesc(widget.leDesc->text().toStdString());
+  object_model.SetClass((CObject::E_CLASSES)widget.cbClass->itemData(widget.cbClass->currentIndex()).toInt());
 }
 
 void NewObjectModuleDlg::ModelToForm() {
   widget.leFilename->setText(QString(object_model.GetImage().c_str()));
   widget.leDesc->setText(QString(object_model.GetDesc().c_str()));
+  widget.cbClass->setCurrentIndex(widget.cbClass->findData(object_model.GetClass()));
 }
 
 void NewObjectModuleDlg::chooseFile() {
@@ -185,4 +201,19 @@ void NewObjectModuleDlg::SizeXChanged(int val) {
 
 void NewObjectModuleDlg::SizeYChanged(int val) {
   object_model.SetYSize(val);
+}
+
+void NewObjectModuleDlg::ChangeClass(int val) {
+  switch((CObject::E_CLASSES)widget.cbClass->itemData(val).toInt()) {
+    case CObject::TECH:
+      break;
+    case CObject::PROJECTILE:
+      QMessageBox::warning(this, QString("Warning"), QString("Use projectile module editor to edit projectiles!"), 1, 0);
+      widget.cbClass->setCurrentIndex(widget.cbClass->findData(CObject::TECH));      
+      break;
+    case CObject::UNIT:
+      QMessageBox::warning(this, QString("Warning"), QString("Use unit module editor to edit units!"), 1, 0);
+      widget.cbClass->setCurrentIndex(widget.cbClass->findData(CObject::TECH));
+      break;
+  }
 }

@@ -203,78 +203,14 @@
       <item row="7" column="1">
        <widget class="QSpinBox" name="AglSbx"/>
       </item>
-     </layout>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tab_2">
-    <attribute name="title">
-     <string>Advanced</string>
-    </attribute>
-    <widget class="QWidget" name="formLayoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>371</width>
-       <height>365</height>
-      </rect>
-     </property>
-     <layout class="QFormLayout" name="formLayout_2">
-      <property name="fieldGrowthPolicy">
-       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-      </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>Sight range</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QSpinBox" name="SightSbx"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>Attack range</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QSpinBox" name="AttRngSbx"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_11">
-        <property name="text">
-         <string>Damage area</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QSpinBox" name="DamSbx"/>
-      </item>
-      <item row="3" column="0">
+      <item row="8" column="0">
        <widget class="QLabel" name="label_16">
         <property name="text">
          <string>Elements</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="label_21">
-        <property name="text">
-         <string>Attack</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0">
-       <widget class="QLabel" name="label_24">
-        <property name="text">
-         <string>Defense</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
+      <item row="8" column="1">
        <layout class="QGridLayout" name="gridLayout">
         <item row="2" column="0">
          <widget class="QLabel" name="label_13">
@@ -318,6 +254,73 @@
         </item>
        </layout>
       </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_2">
+    <attribute name="title">
+     <string>Advanced</string>
+    </attribute>
+    <widget class="QWidget" name="formLayoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>371</width>
+       <height>365</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Sight range</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="SightSbx"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>Attack range</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="AttRngSbx"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>Damage area</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="DamSbx"/>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_32">
+        <property name="text">
+         <string>Weapon</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="AttSbx"/>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_21">
+        <property name="text">
+         <string>Attack</string>
+        </property>
+       </widget>
+      </item>
       <item row="5" column="1">
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="2" column="0">
@@ -351,6 +354,23 @@
          </widget>
         </item>
        </layout>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_33">
+        <property name="text">
+         <string>Armor</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QSpinBox" name="DefSbx"/>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_24">
+        <property name="text">
+         <string>Defense</string>
+        </property>
+       </widget>
       </item>
       <item row="7" column="1">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -386,25 +406,15 @@
         </item>
        </layout>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_32">
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_34">
         <property name="text">
-         <string>Weapon</string>
+         <string>Projectile</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="label_33">
-        <property name="text">
-         <string>Armor</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QSpinBox" name="AttSbx"/>
-      </item>
-      <item row="6" column="1">
-       <widget class="QSpinBox" name="DefSbx"/>
+      <item row="2" column="1">
+       <widget class="QComboBox" name="cbProjectile"/>
       </item>
      </layout>
     </widget>

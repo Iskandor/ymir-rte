@@ -12,31 +12,23 @@
 #include "CUnitEntity.h"
 #include "CUnit.h"
 #include "CObjectManager.h"
+#include "CManager.h"
 
 #include <vector>
 
 using namespace std;
 
-class CUnitManager {
+class CUnitManager : public CManager<CUnit, CUnitEntity> {
 public:
   CUnitManager(CModule<CUnit> *unit_module, CObjectManager* object_manager);
   CUnitManager(const CUnitManager& orig);
   virtual ~CUnitManager();
 
 public:
-  CUnitEntity*  addUnit(int x, int y, int id, int player_id);
-  CUnitEntity*  getUnit(int index);
-  CUnitEntity*  getUnit(int x, int y);
-  CUnitEntity*  getSelectedUnit();
-  void          remUnit(int index);
-  void          remUnit(CUnitEntity* unit_entity);
-  
-  int             GetUnitListSize();
-  
-private:
-  CModule<CUnit>      *unit_module;
-  vector<CUnitEntity*> unit_list;
-  CObjectManager*      object_manager;
+  CUnitEntity*  Add(int x, int y, int id, int player_id);
+  CUnitEntity*  Get(int x, int y);
+  CUnitEntity*  Get(int index);  
+  CUnitEntity*  GetSelectedUnit();
 };
 
 #endif	/* CUNITMANAGER_H */

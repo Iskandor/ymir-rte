@@ -11,13 +11,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/matej/GIT/ymir-rte/YmirCore/include/CModule.h</file>
-            <file>file:/home/matej/GIT/ymir-rte/MapEdit/main.cpp</file>
-            <file>file:/home/matej/GIT/ymir-rte/YmirCore/src/CUnitEntity.cpp</file>
-            <file>file:/home/matej/GIT/ymir-rte/MapEdit/Forms/NewUnitModuleDlg.cpp</file>
-            <file>file:/home/matej/GIT/ymir-rte/YmirCore/src/CUnit.cpp</file>
-            <file>file:/home/matej/GIT/ymir-rte/YmirCore/include/CUnitEntity.h</file>
-            <file>file:/home/matej/GIT/ymir-rte/YmirCore/include/CObject.h</file>
+            <file>file:/home/matej/GIT/ymir-rte/YmirCore/src/CMap.cpp</file>
+            <file>file:/home/matej/GIT/ymir-rte/YmirCore/src/CUnitManager.cpp</file>
+            <file>file:/home/matej/GIT/ymir-rte/YmirCore/include/CMap.h</file>
+            <file>file:/home/matej/GIT/ymir-rte/YmirCore/src/CProjectileEntity.cpp</file>
         </group>
     </open-files>
 </project-private>
