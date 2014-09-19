@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CGameControls.o \
 	${OBJECTDIR}/src/CGuiManager.o \
 	${OBJECTDIR}/src/CMapControls.o \
+	${OBJECTDIR}/src/CProjectileControls.o \
 	${OBJECTDIR}/src/CUnitControls.o \
 	${OBJECTDIR}/src/main.o
 
@@ -96,6 +97,11 @@ ${OBJECTDIR}/src/CMapControls.o: src/CMapControls.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL -I../YmirEngine/include `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CMapControls.o src/CMapControls.cpp
+
+${OBJECTDIR}/src/CProjectileControls.o: src/CProjectileControls.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I../YmirCore/include -Iinclude -I/usr/include/qt4 -I/usr/local/include/guichan -I/usr/include/SDL -I../YmirEngine/include `pkg-config --cflags QtCore` `pkg-config --cflags QtGui` `pkg-config --cflags QtXml` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CProjectileControls.o src/CProjectileControls.cpp
 
 ${OBJECTDIR}/src/CUnitControls.o: src/CUnitControls.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

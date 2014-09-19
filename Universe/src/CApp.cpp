@@ -31,13 +31,22 @@ int CApp::OnExecute() {
   if (OnInit() != 0) {
     return -1;
   }
+  
+  const int FPS = 32;
+  
+  Uint32  start;
 
   while(running) {
+    start = SDL_GetTicks();
     while (SDL_PollEvent(&event)) {
       OnEvent(&event);
     }
     OnLoop();
     OnRender();
+    
+    if (1000/FPS > (SDL_GetTicks() - start)) {
+      SDL_Delay(1000/FPS - (SDL_GetTicks() - start));
+    }
   }
 
   OnCleanup();
@@ -74,16 +83,24 @@ int CApp::OnInit() {
   
   object_module.LoadFromXML("data/objects", "objects", "object"); 
   unit_module.LoadFromXML("data/units", "units", "unit");
+  projectile_module.LoadFromXML("data/projectiles", "projectiles", "projectile");
   
   for(int i = 0; i < unit_module.GetSize(); i++) {
     CObject object = unit_module.GetUnit(i);
-    object_module.AddUnit(object);
+    int new_obj_id = object_module.AddUnit(object);
+    unit_module.GetUnitPtr(object.GetID())->SetID(new_obj_id);
   }
   
-  object_render = new CObjectRender(&object_module, &unit_module);  
+  for(int i = 0; i < projectile_module.GetSize(); i++) {
+    CObject object = projectile_module.GetUnit(i);
+    int new_obj_id = object_module.AddUnit(object);
+    projectile_module.GetUnitPtr(object.GetID())->SetID(new_obj_id);
+  }  
+  
+  object_render = new CObjectRender(&object_module, &unit_module, &projectile_module);  
   unit_render = new CUnitRender(&unit_module);
     
-  map = new CMap(&tile_module, &unit_module, &object_module);
+  map = new CMap(&tile_module, &unit_module, &object_module, &projectile_module);
   map->Load("data/maps/mapa1.map");
   player_manager.AddPlayer("Drow", "");
   player_manager.AddPlayer("Snake", "");
@@ -102,6 +119,7 @@ int CApp::OnInit() {
   map_controls = new CMapControls(map_render);
   unit_controls = new CUnitControls(map_render);
   unit_controls->SetCurrentPlayerID(0);
+  projectile_controls = new CProjectileControls(map_render);
   
   game_controls = new CGameControls(&player_manager, unit_controls);
   
@@ -111,7 +129,7 @@ int CApp::OnInit() {
 void CApp::OnLoop() {
   map_controls->OnLoop();
   unit_controls->OnLoop();
-  SDL_Delay(1000 / 32);
+  projectile_controls->OnLoop();
 }
 
 void CApp::OnEvent(SDL_Event* event) {

@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CGameControls.o \
 	${OBJECTDIR}/src/CGuiManager.o \
 	${OBJECTDIR}/src/CMapControls.o \
+	${OBJECTDIR}/src/CProjectileControls.o \
 	${OBJECTDIR}/src/CUnitControls.o \
 	${OBJECTDIR}/src/main.o
 
@@ -92,6 +93,11 @@ ${OBJECTDIR}/src/CMapControls.o: src/CMapControls.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CMapControls.o src/CMapControls.cpp
+
+${OBJECTDIR}/src/CProjectileControls.o: src/CProjectileControls.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CProjectileControls.o src/CProjectileControls.cpp
 
 ${OBJECTDIR}/src/CUnitControls.o: src/CUnitControls.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

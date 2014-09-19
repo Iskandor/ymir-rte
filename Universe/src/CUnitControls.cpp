@@ -5,6 +5,8 @@
  * Created on April 12, 2014, 10:23 AM
  */
 
+#include <CProjectileEntity.h>
+
 #include "CUnitControls.h"
 #include "CMapRender.h"
 #include "GlobalDefine.h"
@@ -17,7 +19,10 @@ CUnitControls::CUnitControls(CMapRender* map_render) {
 }
 
 CUnitControls::CUnitControls(const CUnitControls& orig) {
+  map_render = orig.map_render;
   map = orig.map;
+  current_player_id = orig.current_player_id;
+  selected_unit = orig.selected_unit;
 }
 
 CUnitControls::~CUnitControls() {
@@ -32,8 +37,8 @@ void CUnitControls::OnEvent(SDL_Event* event) {
         SDL_Rect*    camera;
         int i = 0;
         
-        for(i = 0; i < map->GetUnitManager()->GetUnitListSize(); i++) {
-          unit_entity = map->GetUnitManager()->getUnit(i);
+        for(i = 0; i < map->GetUnitManager()->GetListSize(); i++) {
+          unit_entity = map->GetUnitManager()->Get(i);
           if (unit_entity->GetPlayerID() == current_player_id) {
             unit_rect.x = unit_entity->GetX();
             unit_rect.y = unit_entity->GetY();
@@ -65,7 +70,7 @@ void CUnitControls::OnEvent(SDL_Event* event) {
             }
           }
         }
-        if (i == map->GetUnitManager()->GetUnitListSize()) {
+        if (i == map->GetUnitManager()->GetListSize()) {
           if (selected_unit != NULL) {
             map->remObject(selected_unit->GetRefObject()->GetID());
             selected_unit->SetRefObject(NULL);
@@ -80,7 +85,7 @@ void CUnitControls::OnEvent(SDL_Event* event) {
           SDL_Rect*    camera = map_render->GetCamera();
           int x = (event->button.x / MAP_ELEM) + camera->x;
           int y = (event->button.y / MAP_ELEM) + camera->y;
-          CUnitEntity* other_unit = map->GetUnitManager()->getUnit(x, y);
+          CUnitEntity* other_unit = map->GetUnitManager()->Get(x, y);
           
           if (other_unit != NULL) {
             if (other_unit->GetPlayerID() != current_player_id) {
@@ -104,8 +109,8 @@ void CUnitControls::OnLoop() {
   CUnitEntity*  unit_entity = NULL;
   CAction       action;
   
-  for(int i = 0; i < map->GetUnitManager()->GetUnitListSize(); i++) {
-    unit_entity = map->GetUnitManager()->getUnit(i);
+  for(int i = 0; i < map->GetUnitManager()->GetListSize(); i++) {
+    unit_entity = map->GetUnitManager()->Get(i);
     action = unit_entity->GetAction();
     
     switch(action.GetType())
@@ -259,22 +264,31 @@ pair<int, int> CUnitControls::GetAttackPosition(CUnitEntity* attacker, CUnitEnti
   return pair<int, int>(min_x, min_y);
 }
 
-void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target) {  
-  int attack_type = unit_entity->GetRootUnit()->GetAttackType(CUtils::Probability(100));
+void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target) {
+  if (unit_entity->GetRootUnit()->getProjectilID() != -1) {
+    int start_x = unit_entity->GetX() + unit_entity->GetRootObject()->GetXSize() / 2;
+    int start_y = unit_entity->GetY() + unit_entity->GetRootObject()->GetYSize() / 2;
+    int target_x = target->GetX() + target->GetRootObject()->GetXSize() / 2;
+    int target_y = target->GetY() + target->GetRootObject()->GetYSize() / 2;
+    map->addProj(start_x, start_y, unit_entity->GetRootUnit()->getProjectilID(), target_x, target_y);
+  }
+  else {
+    int attack_type = unit_entity->GetRootUnit()->GetAttackType(CUtils::Probability(100));
 
-  double attack_str = CUtils::rollDice(unit_entity->GetRootUnit()->getWeapon(), 1) + (unit_entity->GetRootUnit()->getProp()[STR_IND] / 2) - 2;
-  double dexterity_def = unit_entity->GetRootUnit()->getArmor() + (unit_entity->GetRootUnit()->getProp()[AGL_IND] / 2) - 2;
+    double attack_str = CUtils::rollDice(unit_entity->GetRootUnit()->getWeapon(), 1) + (unit_entity->GetRootUnit()->getProp()[STR_IND] / 2) - 2;
+    double dexterity_def = unit_entity->GetRootUnit()->getArmor() + (unit_entity->GetRootUnit()->getProp()[AGL_IND] / 2) - 2;
 
-  double damage = (attack_str - dexterity_def) * ((double)(100-target->GetRootUnit()->getRVP()[attack_type])/100.0);
+    double damage = (attack_str - dexterity_def) * ((double)(100-target->GetRootUnit()->getRVP()[attack_type])/100.0);
 
-  if (damage > 0) {
-    int hp = target->GetHP() - (int)round(damage);
-    if (hp > 0) {
-      target->SetHP(hp);
-    }
-    else
-    {
-      target->AddAction(CAction(CAction::DIE, 0));
+    if (damage > 0) {
+      int hp = target->GetHP() - (int)round(damage);
+      if (hp > 0) {
+        target->SetHP(hp);
+      }
+      else
+      {
+        target->AddAction(CAction(CAction::DIE, 0));
+      }
     }
   }
 }

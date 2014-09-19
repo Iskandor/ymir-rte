@@ -9,6 +9,7 @@
       <itemPath>include/CGameControls.h</itemPath>
       <itemPath>include/CGuiManager.h</itemPath>
       <itemPath>include/CMapControls.h</itemPath>
+      <itemPath>include/CProjectileControls.h</itemPath>
       <itemPath>include/CUnitControls.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -23,6 +24,7 @@
       <itemPath>src/CGameControls.cpp</itemPath>
       <itemPath>src/CGuiManager.cpp</itemPath>
       <itemPath>src/CMapControls.cpp</itemPath>
+      <itemPath>src/CProjectileControls.cpp</itemPath>
       <itemPath>src/CUnitControls.cpp</itemPath>
       <itemPath>src/main.cpp</itemPath>
     </logicalFolder>
@@ -131,6 +133,8 @@
       </item>
       <item path="include/CMapControls.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CProjectileControls.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CUnitControls.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/CApp.cpp" ex="false" tool="1" flavor2="0">
@@ -142,6 +146,8 @@
       <item path="src/CGuiManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMapControls.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CProjectileControls.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CUnitControls.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -178,6 +184,8 @@
       </item>
       <item path="include/CMapControls.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CProjectileControls.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CUnitControls.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/CApp.cpp" ex="false" tool="1" flavor2="0">
@@ -189,6 +197,8 @@
       <item path="src/CGuiManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMapControls.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CProjectileControls.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CUnitControls.cpp" ex="false" tool="1" flavor2="0">
       </item>

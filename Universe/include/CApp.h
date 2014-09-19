@@ -25,6 +25,8 @@
 #include "CGuiManager.h"
 #include "CGameControls.h"
 #include "CFontRender.h"
+#include "CProjectile.h"
+#include "CProjectileControls.h"
 
 class CApp {
 public:
@@ -33,20 +35,27 @@ public:
   virtual ~CApp();
 
 private:
+  CModule<CTile>        tile_module;  
+  CModule<CUnit>        unit_module;  
+  CModule<CObject>      object_module;  
+  CModule<CProjectile>  projectile_module;
+  
   CMap            *map;
+  
+  CMapControls        *map_controls;
+  CUnitControls       *unit_controls;
+  CGameControls       *game_controls;
+  CProjectileControls *projectile_controls;
+  
+  
   CMapRender      *map_render;
-  CMapControls    *map_controls;
-  CModule<CTile>  tile_module;
   CTileRender     *tile_render;
-  CModule<CUnit>  unit_module;
   CUnitRender     *unit_render;
-  CUnitControls   *unit_controls;
-  CModule<CObject> object_module;
   CObjectRender   *object_render;
+  CFontRender     *font_render;
+  
   CPlayerManager  player_manager;
   CGuiManager     *gui_manager;
-  CGameControls   *game_controls;
-  CFontRender     *font_render;
   
   bool running;
 
