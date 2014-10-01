@@ -305,10 +305,12 @@ void CMap::normalize_tile(CTile* p_tile) {
   return;
 }
 
-void CMap::addUnit(int x, int y, int id, int player_id)  {
+CUnitEntity* CMap::addUnit(int x, int y, int id, int player_id)  {
   CUnitEntity* unit_entity = unit_manager->Add(x, y, id, player_id);
   Block(unit_entity);
   player_manager->GetPlayer(player_id)->AddUnit(unit_entity);
+  
+  return unit_entity;
 }
 
 void CMap::remUnit(CUnitEntity* unit_entity) {
@@ -321,8 +323,10 @@ void CMap::remUnit(CUnitEntity* unit_entity) {
   remObject(unit_entity->GetID());
 }
 
-void CMap::addProj(int x, int y, int id, int target_x, int target_y) {
-  CProjectileEntity* projectile_entity = projectile_manager->Add(x, y, id, target_x, target_y);
+CProjectileEntity* CMap::addProj(int x, int y, int id, CUnitEntity* target) {
+  CProjectileEntity* projectile_entity = projectile_manager->Add(x, y, id, target);
+  
+  return projectile_entity;
 }
 
 void CMap::remProj(CProjectileEntity* projectile_entity) {

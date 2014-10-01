@@ -16,10 +16,10 @@ CProjectileManager::CProjectileManager(const CProjectileManager& orig) : CManage
 CProjectileManager::~CProjectileManager() {
 }
 
-CProjectileEntity* CProjectileManager::Add(int x, int y, int id, int target_x, int target_y) {
+CProjectileEntity* CProjectileManager::Add(int x, int y, int id, CUnitEntity* target) {
   CObjectEntity* projectile = NULL;
   
-  projectile = new CProjectileEntity(type_module->GetUnitPtr(id), 0, x, y, target_x, target_y);
+  projectile = new CProjectileEntity(type_module->GetUnitPtr(id), 0, x, y, target);
   
   object_manager->addObject(projectile);
   entity_list.push_back(reinterpret_cast<CProjectileEntity*>(projectile));

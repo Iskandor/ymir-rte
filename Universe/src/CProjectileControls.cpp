@@ -43,6 +43,7 @@ void CProjectileControls::Move(CProjectileEntity* projectile_entity) {
 
 void CProjectileControls::TargetReached(CProjectileEntity* projectile_entity) {
   if (projectile_entity->GetX() == projectile_entity->GetTargetX() && projectile_entity->GetY() == projectile_entity->GetTargetY()) {
+    ((CUnitEntity*)projectile_entity->GetRefObject())->AddAction(CAction(CAction::FIGHT, projectile_entity->GetTarget(), 0));
     map->remProj(projectile_entity);
   }
 }

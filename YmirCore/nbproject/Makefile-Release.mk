@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CAction.o \
 	${OBJECTDIR}/src/CMap.o \
 	${OBJECTDIR}/src/CMathUtils.o \
+	${OBJECTDIR}/src/CModifier.o \
 	${OBJECTDIR}/src/CObject.o \
 	${OBJECTDIR}/src/CObjectEntity.o \
 	${OBJECTDIR}/src/CObjectManager.o \
@@ -52,7 +53,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CUnit.o \
 	${OBJECTDIR}/src/CUnitEntity.o \
 	${OBJECTDIR}/src/CUnitManager.o \
-	${OBJECTDIR}/src/CUtils.o
+	${OBJECTDIR}/src/CUtils.o \
+	${OBJECTDIR}/src/IModifier.o
 
 
 # C Compiler Flags
@@ -93,6 +95,11 @@ ${OBJECTDIR}/src/CMathUtils.o: src/CMathUtils.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CMathUtils.o src/CMathUtils.cpp
+
+${OBJECTDIR}/src/CModifier.o: src/CModifier.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CModifier.o src/CModifier.cpp
 
 ${OBJECTDIR}/src/CObject.o: src/CObject.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
@@ -168,6 +175,11 @@ ${OBJECTDIR}/src/CUtils.o: src/CUtils.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUtils.o src/CUtils.cpp
+
+${OBJECTDIR}/src/IModifier.o: src/IModifier.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/IModifier.o src/IModifier.cpp
 
 # Subprojects
 .build-subprojects:

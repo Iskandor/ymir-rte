@@ -24,6 +24,7 @@ public:
   void OnLoop();
   
   void SetCurrentPlayerID(int value) { current_player_id = value; };
+  void ResolveModifiers();
   
 private:
   bool PerformAction(CUnitEntity* unit_entity, CAction* action);
@@ -31,8 +32,10 @@ private:
   void CreatePath(CUnitEntity* unit_entity, int x, int y);
   void Move(CUnitEntity* unit_entity, CAction* action);
   void Attack(CUnitEntity* unit_entity, CAction* action);
+  void FireOrFight(CUnitEntity* unit_entity, CUnitEntity* target);
   void Fight(CUnitEntity* unit_entity, CUnitEntity* target);
   void Die(CUnitEntity* unit_entity);
+  void ResolveModifier(CUnitEntity* unit_entity);
   
   pair<int, int>          GetAttackPosition(CUnitEntity* attacker, CUnitEntity* target);
   queue< pair<int, int> > GeneratePath(CUnitEntity* unit_entity, int x, int y);

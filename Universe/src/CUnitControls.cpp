@@ -12,6 +12,7 @@
 #include "GlobalDefine.h"
 #include "CUtils.h"
 #include "CMathUtils.h"
+#include "CModifier.h"
 
 CUnitControls::CUnitControls(CMapRender* map_render) {
   this->map_render = map_render; 
@@ -126,6 +127,9 @@ void CUnitControls::OnLoop() {
         case CAction::ATTACK:
             Attack(unit_entity, &action);
             break;
+        case CAction::FIGHT:
+            Fight(unit_entity, action.GetTarget());
+            break;
         case CAction::DIE:
             Die(unit_entity);
             break;
@@ -206,7 +210,7 @@ void CUnitControls::Attack(CUnitEntity* unit_entity, CAction* action) {
     if (!PerformAction(unit_entity, action)) {
       return;
     }  
-    Fight(unit_entity, action->GetTarget());
+    FireOrFight(unit_entity, action->GetTarget());
   }
   else
   {
@@ -264,32 +268,30 @@ pair<int, int> CUnitControls::GetAttackPosition(CUnitEntity* attacker, CUnitEnti
   return pair<int, int>(min_x, min_y);
 }
 
-void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target) {
+void CUnitControls::FireOrFight(CUnitEntity* unit_entity, CUnitEntity* target) {
   if (unit_entity->GetRootUnit()->getProjectilID() != -1) {
     int start_x = unit_entity->GetX() + unit_entity->GetRootObject()->GetXSize() / 2;
     int start_y = unit_entity->GetY() + unit_entity->GetRootObject()->GetYSize() / 2;
-    int target_x = target->GetX() + target->GetRootObject()->GetXSize() / 2;
-    int target_y = target->GetY() + target->GetRootObject()->GetYSize() / 2;
-    map->addProj(start_x, start_y, unit_entity->GetRootUnit()->getProjectilID(), target_x, target_y);
+
+    CProjectileEntity* proj = map->addProj(start_x, start_y, unit_entity->GetRootUnit()->getProjectilID(), target);
+    proj->SetRefObject(unit_entity);
   }
   else {
-    int attack_type = unit_entity->GetRootUnit()->GetAttackType(CUtils::Probability(100));
+    Fight(unit_entity, target);
+  }  
+}
 
-    double attack_str = CUtils::rollDice(unit_entity->GetRootUnit()->getWeapon(), 1) + (unit_entity->GetRootUnit()->getProp()[STR_IND] / 2) - 2;
-    double dexterity_def = unit_entity->GetRootUnit()->getArmor() + (unit_entity->GetRootUnit()->getProp()[AGL_IND] / 2) - 2;
+void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target) {
+  int attack_type = unit_entity->GetRootUnit()->GetAttackType(CUtils::Probability(100));
 
-    double damage = (attack_str - dexterity_def) * ((double)(100-target->GetRootUnit()->getRVP()[attack_type])/100.0);
+  double attack_str = CUtils::rollDice(unit_entity->GetRootUnit()->getWeapon(), 1) + (unit_entity->GetRootUnit()->getProp()[STR_IND] / 2) - 2;
+  double dexterity_def = unit_entity->GetRootUnit()->getArmor() + (unit_entity->GetRootUnit()->getProp()[AGL_IND] / 2) - 2;
 
-    if (damage > 0) {
-      int hp = target->GetHP() - (int)round(damage);
-      if (hp > 0) {
-        target->SetHP(hp);
-      }
-      else
-      {
-        target->AddAction(CAction(CAction::DIE, 0));
-      }
-    }
+  double damage = (attack_str - dexterity_def) * ((double)(100-target->GetRootUnit()->getRVP()[attack_type])/100.0);
+
+  if (damage > 0) {
+    CModifier *modifier = (CModifier*)target->AddModifier(new CModifier(IModifier::HURT, 0, target, 1, (int)round(damage), -1));
+    modifier->Apply();
   }
 }
 
@@ -405,3 +407,34 @@ void CUnitControls::Die(CUnitEntity* unit_entity) {
   map->remUnit(unit_entity);
 }
 
+void CUnitControls::ResolveModifiers() {
+  for(int i = 0; i < map->GetUnitManager()->GetListSize(); i++) {
+    ResolveModifier(map->GetUnitManager()->Get(i));
+  }
+}
+
+void CUnitControls::ResolveModifier(CUnitEntity* unit_entity) {
+  vector<IModifier*>* modifier_list = unit_entity->GetModifierList();
+  vector<IModifier*>  modifier_list_new;
+  bool                list_changed = false;
+  for(unsigned int j = 0; j < modifier_list->size(); j++) {
+    ((CModifier*)modifier_list->at(j))->Apply();
+  }
+
+  IModifier* del = NULL;
+  for(vector<IModifier*>::iterator it = modifier_list->begin(); it != modifier_list->end(); it++) {
+    if (((IModifier*)*it)->GetDuration() == 0) {
+      del = *it;
+      delete del;
+      list_changed = true;
+    }
+    else {
+      modifier_list_new.push_back(*it);
+    }
+  }
+  
+  if(list_changed) {
+    modifier_list->clear();
+    modifier_list->insert(modifier_list->begin(), modifier_list_new.begin(), modifier_list_new.end());
+  }
+}

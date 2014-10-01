@@ -9,10 +9,12 @@
 #include "CMathUtils.h"
 #include <cmath>
 
-CProjectileEntity::CProjectileEntity(CProjectile* projectile, int inner_id, int x, int y, int target_x, int target_y) : CObjectEntity(projectile, inner_id, x, y, 0) {
+CProjectileEntity::CProjectileEntity(CProjectile* projectile, int inner_id, int x, int y, CUnitEntity* target) : CObjectEntity(projectile, inner_id, x, y, 0) {
   this->root_projectile = projectile;
-  this->target_x = target_x;
-  this->target_y = target_y;
+  this->target = target;
+  
+  int target_x = GetTargetX();
+  int target_y = GetTargetY();
   
   delta_x = round(abs(target_x - x) / (CMathUtils::euclidian_distance(x, y, target_x, target_y) / projectile->GetSpeed()));
   delta_y = round(abs(target_y - y) / (CMathUtils::euclidian_distance(x, y, target_x, target_y) / projectile->GetSpeed()));
@@ -27,8 +29,7 @@ CProjectileEntity::CProjectileEntity(CProjectile* projectile, int inner_id, int 
 
 CProjectileEntity::CProjectileEntity(const CProjectileEntity& orig) : CObjectEntity(orig) {
   root_projectile = orig.root_projectile;
-  target_x = orig.target_x;
-  target_y = orig.target_y;
+  target = orig.target;
   delta_x = orig.delta_x;
   delta_y = orig.delta_y;
 }

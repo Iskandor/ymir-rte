@@ -132,3 +132,9 @@ void CUnitEntity::ClearActionQueue() {
     action_queue.pop();
   }
 }
+
+IModifier* CUnitEntity::AddModifier(IModifier* modifier) {
+  modifier_list.push_back(modifier);
+  
+  return modifier_list[modifier_list.size() - 1];
+}

@@ -84,9 +84,9 @@ public:
   CUnitManager* GetUnitManager() { return unit_manager; };
   CProjectileManager* GetProjectileManager() { return projectile_manager; };
   
-  void addUnit(int x, int y, int id, int player_id);
+  CUnitEntity* addUnit(int x, int y, int id, int player_id);
   void remUnit(CUnitEntity* unit_entity);
-  void addProj(int x, int y, int id, int target_x, int target_y);
+  CProjectileEntity* addProj(int x, int y, int id, CUnitEntity* target);
   void remProj(CProjectileEntity* projectile_entity);
   
   void Block(CUnitEntity* unit_entity);

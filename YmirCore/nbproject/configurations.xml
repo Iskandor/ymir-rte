@@ -8,6 +8,7 @@
       <itemPath>include/CManager.h</itemPath>
       <itemPath>include/CMap.h</itemPath>
       <itemPath>include/CMathUtils.h</itemPath>
+      <itemPath>include/CModifier.h</itemPath>
       <itemPath>include/CModule.h</itemPath>
       <itemPath>include/CObject.h</itemPath>
       <itemPath>include/CObjectEntity.h</itemPath>
@@ -24,6 +25,7 @@
       <itemPath>include/CUnitManager.h</itemPath>
       <itemPath>include/CUtils.h</itemPath>
       <itemPath>include/GlobalDefine.h</itemPath>
+      <itemPath>include/IModifier.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -35,6 +37,7 @@
       <itemPath>src/CAction.cpp</itemPath>
       <itemPath>src/CMap.cpp</itemPath>
       <itemPath>src/CMathUtils.cpp</itemPath>
+      <itemPath>src/CModifier.cpp</itemPath>
       <itemPath>src/CObject.cpp</itemPath>
       <itemPath>src/CObjectEntity.cpp</itemPath>
       <itemPath>src/CObjectManager.cpp</itemPath>
@@ -50,6 +53,7 @@
       <itemPath>src/CUnitEntity.cpp</itemPath>
       <itemPath>src/CUnitManager.cpp</itemPath>
       <itemPath>src/CUtils.cpp</itemPath>
+      <itemPath>src/IModifier.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -106,6 +110,8 @@
       </item>
       <item path="include/CMathUtils.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CModifier.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CModule.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CObject.h" ex="false" tool="3" flavor2="0">
@@ -138,11 +144,15 @@
       </item>
       <item path="include/GlobalDefine.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/IModifier.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/CAction.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMap.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMathUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CModifier.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CObject.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -173,6 +183,8 @@
       <item path="src/CUnitManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/IModifier.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -203,6 +215,8 @@
       </item>
       <item path="include/CMathUtils.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CModifier.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CModule.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CObject.h" ex="false" tool="3" flavor2="0">
@@ -235,11 +249,15 @@
       </item>
       <item path="include/GlobalDefine.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/IModifier.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/CAction.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMap.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMathUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CModifier.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CObject.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -270,6 +288,8 @@
       <item path="src/CUnitManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/IModifier.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

@@ -19,7 +19,8 @@ public:
     CREATE_PATH = 1,
     MOVE = 2,
     ATTACK = 3,
-    DIE = 4
+    FIGHT = 4,
+    DIE = 5
   };
   
   CAction();

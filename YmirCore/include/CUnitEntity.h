@@ -11,6 +11,7 @@
 #include "CObjectEntity.h"
 #include "CUnit.h"
 #include "CAction.h"
+#include "IModifier.h"
 #include <string>
 #include <vector>
 #include <queue>
@@ -42,7 +43,9 @@ public:
   double  GetSP() { return sp; };
   double  GetMaxSP() { return max_sp; };
     
-  void OnClick(double* block_map, int size_x, int size_y);
+  void  OnClick(double* block_map, int size_x, int size_y);
+  IModifier* AddModifier(IModifier* modifier);
+  vector<IModifier*>* GetModifierList() { return &modifier_list; };
   
 private:
   void generate_props();
@@ -64,6 +67,7 @@ private:
   double as;
   
   queue<CAction>          action_queue;
+  vector<IModifier*>      modifier_list;
   set< pair<int, int> >   possible_loc;
   bool  selected;
 };

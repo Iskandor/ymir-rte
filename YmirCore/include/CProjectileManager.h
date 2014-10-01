@@ -11,6 +11,7 @@
 #include "CModule.h"
 #include "CManager.h"
 #include "CProjectile.h"
+#include "CUnitEntity.h"
 #include "CProjectileEntity.h"
 #include "CObjectManager.h"
 
@@ -20,7 +21,7 @@ public:
   CProjectileManager(const CProjectileManager& orig);
   virtual ~CProjectileManager();
 public:
-  CProjectileEntity* Add(int x, int y, int id, int target_x, int target_y);
+  CProjectileEntity* Add(int x, int y, int id, CUnitEntity* target);
 };
 
 #endif	/* CPROJECTILEMANAGER_H */

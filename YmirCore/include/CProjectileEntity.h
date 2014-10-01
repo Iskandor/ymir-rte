@@ -9,24 +9,26 @@
 #define	CPROJECTILEENTITY_H
 
 #include "CObjectEntity.h"
+#include "CUnitEntity.h"
 #include "CProjectile.h"
 
 class CProjectileEntity : public CObjectEntity {
 public:
-  CProjectileEntity(CProjectile* projectile, int inner_id, int x, int y, int target_x, int target_y);
+  CProjectileEntity(CProjectile* projectile, int inner_id, int x, int y, CUnitEntity* target);
   CProjectileEntity(const CProjectileEntity& orig);
   virtual ~CProjectileEntity();
   
   CProjectile*  GetRootProjectile() { return root_projectile; };
-  int GetTargetX() { return target_x; };
-  int GetTargetY() { return target_y; };
+  int GetTargetX() { return target->GetX() + target->GetRootObject()->GetXSize() / 2; };
+  int GetTargetY() { return target->GetY() + target->GetRootObject()->GetYSize() / 2; };
   int GetDeltaX() { return delta_x; };
   int GetDeltaY() { return delta_y; };
   
+  CUnitEntity* GetTarget() { return target; };
+  
 private:
   CProjectile* root_projectile;
-  int target_x;
-  int target_y;
+  CUnitEntity* target;
   int delta_x;
   int delta_y;
 };
