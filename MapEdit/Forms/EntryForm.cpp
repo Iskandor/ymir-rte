@@ -12,6 +12,7 @@
 #include "NewTileModuleDlg.h"
 #include "NewObjectModuleDlg.h"
 #include "NewProjModuleDlg.h"
+#include "NewModifModuleDlg.h"
 
 EntryForm::EntryForm() {
   widget.setupUi(this);
@@ -25,6 +26,7 @@ EntryForm::EntryForm() {
   connect(widget.actionTile_Module, SIGNAL(triggered()), this, SLOT(openTileModule()));
   connect(widget.actionObject_Modules, SIGNAL(triggered()), this, SLOT(openObjectModule()));
   connect(widget.actionProjectile_Modules, SIGNAL(triggered()), this, SLOT(openProjectileModule()));
+  connect(widget.actionModifier_Module, SIGNAL(triggered()), this, SLOT(openModifierModule()));
 
   connect(widget.horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(moveCameraX(int)));
   connect(widget.verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(moveCameraY(int)));
@@ -48,7 +50,7 @@ void EntryForm::newMap() {
   NewMapDlg dlg(&tile_module);
 
   if (dlg.exec()) {    
-    map = new CMap(dlg.map_dlg.x, dlg.map_dlg.y, dlg.map_dlg.default_tile, &tile_module, &unit_module, &object_module);
+    map = new CMap(dlg.map_dlg.x, dlg.map_dlg.y, dlg.map_dlg.default_tile, &tile_module, &unit_module, &object_module, &projectile_module);
     map->setName(dlg.map_dlg.name);
     //map->generateMap(dlg.map_dlg.centroids[0], dlg.map_dlg.centroids[1], dlg.map_dlg.centroids[2], dlg.map_dlg.centroids[3]);
     map_render->setMapPtr(map);
@@ -121,6 +123,14 @@ void EntryForm::openObjectModule() {
 
 void EntryForm::openProjectileModule() {
   NewProjModuleDlg  dlg;
+  
+  if (dlg.exec()) {
+    //tile_module.LoadFromXML("data/tiles", "tiles", "tile");
+  }
+}
+
+void EntryForm::openModifierModule() {
+  NewModifModuleDlg  dlg;
   
   if (dlg.exec()) {
     //tile_module.LoadFromXML("data/tiles", "tiles", "tile");

@@ -8,6 +8,7 @@
       <itemPath>include/CObjectClass.h</itemPath>
       <itemPath>Forms/EntryForm.h</itemPath>
       <itemPath>Forms/NewMapDlg.h</itemPath>
+      <itemPath>NewModifModuleDlg.h</itemPath>
       <itemPath>Forms/NewObjectModuleDlg.h</itemPath>
       <itemPath>NewProjModuleDlg.h</itemPath>
       <itemPath>Forms/NewTileModuleDlg.h</itemPath>
@@ -19,6 +20,7 @@
                    projectFiles="true">
       <itemPath>Forms/EntryForm.ui</itemPath>
       <itemPath>Forms/NewMapDlg.ui</itemPath>
+      <itemPath>NewModifModuleDlg.ui</itemPath>
       <itemPath>Forms/NewObjectModuleDlg.ui</itemPath>
       <itemPath>Forms/NewProjModuleDlg.ui</itemPath>
       <itemPath>Forms/NewTileModuleDlg.ui</itemPath>
@@ -31,6 +33,7 @@
       <itemPath>src/CObjectClass.cpp</itemPath>
       <itemPath>Forms/EntryForm.cpp</itemPath>
       <itemPath>Forms/NewMapDlg.cpp</itemPath>
+      <itemPath>NewModifModuleDlg.cpp</itemPath>
       <itemPath>Forms/NewObjectModuleDlg.cpp</itemPath>
       <itemPath>NewProjModuleDlg.cpp</itemPath>
       <itemPath>Forms/NewTileModuleDlg.cpp</itemPath>
@@ -138,6 +141,12 @@
       </item>
       <item path="Forms/NewUnitModuleDlg.ui" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="NewModifModuleDlg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NewModifModuleDlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NewModifModuleDlg.ui" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="NewProjModuleDlg.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="NewProjModuleDlg.h" ex="false" tool="3" flavor2="0">
@@ -212,6 +221,12 @@
       <item path="Forms/NewUnitModuleDlg.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Forms/NewUnitModuleDlg.ui" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NewModifModuleDlg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NewModifModuleDlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NewModifModuleDlg.ui" ex="false" tool="3" flavor2="0">
       </item>
       <item path="NewProjModuleDlg.cpp" ex="false" tool="1" flavor2="0">
       </item>

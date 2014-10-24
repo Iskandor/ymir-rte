@@ -13,6 +13,7 @@
 #include "CMap.h"
 #include "CMapRender.h"
 #include "CUnitEntity.h"
+#include "CModifier.h"
 
 class CUnitControls {
 public:
@@ -24,6 +25,7 @@ public:
   void OnLoop();
   
   void SetCurrentPlayerID(int value) { current_player_id = value; };
+  void SetModifierModule(CModule<CModifier>* value) { modifier_module = value; };
   void ResolveModifiers();
   
 private:
@@ -45,6 +47,8 @@ private:
 private:
   CMapRender*   map_render;
   CMap*         map;
+  
+  CModule<CModifier>* modifier_module;
   
   CUnitEntity*  selected_unit;
   int           current_player_id;

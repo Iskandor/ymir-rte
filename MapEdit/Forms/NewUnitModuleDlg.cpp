@@ -38,6 +38,7 @@ NewUnitModuleDlg::NewUnitModuleDlg() {
   unit_image = NULL;
   
   projectile_module.LoadFromXML("data/projectiles", "projectiles", "projectile");
+  modifier_module.LoadFromXML("data/modifiers", "modifiers", "modifier");
   
   RefreshListView();
   RefreshComboBox();
@@ -45,6 +46,7 @@ NewUnitModuleDlg::NewUnitModuleDlg() {
 
 NewUnitModuleDlg::~NewUnitModuleDlg() {
   delete listview_model;
+  delete unit_module;
 }
 
 void NewUnitModuleDlg::RefreshListView() {
@@ -72,6 +74,12 @@ void NewUnitModuleDlg::RefreshComboBox() {
   for(int i = 0; i < projectile_module.GetSize(); i++) {
     widget.cbProjectile->addItem(QString(projectile_module.GetUnit(i).GetDesc().c_str()), QVariant(projectile_module.GetUnit(i).GetID()));
   }
+  
+  widget.cbModifier->clear();
+  widget.cbModifier->addItem(QString("none"), QVariant(-1));
+  for(int i = 0; i < modifier_module.GetSize(); i++) {
+    widget.cbModifier->addItem(QString(modifier_module.GetUnit(i).GetDesc().c_str()), QVariant(modifier_module.GetUnit(i).GetID()));
+  }  
 }
 
 void NewUnitModuleDlg::RefreshImage(QString _filename) {
@@ -217,6 +225,7 @@ void NewUnitModuleDlg::FormToModel() {
   unit_model.setArmor(widget.DefSbx->value());
   unit_model.SetClass(CObject::UNIT);
   unit_model.setProjectilID(widget.cbProjectile->itemData(widget.cbProjectile->currentIndex()).toInt());
+  unit_model.setModifierID(widget.cbModifier->itemData(widget.cbModifier->currentIndex()).toInt());
 }
 
 void NewUnitModuleDlg::ModelToForm() {
@@ -259,6 +268,7 @@ void NewUnitModuleDlg::ModelToForm() {
   widget.AttSbx->setValue(unit_model.getWeapon());
   widget.DefSbx->setValue(unit_model.getArmor());
   widget.cbProjectile->setCurrentIndex(widget.cbProjectile->findData(QVariant(unit_model.getProjectilID())));
+  widget.cbModifier->setCurrentIndex(widget.cbModifier->findData(QVariant(unit_model.getModifierID())));
 }
 
 void NewUnitModuleDlg::DrawGrid(QPixmap* pixmap) {

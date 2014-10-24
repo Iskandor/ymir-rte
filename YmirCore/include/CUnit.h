@@ -73,6 +73,8 @@ public:
     int   getArmor() { return armor; };
     void  setProjectilID(int value) { projectil_id = value; };
     int   getProjectilID() { return projectil_id; };
+    void  setModifierID(int value) { modifier_id = value; };
+    int   getModifierID() { return modifier_id; };    
     
 private:
   int sr;
@@ -81,6 +83,7 @@ private:
   int weapon;
   int armor;
   int projectil_id;
+  int modifier_id;
   vector<int>     elements;
   vector<int>     avp;
   vector<int>     rvp;

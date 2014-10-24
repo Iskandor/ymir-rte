@@ -33,6 +33,7 @@ NewTileModuleDlg::NewTileModuleDlg() {
 
 NewTileModuleDlg::~NewTileModuleDlg() {
   delete listview_model;
+  delete tile_module;
 }
 
 void NewTileModuleDlg::addTile() {

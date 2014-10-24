@@ -13,6 +13,7 @@
 #include "CUnit.h"
 #include "CRace.h"
 #include "CProjectile.h"
+#include "CModifier.h"
 
 #include <qt4/QtGui/QStandardItemModel>
 #include <qt4/QtGui/QStringListModel>
@@ -38,6 +39,7 @@ private:
   
   CModule<CUnit>*       unit_module;
   CModule<CProjectile>  projectile_module;
+  CModule<CModifier>    modifier_module;
   CUnit                 unit_model;
   CRace*                race_list;
   QPixmap*              unit_image; 

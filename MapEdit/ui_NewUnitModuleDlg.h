@@ -105,6 +105,8 @@ public:
     QLabel *label_20;
     QLabel *label_34;
     QComboBox *cbProjectile;
+    QLabel *label_35;
+    QComboBox *cbModifier;
     QWidget *tab_3;
     QWidget *formLayoutWidget_3;
     QFormLayout *formLayout_3;
@@ -363,7 +365,7 @@ public:
         label_21 = new QLabel(formLayoutWidget_2);
         label_21->setObjectName(QString::fromUtf8("label_21"));
 
-        formLayout_2->setWidget(5, QFormLayout::LabelRole, label_21);
+        formLayout_2->setWidget(6, QFormLayout::LabelRole, label_21);
 
         gridLayout_3 = new QGridLayout();
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
@@ -398,22 +400,22 @@ public:
         gridLayout_3->addWidget(label_23, 0, 0, 1, 1);
 
 
-        formLayout_2->setLayout(5, QFormLayout::FieldRole, gridLayout_3);
+        formLayout_2->setLayout(6, QFormLayout::FieldRole, gridLayout_3);
 
         label_33 = new QLabel(formLayoutWidget_2);
         label_33->setObjectName(QString::fromUtf8("label_33"));
 
-        formLayout_2->setWidget(6, QFormLayout::LabelRole, label_33);
+        formLayout_2->setWidget(7, QFormLayout::LabelRole, label_33);
 
         DefSbx = new QSpinBox(formLayoutWidget_2);
         DefSbx->setObjectName(QString::fromUtf8("DefSbx"));
 
-        formLayout_2->setWidget(6, QFormLayout::FieldRole, DefSbx);
+        formLayout_2->setWidget(7, QFormLayout::FieldRole, DefSbx);
 
         label_24 = new QLabel(formLayoutWidget_2);
         label_24->setObjectName(QString::fromUtf8("label_24"));
 
-        formLayout_2->setWidget(7, QFormLayout::LabelRole, label_24);
+        formLayout_2->setWidget(8, QFormLayout::LabelRole, label_24);
 
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
@@ -448,7 +450,7 @@ public:
         gridLayout_2->addWidget(label_20, 0, 0, 1, 1);
 
 
-        formLayout_2->setLayout(7, QFormLayout::FieldRole, gridLayout_2);
+        formLayout_2->setLayout(8, QFormLayout::FieldRole, gridLayout_2);
 
         label_34 = new QLabel(formLayoutWidget_2);
         label_34->setObjectName(QString::fromUtf8("label_34"));
@@ -459,6 +461,16 @@ public:
         cbProjectile->setObjectName(QString::fromUtf8("cbProjectile"));
 
         formLayout_2->setWidget(2, QFormLayout::FieldRole, cbProjectile);
+
+        label_35 = new QLabel(formLayoutWidget_2);
+        label_35->setObjectName(QString::fromUtf8("label_35"));
+
+        formLayout_2->setWidget(5, QFormLayout::LabelRole, label_35);
+
+        cbModifier = new QComboBox(formLayoutWidget_2);
+        cbModifier->setObjectName(QString::fromUtf8("cbModifier"));
+
+        formLayout_2->setWidget(5, QFormLayout::FieldRole, cbModifier);
 
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
@@ -599,6 +611,7 @@ public:
         label_18->setText(QApplication::translate("NewUnitModuleDlg", "Slash", 0, QApplication::UnicodeUTF8));
         label_20->setText(QApplication::translate("NewUnitModuleDlg", "Blunt", 0, QApplication::UnicodeUTF8));
         label_34->setText(QApplication::translate("NewUnitModuleDlg", "Projectile", 0, QApplication::UnicodeUTF8));
+        label_35->setText(QApplication::translate("NewUnitModuleDlg", "Effect", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("NewUnitModuleDlg", "Advanced", 0, QApplication::UnicodeUTF8));
         label_25->setText(QApplication::translate("NewUnitModuleDlg", "Filename", 0, QApplication::UnicodeUTF8));
         label_26->setText(QApplication::translate("NewUnitModuleDlg", "Size", 0, QApplication::UnicodeUTF8));

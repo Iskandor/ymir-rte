@@ -11,12 +11,10 @@
 #include <QtCore/QFile>
 
 CObjectClass::CObjectClass() {
-  if (LoadFromXML("data/object_classes") != 0) {
-   //zalogujem chybu 
-  }
 }
 
 CObjectClass::CObjectClass(const CObjectClass& orig) {
+  classes = orig.classes;
 }
 
 CObjectClass::~CObjectClass() {

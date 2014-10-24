@@ -39,6 +39,8 @@ NewProjModuleDlg::NewProjModuleDlg() {
 }
 
 NewProjModuleDlg::~NewProjModuleDlg() {
+  delete projectile_module;
+  delete listview_model;
 }
 
 void NewProjModuleDlg::accept() {

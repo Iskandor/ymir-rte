@@ -27,6 +27,7 @@
 #include "CFontRender.h"
 #include "CProjectile.h"
 #include "CProjectileControls.h"
+#include "CModifier.h"
 
 class CApp {
 public:
@@ -39,6 +40,7 @@ private:
   CModule<CUnit>        unit_module;  
   CModule<CObject>      object_module;  
   CModule<CProjectile>  projectile_module;
+  CModule<CModifier>    modifier_module;
   
   CMap            *map;
   

@@ -12,6 +12,7 @@
 #define TILE_LIST  "tiles"
 #define OBJECT_LIST "objects"
 #define PROJECTILES_LIST "projectiles"
+#define MODIFIER_LIST "modifiers"
 #define IMAGE_PATH_UNITS "data/image/units/"
 #define IMAGE_PATH_OBJECTS "data/image/objects/"
 #define IMAGE_PATH_PROJECTILES "data/image/objects/"

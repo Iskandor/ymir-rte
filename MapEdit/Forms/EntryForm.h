@@ -17,6 +17,7 @@
 #include "CUnit.h"
 #include "CObject.h"
 #include "CProjectile.h"
+#include "CModifier.h"
 
 class EntryForm : public QMainWindow {
     Q_OBJECT
@@ -32,6 +33,7 @@ private:
     CModule<CUnit>    unit_module;
     CModule<CObject>  object_module;
     CModule<CProjectile>  projectile_module;
+    CModule<CModifier>  modifier_module;
 
 public slots:
     void    newMap();
@@ -43,6 +45,7 @@ public slots:
     void    openTileModule();
     void    openObjectModule();
     void    openProjectileModule();
+    void    openModifierModule();
 
     void    moveCameraX(int);
     void    moveCameraY(int);

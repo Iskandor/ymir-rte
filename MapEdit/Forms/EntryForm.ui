@@ -105,6 +105,7 @@
     <addaction name="actionTile_Module"/>
     <addaction name="actionObject_Modules"/>
     <addaction name="actionProjectile_Modules"/>
+    <addaction name="actionModifier_Module"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -147,22 +148,27 @@
   </action>
   <action name="actionUnit_Module">
    <property name="text">
-    <string>Unit Modules</string>
+    <string>Unit Module</string>
    </property>
   </action>
   <action name="actionTile_Module">
    <property name="text">
-    <string>Tile Modules</string>
+    <string>Tile Module</string>
    </property>
   </action>
   <action name="actionObject_Modules">
    <property name="text">
-    <string>Object Modules</string>
+    <string>Object Module</string>
    </property>
   </action>
   <action name="actionProjectile_Modules">
    <property name="text">
-    <string>Projectile Modules</string>
+    <string>Projectile Module</string>
+   </property>
+  </action>
+  <action name="actionModifier_Module">
+   <property name="text">
+    <string>Modifier Module</string>
    </property>
   </action>
  </widget>

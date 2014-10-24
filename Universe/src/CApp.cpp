@@ -84,6 +84,8 @@ int CApp::OnInit() {
   object_module.LoadFromXML("data/objects", "objects", "object"); 
   unit_module.LoadFromXML("data/units", "units", "unit");
   projectile_module.LoadFromXML("data/projectiles", "projectiles", "projectile");
+  modifier_module.LoadFromXML("data/modifiers", "modifiers", "modifier");
+  
   
   for(int i = 0; i < unit_module.GetSize(); i++) {
     CObject object = unit_module.GetUnit(i);
@@ -119,6 +121,7 @@ int CApp::OnInit() {
   map_controls = new CMapControls(map_render);
   unit_controls = new CUnitControls(map_render);
   unit_controls->SetCurrentPlayerID(0);
+  unit_controls->SetModifierModule(&modifier_module);
   projectile_controls = new CProjectileControls(map_render);
   
   game_controls = new CGameControls(&player_manager, unit_controls);

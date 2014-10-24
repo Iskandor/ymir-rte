@@ -7,16 +7,24 @@
 
 #include "CModifier.h"
 
-CModifier::CModifier(E_MODIFIER mod_class, int id, CUnitEntity* unit_entity, int duration) : IModifier(mod_class, id, duration) {
+CModifier::CModifier() : IModifier() {
+  this->unit_entity = NULL;
+}
+
+CModifier::CModifier(E_MODIFIER mod_class, int id, CUnitEntity* unit_entity, int duration, string desc) : IModifier(mod_class, id, duration, desc) {
   this->unit_entity = unit_entity;
 }
 
-CModifier::CModifier(E_MODIFIER mod_class, int id, CUnitEntity* unit_entity, int duration, int delta, int per) : IModifier(mod_class, id, duration, delta, per) {
+CModifier::CModifier(E_MODIFIER mod_class, int id, CUnitEntity* unit_entity, int duration, string desc, int delta, int per) : IModifier(mod_class, id, duration, desc, delta, per) {
   this->unit_entity = unit_entity;
 }
 
 CModifier::CModifier(const CModifier& orig) : IModifier(orig) {
   unit_entity = orig.unit_entity;
+}
+
+CModifier::CModifier(map<string,string> data) : IModifier(data) {
+  
 }
 
 CModifier::~CModifier() {
@@ -48,7 +56,7 @@ void CModifier::Apply() {
 }
 
 void CModifier::Hurt() {
-  if (delta_hp > -1) {
+  if (delta_hp > 0) {
     if (delta_hp >= unit_entity->GetHP()) {
       unit_entity->SetHP(0);
       unit_entity->AddAction(CAction(CAction::DIE, 0));
@@ -65,5 +73,21 @@ void CModifier::Heal() {
 }
 
 void CModifier::Paralyze() {
-  
+  if (delta_st > 0) {
+    if (delta_st >= unit_entity->GetSP()) {
+      unit_entity->SetSP(0);
+    }
+    else {
+      unit_entity->DecreaseSP(delta_st);
+    }
+  }
+  if (per_st > 0) {
+    double delta = per_st/100 * unit_entity->GetMaxSP();
+    if (delta >= unit_entity->GetSP()) {
+      unit_entity->SetSP(0);
+    }
+    else {
+      unit_entity->DecreaseSP(delta);
+    }    
+  }
 }

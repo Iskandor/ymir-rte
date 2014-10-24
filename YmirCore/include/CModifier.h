@@ -8,9 +8,6 @@
 #ifndef CMODIFIER_H
 #define	CMODIFIER_H
 
-#include <map>
-#include <string>
-
 #include "CUnitEntity.h"
 #include "IModifier.h"
 
@@ -19,13 +16,15 @@ using namespace std;
 
 class CModifier : public IModifier {
 public:
-  CModifier(E_MODIFIER mod_class, int id, CUnitEntity* unit_entity, int duration);
-  CModifier(E_MODIFIER mod_class, int id, CUnitEntity* unit_entity, int duration, int delta, int per);
+  CModifier();
+  CModifier(E_MODIFIER mod_class, int id, CUnitEntity* unit_entity, int duration, string desc);
+  CModifier(E_MODIFIER mod_class, int id, CUnitEntity* unit_entity, int duration, string desc, int delta, int per);
   CModifier(map<string, string> data);
   CModifier(const CModifier& orig);
   virtual ~CModifier();
     
   void Apply();
+  void SetUnitEntity(CUnitEntity* value) { unit_entity = value; };
   
 private:
   void Hurt();

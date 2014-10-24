@@ -11,7 +11,8 @@
             <file>file:/home/matej/GIT/ymir-rte/YmirCore/src/CModifier.cpp</file>
             <file>file:/home/matej/GIT/ymir-rte/YmirCore/src/CUnitEntity.cpp</file>
             <file>file:/home/matej/GIT/ymir-rte/YmirCore/include/IModifier.h</file>
-            <file>file:/home/matej/GIT/ymir-rte/YmirCore/include/CUnitEntity.h</file>
+            <file>file:/home/matej/GIT/ymir-rte/YmirCore/src/CUnit.cpp</file>
+            <file>file:/home/matej/GIT/ymir-rte/YmirCore/include/CUnit.h</file>
             <file>file:/home/matej/GIT/ymir-rte/YmirCore/include/CModifier.h</file>
             <file>file:/home/matej/GIT/ymir-rte/YmirCore/src/IModifier.cpp</file>
         </group>

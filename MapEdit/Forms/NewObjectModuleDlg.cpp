@@ -36,12 +36,15 @@ NewObjectModuleDlg::NewObjectModuleDlg() {
   listview_model = new QStandardItemModel();
   
   object_image = NULL;
+  object_class.LoadFromXML("data/object_classes");
   
   RefreshListView();
   RefreshComboBox();
 }
 
 NewObjectModuleDlg::~NewObjectModuleDlg() {
+  delete listview_model;
+  delete object_module;
 }
 
 void NewObjectModuleDlg::accept() {

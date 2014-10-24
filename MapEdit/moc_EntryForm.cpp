@@ -22,7 +22,7 @@ static const uint qt_meta_data_EntryForm[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      12,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -40,7 +40,8 @@ static const uint qt_meta_data_EntryForm[] = {
       93,   10,   10,   10, 0x0a,
      112,   10,   10,   10, 0x0a,
      135,   10,   10,   10, 0x0a,
-     152,   10,   10,   10, 0x0a,
+     156,   10,   10,   10, 0x0a,
+     173,   10,   10,   10, 0x0a,
 
        0        // eod
 };
@@ -49,8 +50,8 @@ static const char qt_meta_stringdata_EntryForm[] = {
     "EntryForm\0\0newMap()\0openMap()\0saveMap()\0"
     "saveMapAs()\0exit()\0openUnitModule()\0"
     "openTileModule()\0openObjectModule()\0"
-    "openProjectileModule()\0moveCameraX(int)\0"
-    "moveCameraY(int)\0"
+    "openProjectileModule()\0openModifierModule()\0"
+    "moveCameraX(int)\0moveCameraY(int)\0"
 };
 
 void EntryForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -68,8 +69,9 @@ void EntryForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 6: _t->openTileModule(); break;
         case 7: _t->openObjectModule(); break;
         case 8: _t->openProjectileModule(); break;
-        case 9: _t->moveCameraX((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 10: _t->moveCameraY((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: _t->openModifierModule(); break;
+        case 10: _t->moveCameraX((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: _t->moveCameraY((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -107,9 +109,9 @@ int EntryForm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 12;
     }
     return _id;
 }

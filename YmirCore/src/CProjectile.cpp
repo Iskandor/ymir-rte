@@ -16,7 +16,6 @@ CProjectile::CProjectile(map<string,string> data) : CObject(data) {
 
 CProjectile::CProjectile(const CProjectile& orig) : CObject(orig) {
   speed = orig.speed;
-  
 }
 
 CProjectile::~CProjectile() {

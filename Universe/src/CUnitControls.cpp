@@ -290,7 +290,14 @@ void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target) {
   double damage = (attack_str - dexterity_def) * ((double)(100-target->GetRootUnit()->getRVP()[attack_type])/100.0);
 
   if (damage > 0) {
-    CModifier *modifier = (CModifier*)target->AddModifier(new CModifier(IModifier::HURT, 0, target, 1, (int)round(damage), -1));
+    CModifier *modifier = (CModifier*)target->AddModifier(new CModifier(IModifier::HURT, 0, target, 1, "hurt", (int)round(damage), -1));
+    modifier->Apply();
+  }
+  if (unit_entity->GetRootUnit()->getModifierID() > -1) {
+    CModifier *modifier = new CModifier(*modifier_module->GetUnitPtr(unit_entity->GetRootUnit()->getModifierID()));
+    
+    modifier->SetUnitEntity(target);
+    target->AddModifier(modifier);
     modifier->Apply();
   }
 }

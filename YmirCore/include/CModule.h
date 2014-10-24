@@ -61,7 +61,7 @@ public:
   };
   
   T GetUnit    (unsigned int index) {
-    if (index > buffer.size()) {
+    if (index >= buffer.size()) {
       assert(0);
     }
     return buffer[index];    
