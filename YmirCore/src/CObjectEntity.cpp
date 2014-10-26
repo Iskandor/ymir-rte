@@ -7,10 +7,12 @@
 
 #include "CObjectEntity.h"
 #include "CMathUtils.h"
+#include "GlobalDefine.h"
 
 CObjectEntity::CObjectEntity(int inner_id) {
   id = inner_id;
-  x = y = 0;  
+  x = y = 0;
+  render_x = render_y = 0;
   z_index = 0;
   root_object = NULL;
   ref_object_entity = NULL;
@@ -33,7 +35,9 @@ CObjectEntity::CObjectEntity(CObject* object, int inner_id, int x, int y, double
 CObjectEntity::CObjectEntity(const CObjectEntity& orig) {
   id = orig.id;
   x = orig.x;
-  y = orig.y;  
+  y = orig.y;
+  render_x = orig.render_x;
+  render_y = orig.render_y;
   z_index = orig.z_index;
   root_object = orig.root_object;
   ref_object_entity = orig.ref_object_entity;
@@ -48,6 +52,15 @@ CObjectEntity::~CObjectEntity() {
 void CObjectEntity::setPosition(int x, int y) {
   this->x = x;
   this->y = y;
+  render_x = x * MAP_ELEM;
+  render_y = y * MAP_ELEM;
+}
+
+void CObjectEntity::SetRenderPosition(int x, int y) {
+  render_x = x;
+  render_y = y;
+  this->x = x / MAP_ELEM;
+  this->y = y / MAP_ELEM;
 }
 
 pair<int, int> CObjectEntity::FindFirstBlocked() {

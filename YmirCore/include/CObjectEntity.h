@@ -32,6 +32,8 @@ protected:
   unsigned int id;
   int x;
   int y;
+  int render_x;
+  int render_y;
   double z_index;
   
   E_STATE     state;
@@ -50,9 +52,13 @@ public:
   unsigned int GetID();
   int GetX();
   int GetY();
+  int GetRenderX() { return render_x; };
+  int GetRenderY() { return render_y; };
+  
   string GetClassName() { return class_name; };
   
   void setPosition(int x, int y);
+  void SetRenderPosition(int x, int y);
   pair<double, double> GetBlockCenter();
   pair<double, double> GetNearestBlocked(CObjectEntity* object_entity);
 

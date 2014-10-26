@@ -87,8 +87,8 @@ void CMapRender::OnRender(SDL_Surface* dest) {
 
     pair<int, int> point(object_entity->GetX(), object_entity->GetY());
 
-    int x = (object_entity->GetX() - camera.x) * MAP_ELEM;
-    int y = (object_entity->GetY() - camera.y) * MAP_ELEM;
+    int x = object_entity->GetRenderX() - (camera.x * MAP_ELEM);
+    int y = object_entity->GetRenderY() - (camera.y * MAP_ELEM);
 
     SDL_Rect camera_border;
     
