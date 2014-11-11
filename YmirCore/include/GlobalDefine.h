@@ -32,6 +32,11 @@ const double BOTTOM  = -1;
 const double TOP     = 1;
 const double SQRT2   = 1.4142;
 const int MAX_PLAYER = 2;
+const int RESOLUTION_W = 1280;
+const int RESOLUTION_H = 720;
+const int CAMERA_W = 20;
+const int CAMERA_H = 8;
+const int FONT_HEIGHT = 12;
 
 
 #ifdef	__cplusplus

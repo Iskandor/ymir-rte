@@ -12,8 +12,8 @@
 CMapRender::CMapRender(SDL_Rect* display_rect, CMap* map, CTileRender* tile_render, CUnitRender* unit_render, CObjectRender* object_render) {
   camera.x = 0;
   camera.y = 0;
-  camera.w = 20 * (TILE_W / MAP_ELEM);
-  camera.h = 6 * (TILE_H / MAP_ELEM);
+  camera.w = CAMERA_W * (TILE_W / MAP_ELEM);
+  camera.h = CAMERA_H * (TILE_H / MAP_ELEM);
  
   main_rect = display_rect;
 
