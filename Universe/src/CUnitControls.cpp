@@ -14,9 +14,10 @@
 #include "CMathUtils.h"
 #include "CModifier.h"
 
-CUnitControls::CUnitControls(CMapRender* map_render) {
+CUnitControls::CUnitControls(CMapRender* map_render, CGuiManager* gui_manager) {
   this->map_render = map_render; 
   this->map = map_render->GetMap();
+  this->gui_manager = gui_manager;
 }
 
 CUnitControls::CUnitControls(const CUnitControls& orig) {
@@ -62,6 +63,7 @@ void CUnitControls::OnEvent(SDL_Event* event) {
               CObjectEntity* selector = map->addObject(unit_entity->GetX()+(unit_entity->GetRootUnit()->GetXSize()-4), unit_entity->GetY()+(unit_entity->GetRootUnit()->GetYSize()-4), BOTTOM, 0);
               unit_entity->SetRefObject(selector);
               selected_unit = unit_entity;
+              gui_manager->OnUnitClick(selected_unit);
               /*
               map->Unblock(selected_unit);
               selected_unit->OnClick(map->GetCostMap(), map->getMapSizeX(sizemode_elem), map->getMapSizeY(sizemode_elem));
@@ -77,7 +79,7 @@ void CUnitControls::OnEvent(SDL_Event* event) {
             selected_unit->SetRefObject(NULL);
             selected_unit->SetSelected(false);            
             selected_unit = NULL;
-
+            gui_manager->OnUnitClick(selected_unit);  
           }          
         }
       }

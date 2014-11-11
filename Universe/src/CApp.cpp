@@ -66,8 +66,8 @@ int CApp::OnInit() {
   font_render = new CFontRender();
   
   rectDisplay.x = rectDisplay.y = 0;
-  rectDisplay.w = 1280;
-  rectDisplay.h = 720;
+  rectDisplay.w = RESOLUTION_W;
+  rectDisplay.h = RESOLUTION_H;
   
   if ((surfDisplay = SDL_SetVideoMode(rectDisplay.w, rectDisplay.h, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL) { /*SDL_FULLSCREEN*/
     return -2;
@@ -119,7 +119,7 @@ int CApp::OnInit() {
   
   map_render = new CMapRender(&rectDisplay, map, tile_render, unit_render, object_render);
   map_controls = new CMapControls(map_render);
-  unit_controls = new CUnitControls(map_render);
+  unit_controls = new CUnitControls(map_render, gui_manager);
   unit_controls->SetCurrentPlayerID(0);
   unit_controls->SetModifierModule(&modifier_module);
   projectile_controls = new CProjectileControls(map_render);
@@ -150,6 +150,7 @@ void CApp::OnEvent(SDL_Event* event) {
   map_controls->OnEvent(event);
   unit_controls->OnEvent(event);
   game_controls->OnEvent(event);
+  gui_manager->OnEvent(*event);
 }
 
 void CApp::OnRender() {

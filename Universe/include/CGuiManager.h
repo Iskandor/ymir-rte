@@ -18,6 +18,8 @@
 #include <QtCore/QFile>
 
 #include "CFontRender.h"
+#include "GlobalDefine.h"
+#include "CUnitEntity.h"
 
 using namespace gcn;
 using namespace std;
@@ -30,19 +32,32 @@ public:
   
   int   OnInit();
   void  OnRender();
+  void  OnEvent(SDL_Event event);
+  void  OnLoop();
   
+  void  OnUnitClick(CUnitEntity* unit_entity);
 private:
-  int   LoadXML(string filename);
   
 private:
   SDL_Surface*    screen;
   SDLInput*       input;
   SDLGraphics*    graphics;
   SDLImageLoader* imageLoader;
-  vector<Gui*>    gui;
-  Container*  top;
+  
+  
+  Gui*        gui;
   ImageFont*  font;
-  Label*      label;
+  
+  /* containers */
+  Container*  top;
+  Container*  unit_info;
+  
+  Label*      lb_hp;
+  Label*      lb_st;
+  Label*      lbv_unit_class;
+  Label*      lbv_race;
+  Label*      lbv_hp;
+  Label*      lbv_st;
   
   CFontRender* font_render;
 };

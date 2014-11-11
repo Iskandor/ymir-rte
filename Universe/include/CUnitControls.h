@@ -14,10 +14,11 @@
 #include "CMapRender.h"
 #include "CUnitEntity.h"
 #include "CModifier.h"
+#include "CGuiManager.h"
 
 class CUnitControls {
 public:
-  CUnitControls(CMapRender* map_render);
+  CUnitControls(CMapRender* map_render, CGuiManager* gui_manager);
   CUnitControls(const CUnitControls& orig);
   virtual ~CUnitControls();
   
@@ -47,6 +48,7 @@ private:
 private:
   CMapRender*   map_render;
   CMap*         map;
+  CGuiManager*  gui_manager;
   
   CModule<CModifier>* modifier_module;
   
