@@ -42,8 +42,9 @@ int CGuiManager::OnInit() {
 	input = new SDLInput();
   
 	top = new Container();
-	top->setDimension(Rectangle(0, RESOLUTION_H-13*MAP_ELEM, RESOLUTION_W, 13*MAP_ELEM));
-  top->setOpaque(false);
+	top->setDimension(Rectangle(RESOLUTION_W - 13*MAP_ELEM, RESOLUTION_H-13*MAP_ELEM, 13*MAP_ELEM, 13*MAP_ELEM));
+  top->setOpaque(true);
+  top->setBaseColor(Color(46,0,56, 128));
   
 	gui = new Gui();
 	gui->setGraphics(graphics);

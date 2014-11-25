@@ -34,11 +34,11 @@ public:
   void    SetHP(int value) { hp = value; };
   int     GetHP() { return hp; };
   int     GetMaxHP() { return max_hp; };
-  void    AddAction(CAction action) { action_queue.push(action); };
+  void    AddAction(CAction action);
   CAction GetAction();
   void    ClearActionQueue();
   
-  void    DecreaseSP(double value) { sp -= value; };
+  bool    DecreaseSP(double value);
   void    SetSP(double value) { sp = value; };
   double  GetSP() { return sp; };
   double  GetMaxSP() { return max_sp; };
@@ -66,7 +66,7 @@ private:
   double max_sp;
   double as;
   
-  queue<CAction>          action_queue;
+  priority_queue<CAction, deque<CAction>, CAction::less_by_priority> action_queue;
   vector<IModifier*>      modifier_list;
   set< pair<int, int> >   possible_loc;
   bool  selected;

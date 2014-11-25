@@ -7,20 +7,20 @@
 
 #include "IModifier.h"
 
-IModifier::IModifier() {
+IModifier::IModifier() : ISerializable() {
   this->mod_class = E_MODIFIER::HURT;
   this->id = -1;
   this->duration = 0;  
 }
 
-IModifier::IModifier(E_MODIFIER mod_class, int id, int duration, string desc) {
+IModifier::IModifier(E_MODIFIER mod_class, int id, int duration, string desc) : ISerializable() {
   this->mod_class = mod_class;
   this->id = id;
   this->duration = duration;
   this->desc = desc;
 }
 
-IModifier::IModifier(E_MODIFIER mod_class, int id, int duration, string desc, int delta, int per) {
+IModifier::IModifier(E_MODIFIER mod_class, int id, int duration, string desc, int delta, int per) : ISerializable() {
   this->mod_class = mod_class;
   this->id = id;
   this->duration = duration;
@@ -43,7 +43,7 @@ IModifier::IModifier(E_MODIFIER mod_class, int id, int duration, string desc, in
   }  
 }
 
-IModifier::IModifier(map<string,string> data) {
+IModifier::IModifier(map<string,string> data) : ISerializable(data) {
   mod_class = (E_MODIFIER)stoi(data["mod_class"]);
   id = stoi(data["id"]);
   duration = stoi(data["duration"]);
@@ -55,7 +55,7 @@ IModifier::IModifier(map<string,string> data) {
   per_st = stoi(data["per_st"]);
 }
 
-IModifier::IModifier(const IModifier& orig) {
+IModifier::IModifier(const IModifier& orig) : ISerializable(orig) {
   mod_class = orig.mod_class;
   id = orig.id;
   duration = orig.duration;

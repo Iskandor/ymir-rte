@@ -18,6 +18,7 @@ CUnitControls::CUnitControls(CMapRender* map_render, CGuiManager* gui_manager) {
   this->map_render = map_render; 
   this->map = map_render->GetMap();
   this->gui_manager = gui_manager;
+  selected_unit = NULL;
 }
 
 CUnitControls::CUnitControls(const CUnitControls& orig) {
@@ -140,13 +141,7 @@ void CUnitControls::OnLoop() {
 }
 
 bool CUnitControls::PerformAction(CUnitEntity* unit_entity, CAction* action) {
-  if (unit_entity->GetSP() >= action->GetCost()) {
-    unit_entity->DecreaseSP(action->GetCost());
-    return true;
-  }
-  else {
-    return false;
-  }  
+  return unit_entity->DecreaseSP(action->GetCost());
 }
 
 void CUnitControls::CreatePath(CUnitEntity* unit_entity, CAction* action) {
@@ -175,10 +170,14 @@ void CUnitControls::Move(CUnitEntity* unit_entity, CAction* action) {
   map->Unblock(unit_entity);
 
   if (unit_entity->GetX() > action->GetX()) {
-    unit_entity->SetDirection(CUnitEntity::LEFT);
+    if (unit_entity->DecreaseSP(1)) {
+      unit_entity->SetDirection(CUnitEntity::LEFT);
+    }
   }
   if (unit_entity->GetX() < action->GetX()) {
-    unit_entity->SetDirection(CUnitEntity::RIGHT);
+    if (unit_entity->DecreaseSP(1)) {
+      unit_entity->SetDirection(CUnitEntity::RIGHT);
+    }
   }
 
   int dx = action->GetX() - unit_entity->GetX();
@@ -280,6 +279,11 @@ void CUnitControls::FireOrFight(CUnitEntity* unit_entity, CUnitEntity* target) {
   }
   else {
     Fight(unit_entity, target);
+    if (target->GetSP() > 0) {
+      CAction action(CAction::FIGHT, unit_entity, 1);
+      action.SetPriority(CAction::HIGHEST);
+      target->AddAction(action);
+    }
   }  
 }
 
@@ -287,7 +291,22 @@ void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target) {
   int attack_type = unit_entity->GetRootUnit()->GetAttackType(CUtils::Probability(100));
 
   double attack_str = CUtils::rollDice(unit_entity->GetRootUnit()->getWeapon(), 1) + (unit_entity->GetRootUnit()->getProp()[STR_IND] / 2) - 2;
-  double dexterity_def = unit_entity->GetRootUnit()->getArmor() + (unit_entity->GetRootUnit()->getProp()[AGL_IND] / 2) - 2;
+  double dexterity_def = unit_entity->GetRootUnit()->getArmor();
+  
+  if (unit_entity->GetX() < target->GetX()) {
+    if (target->DecreaseSP(1)) {
+      target->SetDirection(CUnitEntity::LEFT);
+    }
+  }
+  if (unit_entity->GetX() > target->GetX()) {
+    if (target->DecreaseSP(1)) {
+      target->SetDirection(CUnitEntity::RIGHT);
+    }
+  }
+  
+  if (abs(unit_entity->GetDirection() - target->GetDirection()) > 0) {
+    dexterity_def += (unit_entity->GetRootUnit()->getProp()[AGL_IND] / 2) - 2;
+  }
 
   double damage = (attack_str - dexterity_def) * ((double)(100-target->GetRootUnit()->getRVP()[attack_type])/100.0);
 

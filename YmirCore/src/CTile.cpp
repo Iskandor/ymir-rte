@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-CTile::CTile() {
+CTile::CTile() : ISerializable() {
   this->id = 0;
   this->air = 0.0;
   this->earth = 0.0;
@@ -17,7 +17,7 @@ CTile::CTile() {
   this->water = 0.0;  
 }
 
-CTile::CTile(int id) {
+CTile::CTile(int id) : ISerializable() {
   this->id = id;
   this->air = 0.0;
   this->earth = 0.0;
@@ -25,7 +25,7 @@ CTile::CTile(int id) {
   this->water = 0.0;
 }
 
-CTile::CTile(map<string,string> data) {
+CTile::CTile(map<string,string> data) : ISerializable(data) {
   id = atoi(data["id"].c_str());
   name = data["name"];
   filename = data["filename"];
@@ -35,7 +35,7 @@ CTile::CTile(map<string,string> data) {
   this->water = 0.0;  
 }
 
-CTile::CTile(const CTile& orig) {
+CTile::CTile(const CTile& orig) : ISerializable(orig) {
   this->id = orig.id;
   this->air = orig.air;
   this->earth = orig.earth;

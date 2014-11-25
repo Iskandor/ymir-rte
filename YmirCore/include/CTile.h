@@ -9,12 +9,13 @@
 #define	CTILE_H
 
 #include "GlobalDefine.h"
+#include "ISerializable.h"
 #include <map>
 #include <string>
 
 using namespace std;
 
-class CTile {
+class CTile : public ISerializable {
 public:
   CTile();
   CTile(int id);

@@ -11,9 +11,11 @@
 #include <string>
 #include <map>
 
+#include "ISerializable.h"
+
 using namespace std;
 
-class CObject {
+class CObject : public ISerializable {
 public:
   enum E_CLASSES {
     TECH = 0,

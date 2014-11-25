@@ -12,7 +12,7 @@
 #include "CStrUtils.h"
 
 
-CObject::CObject() {
+CObject::CObject() : ISerializable() {
   id = 0;
   type_id = 0;
   x_size = y_size = 0;
@@ -22,7 +22,7 @@ CObject::CObject() {
   obj_class = CObject::TECH;
 }
 
-CObject::CObject(int id) {
+CObject::CObject(int id) : ISerializable() {
   this->id = id;
   type_id = id;
   x_size = y_size = 0;
@@ -32,7 +32,7 @@ CObject::CObject(int id) {
   obj_class = CObject::TECH;
 }
 
-CObject::CObject(const CObject& orig) {
+CObject::CObject(const CObject& orig) : ISerializable(orig) {
   id = orig.id;
   x_size = orig.x_size;
   y_size = orig.y_size;
@@ -44,7 +44,7 @@ CObject::CObject(const CObject& orig) {
   type_id = orig.type_id;
 }
 
-CObject::CObject(map<string, string> data) {
+CObject::CObject(map<string, string> data) : ISerializable(data) {
   block_map = NULL;
   
   id = atoi(data["id"].c_str());

@@ -10,10 +10,11 @@
 
 #include <map>
 #include <string>
+#include "ISerializable.h"
 
 using namespace std;
 
-class IModifier {
+class IModifier : public ISerializable {
 public:
   enum E_MODIFIER {
     HURT = 0,

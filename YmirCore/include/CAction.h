@@ -23,6 +23,26 @@ public:
     DIE = 5
   };
   
+  enum E_PRIORITY {
+    HIGHEST = 0,
+    HIGH = 1,
+    MIDDLE = 2,
+    LOW = 3,
+    LOWEST = 4
+  };
+  
+  struct less_by_priority {
+    bool operator()(CAction& lhs, CAction& rhs) const
+    {
+      if (lhs.GetPriority() == rhs.GetPriority()) {
+        return lhs.GetIndex() > rhs.GetIndex();
+      }
+      else {
+        return lhs.GetPriority() < rhs.GetPriority();
+      }
+    }  
+  };  
+  
   CAction();
   CAction(E_TYPE type, int cost);
   CAction(E_TYPE type, int x, int y, int cost);
@@ -35,6 +55,10 @@ public:
   int GetY() { return y; };
   CUnitEntity* GetTarget() { return target; };
   int GetCost() { return cost; };
+  void SetPriority(E_PRIORITY value) { priority = value; };
+  E_PRIORITY GetPriority() { return priority; };
+  void SetIndex(int value) { index = value; };
+  int GetIndex() { return index; };
   
 private:
   E_TYPE  type;
@@ -42,7 +66,8 @@ private:
   int     y;
   CUnitEntity* target;
   int     cost;
-  
+  E_PRIORITY priority;
+  int     index;
   
 };
 
