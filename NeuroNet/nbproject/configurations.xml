@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>include/DataSet.h</itemPath>
+      <itemPath>include/DataSetUtils.h</itemPath>
+      <itemPath>include/ISOM.h</itemPath>
+      <itemPath>include/Neuron.h</itemPath>
+      <itemPath>include/SOM.h</itemPath>
+      <itemPath>include/SOMUtils.h</itemPath>
+      <itemPath>include/main.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>src/DataSet.cpp</itemPath>
+      <itemPath>src/DataSetUtils.cpp</itemPath>
+      <itemPath>src/ISOM.cpp</itemPath>
+      <itemPath>src/Neuron.cpp</itemPath>
+      <itemPath>src/SOM.cpp</itemPath>
+      <itemPath>src/SOMUtils.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>NeuroNet-Makefile.mk</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>NeuroNet-Makefile.mk</projectmakefile>
+  <confs>
+    <conf name="Debug" type="2">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <standard>8</standard>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>bin/${CND_CONF}/libNeuroNet.${CND_DLIB_EXT}</output>
+        </linkerTool>
+      </compileType>
+      <item path="include/DataSet.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/DataSetUtils.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/ISOM.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Neuron.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/SOM.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/SOMUtils.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/main.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/DataSet.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/DataSetUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/ISOM.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Neuron.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/SOM.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/SOMUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="2">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="include/DataSet.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/DataSetUtils.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/ISOM.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Neuron.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/SOM.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/SOMUtils.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/main.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/DataSet.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/DataSetUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/ISOM.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Neuron.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/SOM.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/SOMUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
