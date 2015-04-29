@@ -12,6 +12,25 @@
 #include "CStrUtils.h"
 #include "CMathUtils.h"
 
+CMap::CMap() : CObjectManager(NULL) {
+  this->tile_module = NULL;
+  this->unit_module = NULL;
+  this->object_module = NULL;
+  this->projectile_module = NULL;
+  map_segsize_x = 0;
+  map_segsize_y = 0;
+  map_tilesize_x = 0;
+  map_tilesize_y = 0;
+  map_elemsize_x = 0;
+  map_elemsize_y = 0;
+
+  pTile = NULL;
+  move_cost_map = NULL;
+  
+  unit_manager = NULL;
+  projectile_manager = NULL;  
+}
+
 CMap::CMap(CModule<CTile>* tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module, CModule<CProjectile> *projectile_module) 
     : CObjectManager(object_module) {  
   this->tile_module = tile_module;

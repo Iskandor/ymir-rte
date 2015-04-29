@@ -4,10 +4,12 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="GUI" projectFiles="true">
+        <itemPath>include/CGuiManager.h</itemPath>
+      </logicalFolder>
       <itemPath>include/CApp.h</itemPath>
       <itemPath>include/CDataManager.h</itemPath>
       <itemPath>include/CGameControls.h</itemPath>
-      <itemPath>include/CGuiManager.h</itemPath>
       <itemPath>include/CMapControls.h</itemPath>
       <itemPath>include/CProjectileControls.h</itemPath>
       <itemPath>include/CUnitControls.h</itemPath>
@@ -19,10 +21,12 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="GUI" projectFiles="true">
+        <itemPath>src/CGuiManager.cpp</itemPath>
+      </logicalFolder>
       <itemPath>src/CApp.cpp</itemPath>
       <itemPath>src/CDataManager.cpp</itemPath>
       <itemPath>src/CGameControls.cpp</itemPath>
-      <itemPath>src/CGuiManager.cpp</itemPath>
       <itemPath>src/CMapControls.cpp</itemPath>
       <itemPath>src/CProjectileControls.cpp</itemPath>
       <itemPath>src/CUnitControls.cpp</itemPath>

@@ -25,6 +25,7 @@
       <itemPath>include/CUnitManager.h</itemPath>
       <itemPath>include/CUtils.h</itemPath>
       <itemPath>include/GlobalDefine.h</itemPath>
+      <itemPath>include/IManager.h</itemPath>
       <itemPath>include/IModifier.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -144,6 +145,8 @@
       </item>
       <item path="include/GlobalDefine.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/IManager.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/IModifier.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/CAction.cpp" ex="false" tool="1" flavor2="0">
@@ -248,6 +251,8 @@
       <item path="include/CUtils.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/GlobalDefine.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/IManager.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/IModifier.h" ex="false" tool="3" flavor2="0">
       </item>

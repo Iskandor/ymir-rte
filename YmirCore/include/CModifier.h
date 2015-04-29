@@ -26,6 +26,8 @@ public:
   void Apply();
   void SetUnitEntity(CUnitEntity* value) { unit_entity = value; };
   
+  CUnitEntity* GetUnitEntity() { return unit_entity; };
+  
 private:
   void Hurt();
   void Heal();

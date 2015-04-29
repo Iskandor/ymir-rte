@@ -20,6 +20,7 @@
 #include "CFontRender.h"
 #include "GlobalDefine.h"
 #include "CUnitEntity.h"
+#include "CGuiElementManager.h"
 
 using namespace gcn;
 using namespace std;
@@ -36,9 +37,14 @@ public:
   void  OnLoop();
   
   void  OnUnitClick(CUnitEntity* unit_entity);
+  
+  CGuiElementManager* GuiElementManager() { return &gui_element_manager;};
+  SDL_Surface* Screen() { return screen; };
 private:
   
 private:
+  CGuiElementManager  gui_element_manager;
+  
   SDL_Surface*    screen;
   SDLInput*       input;
   SDLGraphics*    graphics;

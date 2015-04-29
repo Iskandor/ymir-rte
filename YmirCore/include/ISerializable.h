@@ -17,7 +17,6 @@ class ISerializable {
 public:
   ISerializable() {};
   ISerializable(map<string, string>) {};
-  ISerializable(const ISerializable& orig) {};
   virtual ~ISerializable() {};
   
   virtual map<string, string> exportMap() = 0;

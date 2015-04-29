@@ -36,9 +36,13 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/CFontRender.o \
+	${OBJECTDIR}/src/CGuiElement.o \
+	${OBJECTDIR}/src/CGuiElementManager.o \
+	${OBJECTDIR}/src/CGuiElementRender.o \
 	${OBJECTDIR}/src/CMapRender.o \
 	${OBJECTDIR}/src/CMapSegment.o \
 	${OBJECTDIR}/src/CObjectRender.o \
+	${OBJECTDIR}/src/COverText.o \
 	${OBJECTDIR}/src/CSprite.o \
 	${OBJECTDIR}/src/CTileRender.o \
 	${OBJECTDIR}/src/CUnitRender.o
@@ -73,6 +77,21 @@ ${OBJECTDIR}/src/CFontRender.o: src/CFontRender.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFontRender.o src/CFontRender.cpp
 
+${OBJECTDIR}/src/CGuiElement.o: src/CGuiElement.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CGuiElement.o src/CGuiElement.cpp
+
+${OBJECTDIR}/src/CGuiElementManager.o: src/CGuiElementManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CGuiElementManager.o src/CGuiElementManager.cpp
+
+${OBJECTDIR}/src/CGuiElementRender.o: src/CGuiElementRender.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CGuiElementRender.o src/CGuiElementRender.cpp
+
 ${OBJECTDIR}/src/CMapRender.o: src/CMapRender.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
@@ -87,6 +106,11 @@ ${OBJECTDIR}/src/CObjectRender.o: src/CObjectRender.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CObjectRender.o src/CObjectRender.cpp
+
+${OBJECTDIR}/src/COverText.o: src/COverText.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/COverText.o src/COverText.cpp
 
 ${OBJECTDIR}/src/CSprite.o: src/CSprite.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

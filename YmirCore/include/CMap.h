@@ -28,6 +28,7 @@ enum SizeMode {
 
 class CMap : public CObjectManager {
 public:
+  CMap();
   CMap(CModule<CTile> *tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module, CModule<CProjectile> *projectile_module);
   CMap(int x, int y, int default_tile, CModule<CTile> *tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module, CModule<CProjectile> *projectile_module);
   CMap(const CMap& orig);

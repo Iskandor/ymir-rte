@@ -80,10 +80,32 @@ int CGuiManager::OnInit() {
 
 void CGuiManager::OnLoop() {
   gui->logic();
+  
+  vector<CGuiElement*> to_destroy;
+  
+  for(int i = 0; i < gui_element_manager.GetListSize(); i++)
+  {
+    ((CGuiElement*)gui_element_manager.Get(i))->OnLoop();
+    
+    if (((CGuiElement*)gui_element_manager.Get(i))->IsDestroied())
+    {
+      to_destroy.push_back((CGuiElement*)gui_element_manager.Get(i));
+    }
+  }  
+  
+  for(int i = 0; i < to_destroy.size(); i++)
+  {
+    gui_element_manager.Rem(to_destroy[i]);
+  }
 }
 
 void CGuiManager::OnRender() {
   gui->draw();
+  
+  for(int i = 0; i < gui_element_manager.GetListSize(); i++)
+  {
+    ((CGuiElement*)gui_element_manager.Get(i))->OnRender();
+  }
 }
 
 void CGuiManager::OnEvent(SDL_Event event) {

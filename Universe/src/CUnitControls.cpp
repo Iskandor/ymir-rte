@@ -313,6 +313,9 @@ void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target) {
   if (damage > 0) {
     CModifier *modifier = (CModifier*)target->AddModifier(new CModifier(IModifier::HURT, 0, target, 1, "hurt", (int)round(damage), -1));
     modifier->Apply();
+    
+    SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
+    gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, to_string((int)round(damage)), {255, 0, 0});
   }
   if (unit_entity->GetRootUnit()->getModifierID() > -1) {
     CModifier *modifier = new CModifier(*modifier_module->GetUnitPtr(unit_entity->GetRootUnit()->getModifierID()));
@@ -320,6 +323,9 @@ void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target) {
     modifier->SetUnitEntity(target);
     target->AddModifier(modifier);
     modifier->Apply();
+    
+    SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
+    gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, modifier->GetDesc(), {255, 255, 255});
   }
 }
 
@@ -445,8 +451,31 @@ void CUnitControls::ResolveModifier(CUnitEntity* unit_entity) {
   vector<IModifier*>* modifier_list = unit_entity->GetModifierList();
   vector<IModifier*>  modifier_list_new;
   bool                list_changed = false;
+  
   for(unsigned int j = 0; j < modifier_list->size(); j++) {
-    ((CModifier*)modifier_list->at(j))->Apply();
+    CModifier* modifier = ((CModifier*)modifier_list->at(j));
+    CUnitEntity* target = modifier->GetUnitEntity();
+    
+    modifier->Apply();
+    
+    SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
+    
+    switch(modifier->GetClass()) {
+      case CModifier::HURT:
+      case CModifier::BLEED:
+        gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, to_string((int)round(modifier->GetDeltaHP())), {255, 0, 0});
+        break;
+      case CModifier::HEAL:
+
+        break;
+      case CModifier::PARALYZE:
+        gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, modifier->GetDesc(), {255, 255, 255});
+        break;
+      case CModifier::BREAK:
+        break;
+      default:
+        break;
+    }    
   }
 
   IModifier* del = NULL;

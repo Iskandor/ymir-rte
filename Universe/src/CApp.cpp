@@ -133,6 +133,7 @@ void CApp::OnLoop() {
   map_controls->OnLoop();
   unit_controls->OnLoop();
   projectile_controls->OnLoop();
+  gui_manager->OnLoop();
 }
 
 void CApp::OnEvent(SDL_Event* event) {
