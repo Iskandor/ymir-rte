@@ -5,6 +5,8 @@
  * Created on September 19, 2014, 3:37 PM
  */
 
+#include <CMathUtils.h>
+
 #include "CProjectileControls.h"
 
 CProjectileControls::CProjectileControls(CMapRender* map_render) {
@@ -42,7 +44,10 @@ void CProjectileControls::Move(CProjectileEntity* projectile_entity) {
 }
 
 void CProjectileControls::TargetReached(CProjectileEntity* projectile_entity) {
-  if (projectile_entity->GetX() == projectile_entity->GetTargetX() && projectile_entity->GetY() == projectile_entity->GetTargetY()) {
+  if (CMathUtils::intersect(projectile_entity->GetX(), projectile_entity->GetY(), 
+                            projectile_entity->GetTargetX(), projectile_entity->GetTargetY(), 
+                            projectile_entity->GetTargetX() + 1, projectile_entity->GetTargetY() + 1))
+  {
     ((CUnitEntity*)projectile_entity->GetRefObject())->AddAction(CAction(CAction::FIGHT, projectile_entity->GetTarget(), 0));
     map->remProj(projectile_entity);
   }

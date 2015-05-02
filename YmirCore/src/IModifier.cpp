@@ -86,6 +86,6 @@ map<string, string> IModifier::exportMap() {
   return result;
 }
 
-void IModifier::Apply() {
+bool IModifier::Apply() {
   
 }

@@ -45,6 +45,7 @@ void CGameControls::NextPlayer() {
     turn++;
   }
   unit_controls->SetCurrentPlayerID(current_player_id);
+  unit_controls->DeselectUnit();
   player_manager->GetPlayer(current_player_id)->RestoreUnitSP();
   unit_controls->ResolveModifiers();
 }

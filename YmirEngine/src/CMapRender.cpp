@@ -5,6 +5,8 @@
  * Created on October 30, 2013, 9:15 PM
  */
 
+#include <CMathUtils.h>
+
 #include "CMapRender.h"
 #include "GlobalDefine.h"
 #include "CUtils.h"
@@ -52,11 +54,6 @@ void CMapRender::OnRender(SDL_Surface* dest) {
   for(int i = 0; i < map_segments.size(); i++) {
     CMapSegment* segment = map_segments[i];
     
-    pair<int, int> upper_left(camera.x, camera.y);
-    pair<int, int> upper_right((camera.x + camera.w), camera.y);
-    pair<int, int> lower_left(camera.x, (camera.y + camera.h));
-    pair<int, int> lower_right((camera.x + camera.w), (camera.y + camera.h));
-    
     SDL_Rect  area;
     
     area.x = segment->GetX() * TILE_PER_SEGMENT * ELEM_PER_TILE;
@@ -64,12 +61,10 @@ void CMapRender::OnRender(SDL_Surface* dest) {
     area.w = TILE_PER_SEGMENT * ELEM_PER_TILE;
     area.h = TILE_PER_SEGMENT * ELEM_PER_TILE;
     
-    if (CUtils::PointIsInArea(upper_left, area) || 
-        CUtils::PointIsInArea(upper_right, area) || 
-        CUtils::PointIsInArea(lower_left, area) || 
-        CUtils::PointIsInArea(lower_right, area)) {
+    if (CMathUtils::intersect(area, camera))
+    {
       segment->OnRender(dest, &camera);
-    }   
+    }
   }
   
   CUnitEntity* selected_unit = map->GetUnitManager()->GetSelectedUnit();

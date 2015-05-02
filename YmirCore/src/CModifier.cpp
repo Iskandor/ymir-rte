@@ -30,9 +30,9 @@ CModifier::CModifier(map<string,string> data) : IModifier(data) {
 CModifier::~CModifier() {
 }
 
-void CModifier::Apply() {
+bool CModifier::Apply() {
   if (duration == 0) {
-    return;
+    return false;
   }
   
   duration--;
@@ -52,7 +52,9 @@ void CModifier::Apply() {
       break;
     default:
       break;
-  }  
+  }
+  
+  return true;
 }
 
 void CModifier::Hurt() {

@@ -28,6 +28,7 @@ public:
   void SetCurrentPlayerID(int value) { current_player_id = value; };
   void SetModifierModule(CModule<CModifier>* value) { modifier_module = value; };
   void ResolveModifiers();
+  void DeselectUnit();
   
 private:
   bool PerformAction(CUnitEntity* unit_entity, CAction* action);
@@ -36,7 +37,7 @@ private:
   void Move(CUnitEntity* unit_entity, CAction* action);
   void Attack(CUnitEntity* unit_entity, CAction* action);
   void FireOrFight(CUnitEntity* unit_entity, CUnitEntity* target);
-  void Fight(CUnitEntity* unit_entity, CUnitEntity* target);
+  void Fight(CUnitEntity* unit_entity, CUnitEntity* target, bool recursive = true);
   void Die(CUnitEntity* unit_entity);
   void ResolveModifier(CUnitEntity* unit_entity);
   

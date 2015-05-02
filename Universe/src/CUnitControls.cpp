@@ -56,11 +56,8 @@ void CUnitControls::OnEvent(SDL_Event* event) {
             click.second = (event->button.y / MAP_ELEM) + camera->y;
 
             if (CUtils::PointIsInArea(click, unit_rect)) {
-              if (selected_unit != NULL) {
-                map->remObject(selected_unit->GetRefObject()->GetID());
-                selected_unit->SetRefObject(NULL);
-                selected_unit->SetSelected(false);
-              }
+              DeselectUnit();
+              
               CObjectEntity* selector = map->addObject(unit_entity->GetX()+(unit_entity->GetRootUnit()->GetXSize()-4), unit_entity->GetY()+(unit_entity->GetRootUnit()->GetYSize()-4), BOTTOM, 0);
               unit_entity->SetRefObject(selector);
               selected_unit = unit_entity;
@@ -75,13 +72,7 @@ void CUnitControls::OnEvent(SDL_Event* event) {
           }
         }
         if (i == map->GetUnitManager()->GetListSize()) {
-          if (selected_unit != NULL) {
-            map->remObject(selected_unit->GetRefObject()->GetID());
-            selected_unit->SetRefObject(NULL);
-            selected_unit->SetSelected(false);            
-            selected_unit = NULL;
-            gui_manager->OnUnitClick(selected_unit);  
-          }          
+          DeselectUnit();
         }
       }
       if (event->button.button == SDL_BUTTON_RIGHT) {
@@ -287,7 +278,7 @@ void CUnitControls::FireOrFight(CUnitEntity* unit_entity, CUnitEntity* target) {
   }  
 }
 
-void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target) {
+void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target, bool recursive) {
   int attack_type = unit_entity->GetRootUnit()->GetAttackType(CUtils::Probability(100));
 
   double attack_str = CUtils::rollDice(unit_entity->GetRootUnit()->getWeapon(), 1) + (unit_entity->GetRootUnit()->getProp()[STR_IND] / 2) - 2;
@@ -309,23 +300,41 @@ void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target) {
   }
 
   double damage = (attack_str - dexterity_def) * ((double)(100-target->GetRootUnit()->getRVP()[attack_type])/100.0);
+  
+  if (unit_entity->GetRootUnit()->getDamageArea() > 0 && recursive)
+  {
+    CUnitEntity* unit_entity_near = NULL;
+    for(int i = 0; i < map->GetUnitManager()->GetListSize(); i++) {
+      unit_entity_near = map->GetUnitManager()->Get(i);
+      
+      if (CMathUtils::euclidian_distance(unit_entity_near->GetX(), unit_entity_near->GetY(), target->GetX(), target->GetY()) <= unit_entity->GetRootUnit()->getDamageArea())
+      {
+        Fight(unit_entity, unit_entity_near, false);
+      }
+    }    
+  }
+
 
   if (damage > 0) {
     CModifier *modifier = (CModifier*)target->AddModifier(new CModifier(IModifier::HURT, 0, target, 1, "hurt", (int)round(damage), -1));
-    modifier->Apply();
-    
-    SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
-    gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, to_string((int)round(damage)), {255, 0, 0});
+    if (modifier->Apply())
+    {
+      SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
+      gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, to_string((int)round(damage)), {255, 0, 0});
+    }
   }
+  
   if (unit_entity->GetRootUnit()->getModifierID() > -1) {
     CModifier *modifier = new CModifier(*modifier_module->GetUnitPtr(unit_entity->GetRootUnit()->getModifierID()));
     
     modifier->SetUnitEntity(target);
     target->AddModifier(modifier);
-    modifier->Apply();
     
-    SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
-    gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, modifier->GetDesc(), {255, 255, 255});
+    if (modifier->Apply())
+    {
+      SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
+      gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, modifier->GetDesc(), {255, 255, 255});
+    }
   }
 }
 
@@ -438,6 +447,10 @@ queue< pair<int, int> > CUnitControls::ReconstructPath(int* came_from, int lengt
 }
 
 void CUnitControls::Die(CUnitEntity* unit_entity) {
+  if (selected_unit == unit_entity)
+  {
+    selected_unit = NULL;
+  }
   map->remUnit(unit_entity);
 }
 
@@ -456,25 +469,26 @@ void CUnitControls::ResolveModifier(CUnitEntity* unit_entity) {
     CModifier* modifier = ((CModifier*)modifier_list->at(j));
     CUnitEntity* target = modifier->GetUnitEntity();
     
-    modifier->Apply();
-    
-    SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
-    
-    switch(modifier->GetClass()) {
-      case CModifier::HURT:
-      case CModifier::BLEED:
-        gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, to_string((int)round(modifier->GetDeltaHP())), {255, 0, 0});
-        break;
-      case CModifier::HEAL:
+    if (modifier->Apply())
+    {    
+      SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
 
-        break;
-      case CModifier::PARALYZE:
-        gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, modifier->GetDesc(), {255, 255, 255});
-        break;
-      case CModifier::BREAK:
-        break;
-      default:
-        break;
+      switch(modifier->GetClass()) {
+        case CModifier::HURT:
+        case CModifier::BLEED:
+          gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, to_string((int)round(modifier->GetDeltaHP())), {255, 0, 0});
+          break;
+        case CModifier::HEAL:
+
+          break;
+        case CModifier::PARALYZE:
+          gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, modifier->GetDesc(), {255, 255, 255});
+          break;
+        case CModifier::BREAK:
+          break;
+        default:
+          break;
+      }
     }    
   }
 
@@ -493,5 +507,16 @@ void CUnitControls::ResolveModifier(CUnitEntity* unit_entity) {
   if(list_changed) {
     modifier_list->clear();
     modifier_list->insert(modifier_list->begin(), modifier_list_new.begin(), modifier_list_new.end());
+  }
+}
+
+void CUnitControls::DeselectUnit()
+{
+  if (selected_unit != NULL) {
+    map->remObject(selected_unit->GetRefObject()->GetID());
+    selected_unit->SetRefObject(NULL);
+    selected_unit->SetSelected(false);            
+    selected_unit = NULL;
+    gui_manager->OnUnitClick(selected_unit);  
   }
 }

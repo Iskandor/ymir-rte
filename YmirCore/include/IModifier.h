@@ -56,7 +56,7 @@ public:
   int GetPerST() { return per_st; };
   void SetPerST(int value) { per_st = value; };  
   
-  virtual void Apply();
+  virtual bool Apply();
   
 protected:
   int           id;

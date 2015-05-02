@@ -61,7 +61,7 @@ void CMapControls::OnLoop() {
       }
     }
     if (scroll_direction.first > 0) {
-      if (map_render->GetCamera()->x + map_render->GetCamera()->w < map_render->GetMap()->getMapSizeX(sizemode_tile) * ELEM_PER_TILE) {
+      if (map_render->GetCamera()->x + map_render->GetCamera()->w < map_render->GetMap()->getMapSizeX(sizemode_elem)) {
         map_render->GetCamera()->x++;
       }
     } 
@@ -71,7 +71,7 @@ void CMapControls::OnLoop() {
       }
     }
     if (scroll_direction.second > 0) {
-      if (map_render->GetCamera()->y + map_render->GetCamera()->h < map_render->GetMap()->getMapSizeY(sizemode_tile) * ELEM_PER_TILE) {
+      if (map_render->GetCamera()->y + map_render->GetCamera()->h < map_render->GetMap()->getMapSizeY(sizemode_elem)) {
         map_render->GetCamera()->y++;
       }
     }    

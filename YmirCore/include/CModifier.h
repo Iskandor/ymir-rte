@@ -23,7 +23,7 @@ public:
   CModifier(const CModifier& orig);
   virtual ~CModifier();
     
-  void Apply();
+  bool Apply();
   void SetUnitEntity(CUnitEntity* value) { unit_entity = value; };
   
   CUnitEntity* GetUnitEntity() { return unit_entity; };
