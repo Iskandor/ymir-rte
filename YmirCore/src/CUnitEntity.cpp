@@ -53,7 +53,10 @@ CUnit* CUnitEntity::GetRootUnit() {
 }
 
 void CUnitEntity::DecreaseSP(double value) {
-  sp -= value;
+  if (value > 0)
+  {
+    sp -= value;
+  }
 }
 
 void CUnitEntity::OnClick(double* block_map, int size_x, int size_y) {

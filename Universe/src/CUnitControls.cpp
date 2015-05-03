@@ -112,7 +112,7 @@ void CUnitControls::OnLoop() {
     unit_entity = map->GetUnitManager()->Get(i);
     action = unit_entity->GetAction(false);
     
-    if (PerformAction(unit_entity, &action))
+    if (CanPerformAction(unit_entity, &action))
     {
       unit_entity->GetAction(true);
       switch(action.GetType())
@@ -161,6 +161,7 @@ bool CUnitControls::PerformAction(CUnitEntity* unit_entity, CAction* action) {
   if (CanPerformAction(unit_entity, action))
   {
     unit_entity->DecreaseSP(action->GetCost());
+    gui_manager->OnUnitClick(selected_unit);
     return true;    
   }
   else
@@ -586,14 +587,14 @@ void CUnitControls::RemoveAttackOnDead(CUnitEntity* dead)
 
 void CUnitControls::Turn(CUnitEntity* unit_entity, int x)
 {
-  if (unit_entity->GetX() > x) {
+  if (unit_entity->GetX() > x&& unit_entity->GetDirection() != CUnitEntity::LEFT) {
     CAction action(CAction::MOVE, 1);
     if (PerformAction(unit_entity, &action))
     {
       unit_entity->SetDirection(CUnitEntity::LEFT);
     }
   }
-  if (unit_entity->GetX() < x) {
+  if (unit_entity->GetX() < x && unit_entity->GetDirection() != CUnitEntity::RIGHT) {
     CAction action(CAction::MOVE, 1);
     if (PerformAction(unit_entity, &action))
     {
