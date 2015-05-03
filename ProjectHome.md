@@ -1,0 +1,2 @@
+Ymir is turn-based tactical engine similar to HoMAM series battle interface. Includes complex system of battle (morale, influence of terrain, different types of attacks and defences). It is settled into fantasy world full of races with different styles of combat. It emphasizes balance and easy to understand rules.
+It is supported by smart AI agents based on neural networks which can still learn from you how to win.
