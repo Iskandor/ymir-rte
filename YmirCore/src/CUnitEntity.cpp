@@ -52,14 +52,8 @@ CUnit* CUnitEntity::GetRootUnit() {
   return root_unit;
 }
 
-bool CUnitEntity::DecreaseSP(double value) {
-  if (sp >= value) {
-    sp -= value;
-    return true;
-  }
-  else {
-    return false;
-  }  
+void CUnitEntity::DecreaseSP(double value) {
+  sp -= value;
 }
 
 void CUnitEntity::OnClick(double* block_map, int size_x, int size_y) {
@@ -131,12 +125,15 @@ void CUnitEntity::AddAction(CAction action) {
   action_queue.push(action);
 }
 
-CAction CUnitEntity::GetAction() {
+CAction CUnitEntity::GetAction(bool pop) {
   CAction result;
 
   if (!action_queue.empty()) {
       result = action_queue.top();
-      action_queue.pop();
+      if (pop)
+      {
+        action_queue.pop();
+      }
   }
 
   return result;

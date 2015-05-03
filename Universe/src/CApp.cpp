@@ -32,7 +32,7 @@ int CApp::OnExecute() {
     return -1;
   }
   
-  const int FPS = 32;
+  FPS = 32;
   
   Uint32  start;
 
@@ -43,9 +43,14 @@ int CApp::OnExecute() {
     }
     OnLoop();
     OnRender();
-    
+
+    if (1000/FPS < (SDL_GetTicks() - start))
+    {
+      FPS--;
+    }
     if (1000/FPS > (SDL_GetTicks() - start)) {
       SDL_Delay(1000/FPS - (SDL_GetTicks() - start));
+      FPS++;
     }
   }
 
@@ -163,6 +168,7 @@ void CApp::OnRender() {
   SDL_Color  player_color = {255, 255, 255}; 
   
   font_render->RenderText(surfDisplay, player_rect, player_manager.GetPlayer(game_controls->GetCurrentPlayerID())->GetName(), player_color);
+  //font_render->RenderText(surfDisplay, {0, 32, 200, 32}, to_string(FPS), player_color);
   
   SDL_Flip(surfDisplay);
 }

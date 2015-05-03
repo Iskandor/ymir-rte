@@ -83,8 +83,12 @@ void CUnitControls::OnEvent(SDL_Event* event) {
           CUnitEntity* other_unit = map->GetUnitManager()->Get(x, y);
           
           if (other_unit != NULL) {
-            if (other_unit->GetPlayerID() != current_player_id) {
-              selected_unit->AddAction(CAction(CAction::ATTACK, other_unit, 1));
+            if (other_unit->GetPlayerID() != current_player_id) {              
+              CAction action(CAction::ATTACK, other_unit, 1);
+              if (CanPerformAction(selected_unit, &action))
+              {
+                selected_unit->AddAction(action);
+              }
             }
           }
           else
@@ -106,51 +110,99 @@ void CUnitControls::OnLoop() {
   
   for(int i = 0; i < map->GetUnitManager()->GetListSize(); i++) {
     unit_entity = map->GetUnitManager()->Get(i);
-    action = unit_entity->GetAction();
+    action = unit_entity->GetAction(false);
     
-    switch(action.GetType())
+    if (PerformAction(unit_entity, &action))
     {
-        case CAction::IDLE:
-            break;
-        case CAction::CREATE_PATH:
-            CreatePath(unit_entity, &action);
-            break;
-        case CAction::MOVE:
-            Move(unit_entity, &action);
-            break;
-        case CAction::ATTACK:
-            Attack(unit_entity, &action);
-            break;
-        case CAction::FIGHT:
-            Fight(unit_entity, action.GetTarget());
-            break;
-        case CAction::DIE:
-            Die(unit_entity);
-            break;
+      unit_entity->GetAction(true);
+      switch(action.GetType())
+      {
+          case CAction::IDLE:
+              break;
+          case CAction::CREATE_PATH:
+              CreatePath(unit_entity, &action);
+              break;
+          case CAction::MOVE:
+              Move(unit_entity, &action);
+              break;
+          case CAction::ATTACK:
+              Attack(unit_entity, &action);
+              break;
+          case CAction::FIGHT:
+              Fight(unit_entity, action.GetTarget());
+              break;
+          case CAction::DIE:
+              Die(unit_entity);
+              break;
+      }
     }
   }
 }
 
+bool CUnitControls::CanPerformAction(CUnitEntity* unit_entity, CAction* action, double tmp_sp)
+{
+  int sp = unit_entity->GetSP();
+  
+  if (tmp_sp != -1)
+  {
+    sp = tmp_sp;
+  }
+  
+  if (sp >= action->GetCost()) {
+    return true;
+  }
+  else {
+    return false;
+  }  
+  
+}
+
 bool CUnitControls::PerformAction(CUnitEntity* unit_entity, CAction* action) {
-  return unit_entity->DecreaseSP(action->GetCost());
+  if (CanPerformAction(unit_entity, action))
+  {
+    unit_entity->DecreaseSP(action->GetCost());
+    return true;    
+  }
+  else
+  {
+    return false;
+  }
 }
 
-void CUnitControls::CreatePath(CUnitEntity* unit_entity, CAction* action) {
-    CreatePath(unit_entity, action->GetX(), action->GetY());
+bool CUnitControls::CreatePath(CUnitEntity* unit_entity, CAction* action) {
+    return CreatePath(unit_entity, action->GetX(), action->GetY());
 }
 
-void CUnitControls::CreatePath(CUnitEntity* unit_entity, int x, int y) {
+bool CUnitControls::CreatePath(CUnitEntity* unit_entity, int x, int y, double* OUT_sp) {
+    double sp = unit_entity->GetSP();
     map->Unblock(unit_entity);
     
     queue< pair<int, int> > path = GeneratePath(unit_entity, x, y);
 
     while(!path.empty()) {
         pair<int, int>  new_pos = path.front();
-        unit_entity->AddAction(CAction(CAction::MOVE, new_pos.first, new_pos.second, 1));
+        
+        CAction action(CAction::MOVE, new_pos.first, new_pos.second, 1);
+        if (CanPerformAction(unit_entity, &action, sp))
+        {
+          unit_entity->AddAction(action);
+          sp -= 1;
+        }
+        else
+        {
+          return false;
+        }
         path.pop();
     }
     
     map->Block(unit_entity);
+    
+    if (OUT_sp != NULL)
+    {
+      *OUT_sp = sp;
+    }    
+    
+    return true;
 }
 
 void CUnitControls::Move(CUnitEntity* unit_entity, CAction* action) {
@@ -159,17 +211,8 @@ void CUnitControls::Move(CUnitEntity* unit_entity, CAction* action) {
   }
 
   map->Unblock(unit_entity);
-
-  if (unit_entity->GetX() > action->GetX()) {
-    if (unit_entity->DecreaseSP(1)) {
-      unit_entity->SetDirection(CUnitEntity::LEFT);
-    }
-  }
-  if (unit_entity->GetX() < action->GetX()) {
-    if (unit_entity->DecreaseSP(1)) {
-      unit_entity->SetDirection(CUnitEntity::RIGHT);
-    }
-  }
+  
+  Turn(unit_entity, action->GetX());
 
   int dx = action->GetX() - unit_entity->GetX();
   int dy = action->GetY() - unit_entity->GetY();
@@ -186,18 +229,18 @@ void CUnitControls::Move(CUnitEntity* unit_entity, CAction* action) {
     map->SortObjects(unit_entity->GetRefObject());
   }    
 }
-void CUnitControls::Attack(CUnitEntity* unit_entity, CAction* action) { 
+void CUnitControls::Attack(CUnitEntity* unit_entity, CAction* action) {
   pair<double, double> attacker_pos = unit_entity->GetNearestBlocked(action->GetTarget());
 
   attacker_pos.first = attacker_pos.first + unit_entity->GetX();
   attacker_pos.second = attacker_pos.second + unit_entity->GetY();  
 
   pair<double, double> target_pos = action->GetTarget()->GetNearestBlocked(unit_entity);  
-  
+
   target_pos.first = target_pos.first + action->GetTarget()->GetX();
   target_pos.second = target_pos.second + action->GetTarget()->GetY();
-  
-  
+
+
   if (unit_entity->GetRootUnit()->getAttackRange() >= round(CMathUtils::euclidian_distance(target_pos.first, target_pos.second, attacker_pos.first, attacker_pos.second))) {
     if (!PerformAction(unit_entity, action)) {
       return;
@@ -209,9 +252,17 @@ void CUnitControls::Attack(CUnitEntity* unit_entity, CAction* action) {
     map->Unblock(unit_entity);
     pair<int, int> pos = GetAttackPosition(unit_entity, action->GetTarget());
     map->Block(unit_entity);
+    
+    double sp = 0;
 
-    CreatePath(unit_entity, pos.first, pos.second);
-    unit_entity->AddAction(CAction(CAction::ATTACK, action->GetTarget(), 1));
+    if (CreatePath(unit_entity, pos.first, pos.second, &sp))
+    {
+      CAction action_attack(CAction::ATTACK, action->GetTarget(), 1);
+      if (CanPerformAction(unit_entity, &action_attack, sp))
+      {
+        unit_entity->AddAction(action_attack);
+      }
+    }    
   }
 }
 
@@ -284,16 +335,7 @@ void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target, bool re
   double attack_str = CUtils::rollDice(unit_entity->GetRootUnit()->getWeapon(), 1) + (unit_entity->GetRootUnit()->getProp()[STR_IND] / 2) - 2;
   double dexterity_def = unit_entity->GetRootUnit()->getArmor();
   
-  if (unit_entity->GetX() < target->GetX()) {
-    if (target->DecreaseSP(1)) {
-      target->SetDirection(CUnitEntity::LEFT);
-    }
-  }
-  if (unit_entity->GetX() > target->GetX()) {
-    if (target->DecreaseSP(1)) {
-      target->SetDirection(CUnitEntity::RIGHT);
-    }
-  }
+  Turn(unit_entity, target->GetX());
   
   if (abs(unit_entity->GetDirection() - target->GetDirection()) > 0) {
     dexterity_def += (unit_entity->GetRootUnit()->getProp()[AGL_IND] / 2) - 2;
@@ -311,9 +353,8 @@ void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target, bool re
       {
         Fight(unit_entity, unit_entity_near, false);
       }
-    }    
+    }
   }
-
 
   if (damage > 0) {
     CModifier *modifier = (CModifier*)target->AddModifier(new CModifier(IModifier::HURT, 0, target, 1, "hurt", (int)round(damage), -1));
@@ -322,6 +363,11 @@ void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target, bool re
       SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
       gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, to_string((int)round(damage)), {255, 0, 0});
     }
+  }
+  else
+  {
+    SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
+    gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, string("Blocked"), {255, 255, 255});    
   }
   
   if (unit_entity->GetRootUnit()->getModifierID() > -1) {
@@ -449,8 +495,9 @@ queue< pair<int, int> > CUnitControls::ReconstructPath(int* came_from, int lengt
 void CUnitControls::Die(CUnitEntity* unit_entity) {
   if (selected_unit == unit_entity)
   {
-    selected_unit = NULL;
+    DeselectUnit();
   }
+  RemoveAttackOnDead(unit_entity);  
   map->remUnit(unit_entity);
 }
 
@@ -470,8 +517,8 @@ void CUnitControls::ResolveModifier(CUnitEntity* unit_entity) {
     CUnitEntity* target = modifier->GetUnitEntity();
     
     if (modifier->Apply())
-    {    
-      SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
+    {
+      SDL_Rect position = {(Sint16)(target->GetRenderX()), (Sint16)(target->GetRenderY()), (Sint16)(target->GetRootUnit()->GetXSize() * MAP_ELEM), (Sint16)(target->GetRootUnit()->GetYSize() * MAP_ELEM)};
 
       switch(modifier->GetClass()) {
         case CModifier::HURT:
@@ -519,4 +566,38 @@ void CUnitControls::DeselectUnit()
     selected_unit = NULL;
     gui_manager->OnUnitClick(selected_unit);  
   }
+}
+
+void CUnitControls::RemoveAttackOnDead(CUnitEntity* dead)
+{
+  CUnitEntity*  unit_entity = NULL;
+  CAction       action;
+  
+  for(int i = 0; i < map->GetUnitManager()->GetListSize(); i++) {
+    unit_entity = map->GetUnitManager()->Get(i);
+    action = unit_entity->GetAction(false);
+    
+    if (action.GetType() == CAction::ATTACK && action.GetTarget() == dead)
+    {
+      unit_entity->ClearActionQueue();
+    }
+  }
+}
+
+void CUnitControls::Turn(CUnitEntity* unit_entity, int x)
+{
+  if (unit_entity->GetX() > x) {
+    CAction action(CAction::MOVE, 1);
+    if (PerformAction(unit_entity, &action))
+    {
+      unit_entity->SetDirection(CUnitEntity::LEFT);
+    }
+  }
+  if (unit_entity->GetX() < x) {
+    CAction action(CAction::MOVE, 1);
+    if (PerformAction(unit_entity, &action))
+    {
+      unit_entity->SetDirection(CUnitEntity::RIGHT);
+    }
+  }  
 }

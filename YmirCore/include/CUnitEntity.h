@@ -35,17 +35,17 @@ public:
   int     GetHP() { return hp; };
   int     GetMaxHP() { return max_hp; };
   void    AddAction(CAction action);
-  CAction GetAction();
+  CAction GetAction(bool pop = true);
   void    ClearActionQueue();
   
-  bool    DecreaseSP(double value);
+  void    DecreaseSP(double value);
   void    SetSP(double value) { sp = value; };
   double  GetSP() { return sp; };
   double  GetMaxSP() { return max_sp; };
     
   void  OnClick(double* block_map, int size_x, int size_y);
   IModifier* AddModifier(IModifier* modifier);
-  vector<IModifier*>* GetModifierList() { return &modifier_list; };
+  vector<IModifier*>* GetModifierList() { return &modifier_list; };  
   
 private:
   void generate_props();

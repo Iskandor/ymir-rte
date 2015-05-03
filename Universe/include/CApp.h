@@ -59,7 +59,8 @@ private:
   CPlayerManager  player_manager;
   CGuiManager     *gui_manager;
   
-  bool running;
+  bool  running;
+  int   FPS;
 
   SDL_Surface*    surfDisplay;
   SDL_Rect        rectDisplay;

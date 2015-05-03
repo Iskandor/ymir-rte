@@ -32,14 +32,18 @@ public:
   
 private:
   bool PerformAction(CUnitEntity* unit_entity, CAction* action);
-  void CreatePath(CUnitEntity* unit_entity, CAction* action);
-  void CreatePath(CUnitEntity* unit_entity, int x, int y);
+  bool CanPerformAction(CUnitEntity* unit_entity, CAction* action, double tmp_sp = -1);
+  bool CreatePath(CUnitEntity* unit_entity, CAction* action);
+  bool CreatePath(CUnitEntity* unit_entity, int x, int y, double* sp = NULL);
   void Move(CUnitEntity* unit_entity, CAction* action);
   void Attack(CUnitEntity* unit_entity, CAction* action);
   void FireOrFight(CUnitEntity* unit_entity, CUnitEntity* target);
   void Fight(CUnitEntity* unit_entity, CUnitEntity* target, bool recursive = true);
   void Die(CUnitEntity* unit_entity);
+  void Turn(CUnitEntity* unit_entity, int x);
+  
   void ResolveModifier(CUnitEntity* unit_entity);
+  void RemoveAttackOnDead(CUnitEntity* dead);
   
   pair<int, int>          GetAttackPosition(CUnitEntity* attacker, CUnitEntity* target);
   queue< pair<int, int> > GeneratePath(CUnitEntity* unit_entity, int x, int y);
