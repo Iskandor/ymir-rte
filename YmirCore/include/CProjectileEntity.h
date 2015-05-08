@@ -23,6 +23,11 @@ public:
   int GetTargetY() { return target->GetY() + target->GetRootObject()->GetYSize() / 2; };
   int GetDeltaX() { return delta_x; };
   int GetDeltaY() { return delta_y; };
+  int GetX() { return map_x; };
+  int GetY() { return map_y; };
+  
+  void setPosition(int x, int y);
+  
   
   CUnitEntity* GetTarget() { return target; };
   
@@ -31,6 +36,9 @@ private:
   CUnitEntity* target;
   int delta_x;
   int delta_y;
+  
+  int map_x;
+  int map_y;
 };
 
 #endif	/* CPROJECTILEENTITY_H */

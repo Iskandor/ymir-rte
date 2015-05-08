@@ -225,9 +225,9 @@ void CUnitControls::Move(CUnitEntity* unit_entity, CAction* action) {
 
 
   map->Block(unit_entity);
-  map->SortObjects(unit_entity);
+  map_render->SortObjects(unit_entity);
   if (unit_entity->GetRefObject() != NULL) {
-    map->SortObjects(unit_entity->GetRefObject());
+    map_render->SortObjects(unit_entity->GetRefObject());
   }    
 }
 void CUnitControls::Attack(CUnitEntity* unit_entity, CAction* action) {
@@ -361,13 +361,15 @@ void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target, bool re
     CModifier *modifier = (CModifier*)target->AddModifier(new CModifier(IModifier::HURT, 0, target, 1, "hurt", (int)round(damage), -1));
     if (modifier->Apply())
     {
-      SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
+      SDL_Rect position = {(Sint16)(target->GetX() * MAP_ELEM), (Sint16)(target->GetY() * MAP_ELEM), 
+                           (Uint16)(target->GetRootUnit()->GetXSize() * MAP_ELEM), (Uint16)(target->GetRootUnit()->GetYSize() * MAP_ELEM)};
       gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, to_string((int)round(damage)), {255, 0, 0});
     }
   }
   else
   {
-    SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
+    SDL_Rect position = {(Sint16)(target->GetX() * MAP_ELEM), (Sint16)(target->GetY() * MAP_ELEM), 
+                         (Uint16)(target->GetRootUnit()->GetXSize() * MAP_ELEM), (Uint16)(target->GetRootUnit()->GetYSize() * MAP_ELEM)};
     gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, string("Blocked"), {255, 255, 255});    
   }
   
@@ -379,7 +381,8 @@ void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target, bool re
     
     if (modifier->Apply())
     {
-      SDL_Rect position = {target->GetRenderX(), target->GetRenderY(), target->GetRootUnit()->GetXSize() * MAP_ELEM, target->GetRootUnit()->GetYSize() * MAP_ELEM};
+      SDL_Rect position = {(Sint16)(target->GetX() * MAP_ELEM), (Sint16)(target->GetY() * MAP_ELEM), 
+                           (Uint16)(target->GetRootUnit()->GetXSize() * MAP_ELEM), (Uint16)(target->GetRootUnit()->GetYSize() * MAP_ELEM)};
       gui_manager->GuiElementManager()->AddOverText(gui_manager->Screen(), position, modifier->GetDesc(), {255, 255, 255});
     }
   }
@@ -519,7 +522,8 @@ void CUnitControls::ResolveModifier(CUnitEntity* unit_entity) {
     
     if (modifier->Apply())
     {
-      SDL_Rect position = {(Sint16)(target->GetRenderX()), (Sint16)(target->GetRenderY()), (Sint16)(target->GetRootUnit()->GetXSize() * MAP_ELEM), (Sint16)(target->GetRootUnit()->GetYSize() * MAP_ELEM)};
+      SDL_Rect position = { (Sint16)(target->GetX() * MAP_ELEM), (Sint16)(target->GetY() * MAP_ELEM), 
+                            (Uint16)(target->GetRootUnit()->GetXSize() * MAP_ELEM), (Uint16)(target->GetRootUnit()->GetYSize() * MAP_ELEM)};
 
       switch(modifier->GetClass()) {
         case CModifier::HURT:

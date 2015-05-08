@@ -14,7 +14,7 @@ class CObjectEntity {
   
 public:
   CObjectEntity(int inner_id);
-  CObjectEntity(CObject* object, int inner_id, int x, int y, double z_index);
+  CObjectEntity(CObject* object, int inner_id, int x, int y);
   CObjectEntity(const CObjectEntity& orig);
   virtual ~CObjectEntity();
   
@@ -32,9 +32,6 @@ protected:
   unsigned int id;
   int x;
   int y;
-  int render_x;
-  int render_y;
-  double z_index;
   
   E_STATE     state;
   E_DIRECTION direction;  
@@ -50,27 +47,22 @@ protected:
 public:  
   void SetID(unsigned int id) { this->id = id; };
   unsigned int GetID();
-  int GetX();
-  int GetY();
-  int GetRenderX() { return render_x; };
-  int GetRenderY() { return render_y; };
+  virtual int GetX();
+  virtual int GetY();
   
   string GetClassName() { return class_name; };
   
-  void setPosition(int x, int y);
-  void SetRenderPosition(int x, int y);
+  virtual void setPosition(int x, int y);
   pair<double, double> GetBlockCenter();
   pair<double, double> GetNearestBlocked(CObjectEntity* object_entity);
 
-  bool operator< (CObjectEntity& ent);  
+    
   
   CObject*  GetRootObject() { return root_object; };
   
   void SetRefObject(CObjectEntity* ref_object_entity) { this->ref_object_entity = ref_object_entity; };
   CObjectEntity* GetRefObject() {return ref_object_entity; };
   
-  void SetZIndex(int z_index) { this->z_index = z_index; };
-  double GetZIndex() { return z_index; };
   
   E_DIRECTION GetDirection()  {return direction; };
   void SetDirection(E_DIRECTION value) { direction = value; };

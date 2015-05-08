@@ -14,7 +14,6 @@ CObjectManager::CObjectManager(CModule<CObject> *object_module) {
   new_ent_id = 0;
   set_ent_id.clear();
   this->object_module = object_module;
-  ysorted_tree.clear();
 }
 
 CObjectManager::CObjectManager(const CObjectManager& orig) {
@@ -22,7 +21,6 @@ CObjectManager::CObjectManager(const CObjectManager& orig) {
   set_ent_id = orig.set_ent_id;
   object_module = orig.object_module;
   object_tree = orig.object_tree;
-  ysorted_tree = orig.ysorted_tree;
 }
 
 CObjectManager::~CObjectManager() {
@@ -36,22 +34,20 @@ unsigned int CObjectManager::genNewEntId() {
   return new_ent_id;
 }
 
-CObjectEntity* CObjectManager::addObject(int x, int y, double z_index, int class_id, CObject* object) {
+CObjectEntity* CObjectManager::addObject(int x, int y, int class_id, CObject* object) {
   CObjectEntity* object_entity = NULL;
   
   if (class_id == -1 && object != NULL) {
-    object_entity = new CObjectEntity(object, new_ent_id, x, y, z_index);
+    object_entity = new CObjectEntity(object, new_ent_id, x, y);
   }
   else if (class_id > -1) {
-    object_entity = new CObjectEntity(object_module->GetUnitPtr(class_id), new_ent_id, x, y, z_index);
+    object_entity = new CObjectEntity(object_module->GetUnitPtr(class_id), new_ent_id, x, y);
   }
   
   if (object_entity != NULL) {
     set_ent_id.insert(new_ent_id);
     object_list.emplace_back(object_entity);
     object_tree[new_ent_id] = object_entity;
-    ysorted_tree.insert(pair<double, CObjectEntity*>(y + z_index - object_entity->GetRootObject()->GetYSize(), 
-                                                    object_entity));
     genNewEntId();
   }
   
@@ -64,25 +60,13 @@ CObjectEntity* CObjectManager::addObject(CObjectEntity* object_entity) {
   
   object_list.emplace_back(object_entity);
   object_tree[new_ent_id] = (object_entity);
-  ysorted_tree.insert(pair<double, CObjectEntity*>(object_entity->GetY() + object_entity->GetZIndex() - object_entity->GetRootObject()->GetYSize(),
-                                                  object_entity));
+
   genNewEntId();
   
   return object_entity;
 }
 
 void CObjectManager::remObject(int id) {
-  multimap<double, CObjectEntity*, less< double > >::iterator it; 
-  
-  for(it = ysorted_tree.begin(); it != ysorted_tree.end(); it++) {
-    if (it->second->GetID() == id) {
-      break;
-    }
-  }
-  
-  if (it != ysorted_tree.end()) {
-    ysorted_tree.erase(it);
-  }
   object_tree.erase(id);
   
   for(vector< unique_ptr<CObjectEntity> >::iterator i = object_list.begin(); i != object_list.end(); i++) {
@@ -108,21 +92,4 @@ CObjectEntity* CObjectManager::getObjectByIndex(int index) {
 
 int CObjectManager::GetObjectListSize() {
   return object_list.size();
-}
-
-void CObjectManager::SortObjects(CObjectEntity* object_entity) {
-  multimap<double, CObjectEntity*, less< double > >::iterator it;
-  
-  for(it = ysorted_tree.begin(); it != ysorted_tree.end(); it++) {
-    if (it->second->GetID() == object_entity->GetID()) {
-      break;
-    }
-  }
-  
-  if (it != ysorted_tree.end()) {
-    ysorted_tree.erase(it);
-    ysorted_tree.insert(pair<double, CObjectEntity*>(object_entity->GetY() + object_entity->GetZIndex(), object_entity));
-  }
-  
-  
 }

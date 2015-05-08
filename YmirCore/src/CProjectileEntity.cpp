@@ -5,11 +5,12 @@
  * Created on September 17, 2014, 10:42 PM
  */
 
+#include "GlobalDefine.h"
 #include "CProjectileEntity.h"
 #include "CMathUtils.h"
 #include <cmath>
 
-CProjectileEntity::CProjectileEntity(CProjectile* projectile, int inner_id, int x, int y, CUnitEntity* target) : CObjectEntity(projectile, inner_id, x, y, 0) {
+CProjectileEntity::CProjectileEntity(CProjectile* projectile, int inner_id, int x, int y, CUnitEntity* target) : CObjectEntity(projectile, inner_id, x, y) {
   this->root_projectile = projectile;
   this->target = target;
   
@@ -37,3 +38,7 @@ CProjectileEntity::CProjectileEntity(const CProjectileEntity& orig) : CObjectEnt
 CProjectileEntity::~CProjectileEntity() {
 }
 
+void CProjectileEntity::setPosition(int x, int y) {
+  this->map_x = x * MAP_ELEM;
+  this->map_y = y * MAP_ELEM;
+}

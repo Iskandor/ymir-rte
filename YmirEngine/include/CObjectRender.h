@@ -12,7 +12,7 @@
 #include <SDL/SDL_image.h>
 #include <map>
 
-#include "CObjectEntity.h"
+#include "CObjectPicture.h"
 #include "CModule.h"
 #include "CSprite.h"
 #include "CUnit.h"
@@ -26,15 +26,24 @@ public:
 
   bool LoadSurfaces();
   void OnRender(SDL_Surface* dest, CObjectEntity* object_entity, int x, int y);
+  void SortObjects(CObjectPicture*);
+
+  virtual CObjectPicture* addPicture(CObjectEntity* object_entity, double z_index);
+  void              remPicture(int id);
   
-private:
+  multimap<double, CObjectPicture*, less< double > >* GetYSortedTree() { return &ysorted_tree; };
+  CObjectPicture* GetObjectPicture(int object_id);
+  
+protected:
   CModule<CObject>                  *object_module;
   CModule<CUnit>                    *unit_module;
   CModule<CProjectile>              *projectile_module;
   
   map<int, SDL_Surface*>            insignia_bckg;
   map<int, SDL_Surface*>            insignia;
-  map<int, CSprite*>  object_sprite;
+  map<int, CSprite*>                object_sprite;
+  
+  multimap<double, CObjectPicture*, less< double > > ysorted_tree;
 };
 
 #endif	/* COBJECTRENDER_H */

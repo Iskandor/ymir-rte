@@ -72,29 +72,14 @@ void CMapRender::OnRender(SDL_Surface* dest) {
   if (selected_unit != NULL) {
     render_possible_loc(dest, selected_unit);
   }
-  
-  CObjectManager *object_manager = (CObjectManager*)map;
-  multimap<double, CObjectEntity*, less<double> >* ytree = object_manager->GetYSortedTree();
-  multimap<double, CObjectEntity*, less<double> >::iterator it;
+
+  multimap<double, CObjectPicture*, less<double> >* ytree = object_render->GetYSortedTree();
+  multimap<double, CObjectPicture*, less<double> >::iterator it;
 
   for(it = ytree->begin(); it != ytree->end(); it++) {
-    CObjectEntity* object_entity = it->second;
-
-    pair<int, int> point(object_entity->GetX(), object_entity->GetY());
-
-    int x = object_entity->GetRenderX() - (camera.x * MAP_ELEM);
-    int y = object_entity->GetRenderY() - (camera.y * MAP_ELEM);
-
-    SDL_Rect camera_border;
-    
-    camera_border.x = camera.x - 4;
-    camera_border.y = camera.y - 4;
-    camera_border.w = camera.w + 8;
-    camera_border.h = camera.h + 8;
-    
-    if (CUtils::PointIsInArea(point, camera_border)) {
-      object_render->OnRender(dest, object_entity, x, y);
-    }    
+    CObjectPicture* object_picture = it->second;
+   
+    object_picture->OnRender(dest, camera);
   }
 }
 
@@ -122,4 +107,10 @@ SDL_Rect* CMapRender::GetMainRect() {
 
 CMap* CMapRender::GetMap() {
   return map;
+}
+
+void CMapRender::SortObjects(CObjectEntity* object_entity)
+{
+  CObjectPicture* object_picture = object_render->GetObjectPicture(object_entity->GetID());
+  object_render->SortObjects(object_picture);
 }

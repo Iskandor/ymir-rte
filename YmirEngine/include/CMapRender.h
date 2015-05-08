@@ -31,6 +31,8 @@ public:
   SDL_Rect*  GetMainRect();
   CMap*      GetMap();
   
+  void SortObjects(CObjectEntity* object_entity);
+  
 private:
   void render_possible_loc(SDL_Surface* dest, CUnitEntity* unit_entity);
   

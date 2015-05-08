@@ -41,10 +41,13 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CGuiElementRender.o \
 	${OBJECTDIR}/src/CMapRender.o \
 	${OBJECTDIR}/src/CMapSegment.o \
+	${OBJECTDIR}/src/CObjectPicture.o \
 	${OBJECTDIR}/src/CObjectRender.o \
 	${OBJECTDIR}/src/COverText.o \
+	${OBJECTDIR}/src/CProjectilePicture.o \
 	${OBJECTDIR}/src/CSprite.o \
 	${OBJECTDIR}/src/CTileRender.o \
+	${OBJECTDIR}/src/CUnitPicture.o \
 	${OBJECTDIR}/src/CUnitRender.o
 
 
@@ -104,6 +107,11 @@ ${OBJECTDIR}/src/CMapSegment.o: src/CMapSegment.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Iinclude -I../YmirCore/include -I/usr/include/qt4 -I/usr/include/SDL `pkg-config --cflags SDL_gfx` `pkg-config --cflags SDL_image` `pkg-config --cflags SDL_mixer` `pkg-config --cflags SDL_net` `pkg-config --cflags SDL_ttf` -std=c++11  -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CMapSegment.o src/CMapSegment.cpp
 
+${OBJECTDIR}/src/CObjectPicture.o: src/CObjectPicture.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I../YmirCore/include -I/usr/include/qt4 -I/usr/include/SDL `pkg-config --cflags SDL_gfx` `pkg-config --cflags SDL_image` `pkg-config --cflags SDL_mixer` `pkg-config --cflags SDL_net` `pkg-config --cflags SDL_ttf` -std=c++11  -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CObjectPicture.o src/CObjectPicture.cpp
+
 ${OBJECTDIR}/src/CObjectRender.o: src/CObjectRender.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
@@ -114,6 +122,11 @@ ${OBJECTDIR}/src/COverText.o: src/COverText.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Iinclude -I../YmirCore/include -I/usr/include/qt4 -I/usr/include/SDL `pkg-config --cflags SDL_gfx` `pkg-config --cflags SDL_image` `pkg-config --cflags SDL_mixer` `pkg-config --cflags SDL_net` `pkg-config --cflags SDL_ttf` -std=c++11  -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/COverText.o src/COverText.cpp
 
+${OBJECTDIR}/src/CProjectilePicture.o: src/CProjectilePicture.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I../YmirCore/include -I/usr/include/qt4 -I/usr/include/SDL `pkg-config --cflags SDL_gfx` `pkg-config --cflags SDL_image` `pkg-config --cflags SDL_mixer` `pkg-config --cflags SDL_net` `pkg-config --cflags SDL_ttf` -std=c++11  -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CProjectilePicture.o src/CProjectilePicture.cpp
+
 ${OBJECTDIR}/src/CSprite.o: src/CSprite.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
@@ -123,6 +136,11 @@ ${OBJECTDIR}/src/CTileRender.o: src/CTileRender.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Iinclude -I../YmirCore/include -I/usr/include/qt4 -I/usr/include/SDL `pkg-config --cflags SDL_gfx` `pkg-config --cflags SDL_image` `pkg-config --cflags SDL_mixer` `pkg-config --cflags SDL_net` `pkg-config --cflags SDL_ttf` -std=c++11  -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CTileRender.o src/CTileRender.cpp
+
+${OBJECTDIR}/src/CUnitPicture.o: src/CUnitPicture.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I../YmirCore/include -I/usr/include/qt4 -I/usr/include/SDL `pkg-config --cflags SDL_gfx` `pkg-config --cflags SDL_image` `pkg-config --cflags SDL_mixer` `pkg-config --cflags SDL_net` `pkg-config --cflags SDL_ttf` -std=c++11  -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUnitPicture.o src/CUnitPicture.cpp
 
 ${OBJECTDIR}/src/CUnitRender.o: src/CUnitRender.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

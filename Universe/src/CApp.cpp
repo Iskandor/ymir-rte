@@ -121,6 +121,7 @@ int CApp::OnInit() {
 
   map->addUnit(15, 8, 5, 1);
   map->addUnit(17, 4, 5, 1);
+  map->addUnit(17, 10, 7, 1);
   
   map_render = new CMapRender(&rectDisplay, map, tile_render, unit_render, object_render);
   map_controls = new CMapControls(map_render);

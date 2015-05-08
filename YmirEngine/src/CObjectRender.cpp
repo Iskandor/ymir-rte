@@ -10,7 +10,7 @@
 #include "GlobalDefine.h"
 #include "CUnitEntity.h"
 #include <iostream>
-#include <SDL_gfxPrimitives.h>
+
 
 CObjectRender::CObjectRender(CModule<CObject> *object_module, CModule<CUnit> *unit_module, CModule<CProjectile> *projectile_module) {
   this->object_module = object_module;
@@ -29,6 +29,7 @@ CObjectRender::CObjectRender(const CObjectRender& orig) {
   object_sprite = orig.object_sprite;
   insignia_bckg = orig.insignia_bckg;
   insignia = orig.insignia;
+  ysorted_tree = orig.ysorted_tree;
 }
 
 CObjectRender::~CObjectRender() {
@@ -107,40 +108,54 @@ bool CObjectRender::LoadSurfaces() {
   return true;
 }
 
-void CObjectRender::OnRender(SDL_Surface* dest, CObjectEntity* object_entity, int x, int y) {
-  CObject* object = object_entity->GetRootObject();
-  SDL_Surface* surf = object_sprite[object->GetID()]->GetSurface(object_entity->GetDirection(),0,0);
-   
-  if (object->GetClass() == CObject::UNIT) {
-    double  hp_bar = (double)((CUnitEntity*)object_entity)->GetHP() / (double)((CUnitEntity*)object_entity)->GetMaxHP();
-    Sint16  x1 = x + 1;
-    Sint16  y1 = y + 1;
-    Sint16  x2 = x + (Sint16)(hp_bar * MAP_ELEM-1);
-    Sint16  y2 = y + 5;    
-    
-    
-    SDL_Rect insignia_rect = {(Sint16)x, (Sint16)y + 8, MAP_ELEM, MAP_ELEM};
-    SDL_BlitSurface(insignia_bckg[((CUnitEntity*)object_entity)->GetPlayerID()], NULL, dest, &insignia_rect);
-
-    SDL_BlitSurface(insignia[object_entity->GetRootObject()->GetID()], NULL, dest, &insignia_rect);
-    
-    rectangleRGBA(dest, x, y, x+MAP_ELEM, y+6, 64, 64, 64, 255);
-    switch(((CUnitEntity*)object_entity)->GetPlayerID()) {
-      case 0:
-        boxRGBA(dest, x1, y1, x2, y2, 0, 0, 128, 224);
-        break;
-      case 1:
-        boxRGBA(dest, x1, y1, x2, y2, 128, 0, 0, 224 );
-        break;
-      case 2:
-        boxRGBA(dest, x1, y1, x2, y2, 128, 128, 0, 224 );
-        break;
-      
+void CObjectRender::SortObjects(CObjectPicture* object_picture) {
+  multimap<double, CObjectPicture*, less< double > >::iterator it;
+  
+  for(it = ysorted_tree.begin(); it != ysorted_tree.end(); it++) {
+    if (it->second->GetObjectEntity()->GetID() == object_picture->GetObjectEntity()->GetID()) {
+      break;
     }
   }
   
-  SDL_Rect rect = {(Sint16)x, (Sint16)y, (Uint16)surf->w, (Uint16)surf->h};
-  SDL_BlitSurface(surf, NULL, dest, &rect);  
+  if (it != ysorted_tree.end()) {
+    ysorted_tree.erase(it);
+    ysorted_tree.insert(pair<double, CObjectPicture*>(object_picture->GetRenderY() + object_picture->GetZIndex(), object_picture));
+  }
+}
+
+CObjectPicture* CObjectRender::addPicture(CObjectEntity* object_entity, double z_index)
+{
+  CObjectPicture* object_picture = new CObjectPicture(object_sprite[object_entity->GetRootObject()->GetID()], object_entity, z_index);
+  
+  ysorted_tree.insert(pair<double, CObjectPicture*>(object_entity->GetY() + z_index - object_entity->GetRootObject()->GetYSize(), object_picture));
+}
+
+void CObjectRender::remPicture(int id)
+{
+  multimap<double, CObjectPicture*, less< double > >::iterator it; 
+  
+  for(it = ysorted_tree.begin(); it != ysorted_tree.end(); it++) {
+    if (it->second->GetObjectEntity()->GetID() == id) {
+      break;
+    }
+  }
+  
+  if (it != ysorted_tree.end()) {
+    ysorted_tree.erase(it);
+  }  
+}
+
+CObjectPicture* CObjectRender::GetObjectPicture(int object_id)
+{
+  multimap<double, CObjectPicture*, less< double > >::iterator it;
+  
+  for(it = ysorted_tree.begin(); it != ysorted_tree.end(); it++) {
+    if (it->second->GetObjectEntity()->GetID() == object_id) {
+      return it->second;
+    }
+  }
+  
+  return NULL;
 }
 
 

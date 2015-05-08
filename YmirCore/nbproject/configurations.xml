@@ -16,6 +16,7 @@
       <itemPath>include/CPlayer.h</itemPath>
       <itemPath>include/CPlayerManager.h</itemPath>
       <itemPath>include/CProjectile.h</itemPath>
+      <itemPath>include/CProjectileEntity.h</itemPath>
       <itemPath>include/CProjectileManager.h</itemPath>
       <itemPath>include/CRace.h</itemPath>
       <itemPath>include/CStrUtils.h</itemPath>
@@ -127,6 +128,8 @@
       </item>
       <item path="include/CProjectile.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CProjectileEntity.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CProjectileManager.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CRace.h" ex="false" tool="3" flavor2="0">
@@ -233,6 +236,8 @@
       <item path="include/CPlayerManager.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CProjectile.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CProjectileEntity.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CProjectileManager.h" ex="false" tool="3" flavor2="0">
       </item>

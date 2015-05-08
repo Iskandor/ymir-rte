@@ -13,9 +13,12 @@
       <itemPath>include/CFontRender.h</itemPath>
       <itemPath>include/CMapRender.h</itemPath>
       <itemPath>include/CMapSegment.h</itemPath>
+      <itemPath>include/CObjectPicture.h</itemPath>
       <itemPath>include/CObjectRender.h</itemPath>
+      <itemPath>include/CProjectilePicture.h</itemPath>
       <itemPath>include/CSprite.h</itemPath>
       <itemPath>include/CTileRender.h</itemPath>
+      <itemPath>include/CUnitPicture.h</itemPath>
       <itemPath>include/CUnitRender.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -34,9 +37,12 @@
       <itemPath>src/CFontRender.cpp</itemPath>
       <itemPath>src/CMapRender.cpp</itemPath>
       <itemPath>src/CMapSegment.cpp</itemPath>
+      <itemPath>src/CObjectPicture.cpp</itemPath>
       <itemPath>src/CObjectRender.cpp</itemPath>
+      <itemPath>src/CProjectilePicture.cpp</itemPath>
       <itemPath>src/CSprite.cpp</itemPath>
       <itemPath>src/CTileRender.cpp</itemPath>
+      <itemPath>src/CUnitPicture.cpp</itemPath>
       <itemPath>src/CUnitRender.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -129,13 +135,19 @@
       </item>
       <item path="include/CMapSegment.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CObjectPicture.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CObjectRender.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/COverText.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CProjectilePicture.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CSprite.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CTileRender.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CUnitPicture.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CUnitRender.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -151,13 +163,19 @@
       </item>
       <item path="src/CMapSegment.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/CObjectPicture.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/CObjectRender.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/COverText.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/CProjectilePicture.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/CSprite.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CTileRender.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CUnitPicture.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CUnitRender.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -194,13 +212,19 @@
       </item>
       <item path="include/CMapSegment.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CObjectPicture.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CObjectRender.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/COverText.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CProjectilePicture.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CSprite.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CTileRender.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/CUnitPicture.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CUnitRender.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -216,13 +240,19 @@
       </item>
       <item path="src/CMapSegment.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/CObjectPicture.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/CObjectRender.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/COverText.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/CProjectilePicture.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/CSprite.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CTileRender.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CUnitPicture.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CUnitRender.cpp" ex="false" tool="1" flavor2="0">
       </item>

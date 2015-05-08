@@ -12,7 +12,7 @@
 #include "CMathUtils.h"
 #include "CMap.h"
 
-CUnitEntity::CUnitEntity(CUnit* unit, int inner_id, int player_id, int x, int y) : CObjectEntity(unit, inner_id, x, y, 0) {
+CUnitEntity::CUnitEntity(CUnit* unit, int inner_id, int player_id, int x, int y) : CObjectEntity(unit, inner_id, x, y) {
   root_unit = unit;
   this->player_id = player_id;
   generate_props();
