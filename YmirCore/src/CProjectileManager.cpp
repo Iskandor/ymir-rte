@@ -7,10 +7,10 @@
 
 #include "CProjectileManager.h"
 
-CProjectileManager::CProjectileManager(CModule<CProjectile> *module, CObjectManager* object_manager) : CManager<CProjectile, CProjectileEntity>(module, object_manager) {
+CProjectileManager::CProjectileManager(CModule<CProjectile> *module) : CManager<CProjectile, CProjectileEntity>(module) {
 }
 
-CProjectileManager::CProjectileManager(const CProjectileManager& orig) : CManager(orig) {
+CProjectileManager::CProjectileManager(const CProjectileManager& orig) : CManager<CProjectile, CProjectileEntity>(orig) {
 }
 
 CProjectileManager::~CProjectileManager() {
@@ -20,8 +20,6 @@ CProjectileEntity* CProjectileManager::Add(int x, int y, int id, CUnitEntity* ta
   CObjectEntity* projectile = NULL;
   
   projectile = new CProjectileEntity(type_module->GetUnitPtr(id), 0, x, y, target);
-  
-  object_manager->addObject(projectile);
   entity_list.push_back(reinterpret_cast<CProjectileEntity*>(projectile));
   
   return reinterpret_cast<CProjectileEntity*>(projectile);  

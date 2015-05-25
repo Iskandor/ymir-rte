@@ -8,10 +8,11 @@
         <itemPath>include/CGuiManager.h</itemPath>
       </logicalFolder>
       <itemPath>include/CApp.h</itemPath>
-      <itemPath>include/CDataManager.h</itemPath>
+      <itemPath>include/CControls.h</itemPath>
       <itemPath>include/CGame.h</itemPath>
       <itemPath>include/CGameControls.h</itemPath>
       <itemPath>include/CMapControls.h</itemPath>
+      <itemPath>include/CObjectBuilder.h</itemPath>
       <itemPath>include/CProjectileControls.h</itemPath>
       <itemPath>include/CUnitControls.h</itemPath>
     </logicalFolder>
@@ -26,10 +27,11 @@
         <itemPath>src/CGuiManager.cpp</itemPath>
       </logicalFolder>
       <itemPath>src/CApp.cpp</itemPath>
-      <itemPath>src/CDataManager.cpp</itemPath>
+      <itemPath>src/CControls.cpp</itemPath>
       <itemPath>src/CGame.cpp</itemPath>
       <itemPath>src/CGameControls.cpp</itemPath>
       <itemPath>src/CMapControls.cpp</itemPath>
+      <itemPath>src/CObjectBuilder.cpp</itemPath>
       <itemPath>src/CProjectileControls.cpp</itemPath>
       <itemPath>src/CUnitControls.cpp</itemPath>
       <itemPath>src/main.cpp</itemPath>
@@ -131,7 +133,7 @@
       </compileType>
       <item path="include/CApp.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="include/CDataManager.h" ex="false" tool="3" flavor2="0">
+      <item path="include/CControls.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CGame.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -141,13 +143,15 @@
       </item>
       <item path="include/CMapControls.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CObjectBuilder.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CProjectileControls.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CUnitControls.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/CApp.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/CDataManager.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/CControls.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CGame.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -156,6 +160,8 @@
       <item path="src/CGuiManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMapControls.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CObjectBuilder.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CProjectileControls.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -186,7 +192,7 @@
       </compileType>
       <item path="include/CApp.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="include/CDataManager.h" ex="false" tool="3" flavor2="0">
+      <item path="include/CControls.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CGame.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -196,13 +202,15 @@
       </item>
       <item path="include/CMapControls.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CObjectBuilder.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CProjectileControls.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CUnitControls.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/CApp.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/CDataManager.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/CControls.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CGame.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -211,6 +219,8 @@
       <item path="src/CGuiManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMapControls.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CObjectBuilder.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CProjectileControls.cpp" ex="false" tool="1" flavor2="0">
       </item>

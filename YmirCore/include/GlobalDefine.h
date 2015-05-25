@@ -29,6 +29,7 @@ const int TILE_H = 64;
 const int TILE_PER_SEGMENT = 16;
 const int ELEM_PER_TILE = 4;
 const double BOTTOM  = -1;
+const double MIDDLE  = 0; 
 const double TOP     = 1;
 const double SQRT2   = 1.4142;
 const int MAX_PLAYER = 2;

@@ -8,10 +8,10 @@
 #ifndef CPROJECTILEPICTURE_H
 #define	CPROJECTILEPICTURE_H
 
-#include "CObjectPicture.h"
+#include "CPicture.h"
 #include "CProjectileEntity.h"
 
-class CProjectilePicture : public CObjectPicture {
+class CProjectilePicture : public CPicture {
 public:
   CProjectilePicture(CSprite* asset, CProjectileEntity* projectile_entity, double z_index);
   CProjectilePicture(const CProjectilePicture& orig);

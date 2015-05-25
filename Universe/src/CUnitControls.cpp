@@ -13,17 +13,14 @@
 #include "CUtils.h"
 #include "CMathUtils.h"
 #include "CModifier.h"
+#include "CObjectBuilder.h"
 
-CUnitControls::CUnitControls(CMapRender* map_render, CGuiManager* gui_manager) {
-  this->map_render = map_render; 
-  this->map = map_render->GetMap();
+CUnitControls::CUnitControls(CMap* map, CMapRender* map_render, CObjectBuilder* object_builder, CGuiManager* gui_manager) : CControls(map, map_render, object_builder) {
   this->gui_manager = gui_manager;
   selected_unit = NULL;
 }
 
-CUnitControls::CUnitControls(const CUnitControls& orig) {
-  map_render = orig.map_render;
-  map = orig.map;
+CUnitControls::CUnitControls(const CUnitControls& orig) : CControls(orig) {
   current_player_id = orig.current_player_id;
   selected_unit = orig.selected_unit;
 }
@@ -58,7 +55,7 @@ void CUnitControls::OnEvent(SDL_Event* event) {
             if (CUtils::PointIsInArea(click, unit_rect)) {
               DeselectUnit();
               
-              CObjectEntity* selector = map->addObject(unit_entity->GetX()+(unit_entity->GetRootUnit()->GetXSize()-4), unit_entity->GetY()+(unit_entity->GetRootUnit()->GetYSize()-4), BOTTOM, 0);
+              CObjectEntity* selector = object_builder->AddObject(unit_entity->GetX()+(unit_entity->GetRootUnit()->GetXSize()-4), unit_entity->GetY()+(unit_entity->GetRootUnit()->GetYSize()-4), BOTTOM, 0);
               unit_entity->SetRefObject(selector);
               selected_unit = unit_entity;
               gui_manager->OnUnitClick(selected_unit);
@@ -317,7 +314,7 @@ void CUnitControls::FireOrFight(CUnitEntity* unit_entity, CUnitEntity* target) {
     int start_x = unit_entity->GetX() + unit_entity->GetRootObject()->GetXSize() / 2;
     int start_y = unit_entity->GetY() + unit_entity->GetRootObject()->GetYSize() / 2;
 
-    CProjectileEntity* proj = map->addProj(start_x, start_y, unit_entity->GetRootUnit()->getProjectilID(), target);
+    CProjectileEntity* proj = object_builder->AddProjectile(start_x, start_y, unit_entity->GetRootUnit()->getProjectilID(), target);
     proj->SetRefObject(unit_entity);
   }
   else {
@@ -502,7 +499,7 @@ void CUnitControls::Die(CUnitEntity* unit_entity) {
     DeselectUnit();
   }
   RemoveAttackOnDead(unit_entity);  
-  map->remUnit(unit_entity);
+  object_builder->RemUnit(unit_entity);
 }
 
 void CUnitControls::ResolveModifiers() {
@@ -565,7 +562,7 @@ void CUnitControls::ResolveModifier(CUnitEntity* unit_entity) {
 void CUnitControls::DeselectUnit()
 {
   if (selected_unit != NULL) {
-    map->remObject(selected_unit->GetRefObject()->GetID());
+    object_builder->RemObject(selected_unit->GetRefObject()->GetID());
     selected_unit->SetRefObject(NULL);
     selected_unit->SetSelected(false);            
     selected_unit = NULL;

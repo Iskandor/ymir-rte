@@ -7,10 +7,10 @@
 
 #include "CProjectilePicture.h"
 
-CProjectilePicture::CProjectilePicture(CSprite* asset, CProjectileEntity* projectile_entity, double z_index) : CObjectPicture(asset, object_entity, z_index) {
+CProjectilePicture::CProjectilePicture(CSprite* asset, CProjectileEntity* projectile_entity, double z_index) : CPicture(asset, object_entity, z_index) {
 }
 
-CProjectilePicture::CProjectilePicture(const CProjectilePicture& orig) : CObjectPicture(orig) {
+CProjectilePicture::CProjectilePicture(const CProjectilePicture& orig) : CPicture(orig) {
 }
 
 CProjectilePicture::~CProjectilePicture() {

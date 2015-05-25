@@ -10,12 +10,12 @@
 #include <SDL_gfxPrimitives.h>
 
 
-CUnitPicture::CUnitPicture(CSprite* asset, SDL_Surface* insignia_asset, SDL_Surface* insignia_bckg, CUnitEntity* unit_entity, double z_index) : CObjectPicture(asset, unit_entity, z_index) {
+CUnitPicture::CUnitPicture(CSprite* asset, SDL_Surface* insignia_asset, SDL_Surface* insignia_bckg, CUnitEntity* unit_entity, double z_index) : CPicture(asset, unit_entity, z_index) {
   this->insignia_asset = insignia_asset;
   this->insignia_bckg = insignia_bckg;
 }
 
-CUnitPicture::CUnitPicture(const CUnitPicture& orig) : CObjectPicture(orig) {
+CUnitPicture::CUnitPicture(const CUnitPicture& orig) : CPicture(orig) {
   this->insignia_asset = orig.insignia_asset;
   this->insignia_bckg = orig.insignia_bckg;
 }
@@ -47,7 +47,7 @@ void CUnitPicture::OnRender(SDL_Surface* dest, SDL_Rect camera)
     Sint16  y2 = y + 5;    
 
 
-    SDL_Rect insignia_rect = {(Sint16)x, (Sint16)y + 8, MAP_ELEM, MAP_ELEM};
+    SDL_Rect insignia_rect = {(Sint16)x, (Sint16)(y + 8), (Uint16)MAP_ELEM, (Uint16)MAP_ELEM};
     SDL_BlitSurface(insignia_bckg, NULL, dest, &insignia_rect);
 
     SDL_BlitSurface(insignia_asset, NULL, dest, &insignia_rect);
@@ -66,7 +66,7 @@ void CUnitPicture::OnRender(SDL_Surface* dest, SDL_Rect camera)
 
     }
 
-    CObjectPicture::OnRender(dest, camera);
+    CPicture::OnRender(dest, camera);
   }
 }
 

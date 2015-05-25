@@ -36,11 +36,12 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/CApp.o \
-	${OBJECTDIR}/src/CDataManager.o \
+	${OBJECTDIR}/src/CControls.o \
 	${OBJECTDIR}/src/CGame.o \
 	${OBJECTDIR}/src/CGameControls.o \
 	${OBJECTDIR}/src/CGuiManager.o \
 	${OBJECTDIR}/src/CMapControls.o \
+	${OBJECTDIR}/src/CObjectBuilder.o \
 	${OBJECTDIR}/src/CProjectileControls.o \
 	${OBJECTDIR}/src/CUnitControls.o \
 	${OBJECTDIR}/src/main.o
@@ -75,10 +76,10 @@ ${OBJECTDIR}/src/CApp.o: src/CApp.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CApp.o src/CApp.cpp
 
-${OBJECTDIR}/src/CDataManager.o: src/CDataManager.cpp 
+${OBJECTDIR}/src/CControls.o: src/CControls.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CDataManager.o src/CDataManager.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CControls.o src/CControls.cpp
 
 ${OBJECTDIR}/src/CGame.o: src/CGame.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
@@ -99,6 +100,11 @@ ${OBJECTDIR}/src/CMapControls.o: src/CMapControls.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CMapControls.o src/CMapControls.cpp
+
+${OBJECTDIR}/src/CObjectBuilder.o: src/CObjectBuilder.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CObjectBuilder.o src/CObjectBuilder.cpp
 
 ${OBJECTDIR}/src/CProjectileControls.o: src/CProjectileControls.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

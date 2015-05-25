@@ -10,24 +10,9 @@
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
-
-#include "CModule.h"
-#include "CTile.h"
-#include "CTileRender.h"
-#include "CUnit.h"
-#include "CUnitRender.h"
-#include "CUnitControls.h"
-#include "CMap.h"
-#include "CMapRender.h"
-#include "CMapControls.h"
-#include "CObject.h"
-#include "CPlayerManager.h"
 #include "CGuiManager.h"
-#include "CGameControls.h"
 #include "CFontRender.h"
-#include "CProjectile.h"
-#include "CProjectileControls.h"
-#include "CModifier.h"
+#include "CGame.h"
 
 class CApp {
 public:
@@ -36,28 +21,9 @@ public:
   virtual ~CApp();
 
 private:
-  CModule<CTile>        tile_module;  
-  CModule<CUnit>        unit_module;  
-  CModule<CObject>      object_module;  
-  CModule<CProjectile>  projectile_module;
-  CModule<CModifier>    modifier_module;
-  
-  CMap            *map;
-  
-  CMapControls        *map_controls;
-  CUnitControls       *unit_controls;
-  CGameControls       *game_controls;
-  CProjectileControls *projectile_controls;
-  
-  
-  CMapRender      *map_render;
-  CTileRender     *tile_render;
-  CUnitRender     *unit_render;
-  CObjectRender   *object_render;
-  CFontRender     *font_render;
-  
-  CPlayerManager  player_manager;
+  CFontRender     font_render;
   CGuiManager     *gui_manager;
+  CGame           *game;
   
   bool  running;
   int   FPS;

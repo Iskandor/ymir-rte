@@ -44,7 +44,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CObjectPicture.o \
 	${OBJECTDIR}/src/CObjectRender.o \
 	${OBJECTDIR}/src/COverText.o \
+	${OBJECTDIR}/src/CPicture.o \
+	${OBJECTDIR}/src/CPictureRender.o \
 	${OBJECTDIR}/src/CProjectilePicture.o \
+	${OBJECTDIR}/src/CProjectileRender.o \
 	${OBJECTDIR}/src/CSprite.o \
 	${OBJECTDIR}/src/CTileRender.o \
 	${OBJECTDIR}/src/CUnitPicture.o \
@@ -120,10 +123,25 @@ ${OBJECTDIR}/src/COverText.o: src/COverText.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/COverText.o src/COverText.cpp
 
+${OBJECTDIR}/src/CPicture.o: src/CPicture.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CPicture.o src/CPicture.cpp
+
+${OBJECTDIR}/src/CPictureRender.o: src/CPictureRender.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CPictureRender.o src/CPictureRender.cpp
+
 ${OBJECTDIR}/src/CProjectilePicture.o: src/CProjectilePicture.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CProjectilePicture.o src/CProjectilePicture.cpp
+
+${OBJECTDIR}/src/CProjectileRender.o: src/CProjectileRender.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CProjectileRender.o src/CProjectileRender.cpp
 
 ${OBJECTDIR}/src/CSprite.o: src/CSprite.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

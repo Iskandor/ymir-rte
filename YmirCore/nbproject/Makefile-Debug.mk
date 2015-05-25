@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/CAction.o \
+	${OBJECTDIR}/src/CDataManager.o \
 	${OBJECTDIR}/src/CMap.o \
 	${OBJECTDIR}/src/CMathUtils.o \
 	${OBJECTDIR}/src/CModifier.o \
@@ -85,6 +86,11 @@ ${OBJECTDIR}/src/CAction.o: src/CAction.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CAction.o src/CAction.cpp
+
+${OBJECTDIR}/src/CDataManager.o: src/CDataManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/qt4 -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CDataManager.o src/CDataManager.cpp
 
 ${OBJECTDIR}/src/CMap.o: src/CMap.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

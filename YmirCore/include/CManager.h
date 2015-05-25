@@ -16,21 +16,18 @@ template<class Type, class Entity>
 class CManager : public IManager<Entity> {
   public:
   
-  CManager(CModule<Type> *module, CObjectManager* object_manager) : IManager<Entity>() {
+  CManager(CModule<Type> *module) : IManager<Entity>() {
     this->type_module = module;
-    this->object_manager = object_manager;
   };
 
   CManager(const CManager& orig) : IManager<Entity>(orig) {
     this->type_module = orig.type_module;
-    this->object_manager = orig.object_manager;
   };
 
   virtual ~CManager() { };
 
 protected:
-  CModule<Type>         *type_module;
-  CObjectManager*       object_manager;
+  CModule<Type> *type_module;
 };
 
 #endif	/* CMANAGER_H */

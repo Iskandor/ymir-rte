@@ -8,15 +8,12 @@
 #include <CMathUtils.h>
 
 #include "CProjectileControls.h"
+#include "CObjectBuilder.h"
 
-CProjectileControls::CProjectileControls(CMapRender* map_render) {
-  this->map_render = map_render;
-  this->map = map_render->GetMap();
+CProjectileControls::CProjectileControls(CMap* map, CMapRender* map_render, CObjectBuilder* object_builder) : CControls(map, map_render, object_builder) {
 }
 
-CProjectileControls::CProjectileControls(const CProjectileControls& orig) {
-  map_render = orig.map_render;
-  map = orig.map;
+CProjectileControls::CProjectileControls(const CProjectileControls& orig) : CControls(orig) {
 }
 
 CProjectileControls::~CProjectileControls() {
@@ -49,7 +46,7 @@ void CProjectileControls::TargetReached(CProjectileEntity* projectile_entity) {
                             projectile_entity->GetTargetX() + 1, projectile_entity->GetTargetY() + 1))
   {
     ((CUnitEntity*)projectile_entity->GetRefObject())->AddAction(CAction(CAction::FIGHT, projectile_entity->GetTarget(), 0));
-    map->remProj(projectile_entity);
+    object_builder->RemProjectile(projectile_entity);
   }
 }
 

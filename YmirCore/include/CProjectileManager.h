@@ -17,7 +17,7 @@
 
 class CProjectileManager : public CManager<CProjectile, CProjectileEntity> {
 public:
-  CProjectileManager(CModule<CProjectile> *module, CObjectManager* object_manager);
+  CProjectileManager(CModule<CProjectile> *module);
   CProjectileManager(const CProjectileManager& orig);
   virtual ~CProjectileManager();
 public:

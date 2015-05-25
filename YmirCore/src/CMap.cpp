@@ -12,11 +12,8 @@
 #include "CStrUtils.h"
 #include "CMathUtils.h"
 
-CMap::CMap() : CObjectManager(NULL) {
-  this->tile_module = NULL;
-  this->unit_module = NULL;
-  this->object_module = NULL;
-  this->projectile_module = NULL;
+CMap::CMap() {
+
   map_segsize_x = 0;
   map_segsize_y = 0;
   map_tilesize_x = 0;
@@ -26,17 +23,15 @@ CMap::CMap() : CObjectManager(NULL) {
 
   pTile = NULL;
   move_cost_map = NULL;
-  
+
+  this->data_manager = NULL;
+  object_manager = NULL;  
   unit_manager = NULL;
-  projectile_manager = NULL;  
+  projectile_manager = NULL;
 }
 
-CMap::CMap(CModule<CTile>* tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module, CModule<CProjectile> *projectile_module) 
-    : CObjectManager(object_module) {  
-  this->tile_module = tile_module;
-  this->unit_module = unit_module;
-  this->object_module = object_module;
-  this->projectile_module = projectile_module;
+CMap::CMap(CDataManager* data_manager) {
+
   map_segsize_x = 0;
   map_segsize_y = 0;
   map_tilesize_x = 0;
@@ -47,37 +42,37 @@ CMap::CMap(CModule<CTile>* tile_module, CModule<CUnit> *unit_module, CModule<COb
   pTile = NULL;
   move_cost_map = NULL;
   
-  unit_manager = new CUnitManager(unit_module, this);
-  projectile_manager = new CProjectileManager(projectile_module, this);
+  this->data_manager = data_manager;
+  object_manager = new CObjectManager(data_manager->GetObjectModule());
+  unit_manager = new CUnitManager(data_manager->GetUnitModule());
+  projectile_manager = new CProjectileManager(data_manager->GetProjectileModule());
 }
 
-CMap::CMap(int x, int y, int default_tile, CModule<CTile> *tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module, CModule<CProjectile> *projectile_module) 
-    : CObjectManager(object_module) {
+CMap::CMap(int x, int y, int default_tile, CDataManager* data_manager) 
+{
   map_segsize_x = x;
   map_segsize_y = y;
   map_tilesize_x = x * TILE_PER_SEGMENT;
   map_tilesize_y = y * TILE_PER_SEGMENT;
   map_elemsize_x = x * TILE_PER_SEGMENT * ELEM_PER_TILE;
   map_elemsize_y = y * TILE_PER_SEGMENT * ELEM_PER_TILE;
-  
-  this->tile_module = tile_module;
-  this->unit_module = unit_module;
-  this->object_module = object_module;
-  this->projectile_module = projectile_module;
 
   pTile = new CTile*[map_tilesize_x*map_tilesize_y];
   
   for(int i = 0; i < map_tilesize_x*map_tilesize_y; i++) {
-    pTile[i] = tile_module->GetUnitPtr(default_tile);
+    pTile[i] = data_manager->GetTileModule()->GetUnitPtr(default_tile);
   }
   
   move_cost_map = new double[map_elemsize_x*map_elemsize_y];
   memset(move_cost_map, 0, map_elemsize_x*map_elemsize_y*sizeof(double));
-  unit_manager = new CUnitManager(unit_module, this);
-  projectile_manager = new CProjectileManager(projectile_module, this);
+  
+  this->data_manager = data_manager;
+  object_manager = new CObjectManager(data_manager->GetObjectModule());
+  unit_manager = new CUnitManager(data_manager->GetUnitModule());
+  projectile_manager = new CProjectileManager(data_manager->GetProjectileModule());
 }
 
-CMap::CMap(const CMap& orig) : CObjectManager(orig) {
+CMap::CMap(const CMap& orig) {
   map_segsize_x = orig.map_segsize_x;
   map_segsize_x = orig.map_segsize_x;
   map_tilesize_x = orig.map_tilesize_x;
@@ -86,10 +81,6 @@ CMap::CMap(const CMap& orig) : CObjectManager(orig) {
   map_elemsize_y = orig.map_elemsize_y;
   pTile = orig.pTile;
   move_cost_map = orig.move_cost_map;
-  tile_module = orig.tile_module;
-  unit_module = orig.unit_module;
-  projectile_module = orig.projectile_module;
-  object_module = orig.object_module;
   unit_manager = orig.unit_manager;
   projectile_manager = orig.projectile_manager;
 }
@@ -174,7 +165,7 @@ int CMap::Load(string filename) {
   for(int i = 0; i < map_tilesize_y; i++) {
     for(int j = 0; j < map_tilesize_x; j++) {
       file.read(val, 4);
-      pTile[i*map_tilesize_x + j] = tile_module->GetUnitPtr(atoi(val));
+      pTile[i*map_tilesize_x + j] = data_manager->GetTileModule()->GetUnitPtr(atoi(val));
     }
   }
   
@@ -324,8 +315,24 @@ void CMap::normalize_tile(CTile* p_tile) {
   return;
 }
 
+CObjectEntity* CMap::addObject(int x, int y, int class_id, CObject* object)
+{
+  return object_manager->addObject(x, y, class_id, object);
+}
+
+CObjectEntity* CMap::addObject(CObjectEntity* object_entity)
+{
+  return object_manager->addObject(object_entity);
+}
+
+void CMap::remObject(int id)
+{
+  object_manager->remObject(id);
+}
+
 CUnitEntity* CMap::addUnit(int x, int y, int id, int player_id)  {
   CUnitEntity* unit_entity = unit_manager->Add(x, y, id, player_id);
+  object_manager->addObject(unit_entity);
   Block(unit_entity);
   player_manager->GetPlayer(player_id)->AddUnit(unit_entity);
   
@@ -334,23 +341,24 @@ CUnitEntity* CMap::addUnit(int x, int y, int id, int player_id)  {
 
 void CMap::remUnit(CUnitEntity* unit_entity) {
   if (unit_entity->GetRefObject() != NULL) {
-    remObject(unit_entity->GetRefObject()->GetID());
+    object_manager->remObject(unit_entity->GetRefObject()->GetID());
   }
   Unblock(unit_entity);
   unit_manager->Rem(unit_entity);
   player_manager->GetPlayer(unit_entity->GetPlayerID())->RemoveUnit(unit_entity->GetID());
-  remObject(unit_entity->GetID());
+  object_manager->remObject(unit_entity->GetID());
 }
 
 CProjectileEntity* CMap::addProj(int x, int y, int id, CUnitEntity* target) {
   CProjectileEntity* projectile_entity = projectile_manager->Add(x, y, id, target);
+  object_manager->addObject(projectile_entity);
   
   return projectile_entity;
 }
 
 void CMap::remProj(CProjectileEntity* projectile_entity) {
   projectile_manager->Rem(projectile_entity);
-  remObject(projectile_entity->GetID());
+  object_manager->remObject(projectile_entity->GetID());
 }
 
 int CMap::getMapSizeX(SizeMode mode) {

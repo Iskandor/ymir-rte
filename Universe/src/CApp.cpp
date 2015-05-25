@@ -10,6 +10,8 @@
 
 CApp::CApp() {
   surfDisplay = NULL;
+  game = NULL;
+  gui_manager = NULL;
 
   running = true;
 }
@@ -19,10 +21,21 @@ CApp::CApp(const CApp& orig) {
 }
 
 CApp::~CApp() {
-  delete map;
-  delete tile_render;
-  delete map_render;
-  delete map_controls;
+  if (surfDisplay != NULL)
+  {
+    SDL_FreeSurface(surfDisplay);
+  }
+  
+  if (gui_manager != NULL)
+  {
+    //delete gui_manager;
+  }
+  
+  if (game != NULL)
+  {
+    delete game;
+  }
+
 }
 
 int CApp::OnExecute() {
@@ -68,8 +81,6 @@ int CApp::OnInit() {
     return -2; 
   }
 
-  font_render = new CFontRender();
-  
   rectDisplay.x = rectDisplay.y = 0;
   rectDisplay.w = RESOLUTION_W;
   rectDisplay.h = RESOLUTION_H;
@@ -78,67 +89,27 @@ int CApp::OnInit() {
     return -2;
   }
   
-  gui_manager = new CGuiManager(surfDisplay, font_render);
-  if (gui_manager->OnInit() != 0) {
+  if (font_render.onInit() != 0)
+  {
     return -3;
   }
   
-  tile_module.LoadFromXML("data/tiles", "tiles", "tile");
-  tile_render = new CTileRender(&tile_module);
-  
-  object_module.LoadFromXML("data/objects", "objects", "object"); 
-  unit_module.LoadFromXML("data/units", "units", "unit");
-  projectile_module.LoadFromXML("data/projectiles", "projectiles", "projectile");
-  modifier_module.LoadFromXML("data/modifiers", "modifiers", "modifier");
-  
-  
-  for(int i = 0; i < unit_module.GetSize(); i++) {
-    CObject object = unit_module.GetUnit(i);
-    int new_obj_id = object_module.AddUnit(object);
-    unit_module.GetUnitPtr(object.GetID())->SetID(new_obj_id);
+  gui_manager = new CGuiManager(surfDisplay, &font_render);
+  if (gui_manager->OnInit() != 0) {
+    return -4;
   }
   
-  for(int i = 0; i < projectile_module.GetSize(); i++) {
-    CObject object = projectile_module.GetUnit(i);
-    int new_obj_id = object_module.AddUnit(object);
-    projectile_module.GetUnitPtr(object.GetID())->SetID(new_obj_id);
-  }  
-  
-  object_render = new CObjectRender(&object_module, &unit_module, &projectile_module);  
-  unit_render = new CUnitRender(&unit_module);
-    
-  map = new CMap(&tile_module, &unit_module, &object_module, &projectile_module);
-  map->Load("data/maps/mapa1.map");
-  player_manager.AddPlayer("Drow", "");
-  player_manager.AddPlayer("Snake", "");
-  map->SetPlayerManager(&player_manager);
-  
-  map->addUnit(5, 5, 1, 0);
-  map->addUnit(7, 4, 2, 0);
-  map->addUnit(10, 9, 3, 0);
-  map->addUnit(3, 7, 4, 0);
-  map->addUnit(4, 12, 6, 0);
-
-  map->addUnit(15, 8, 5, 1);
-  map->addUnit(17, 4, 5, 1);
-  map->addUnit(17, 10, 7, 1);
-  
-  map_render = new CMapRender(&rectDisplay, map, tile_render, unit_render, object_render);
-  map_controls = new CMapControls(map_render);
-  unit_controls = new CUnitControls(map_render, gui_manager);
-  unit_controls->SetCurrentPlayerID(0);
-  unit_controls->SetModifierModule(&modifier_module);
-  projectile_controls = new CProjectileControls(map_render);
-  
-  game_controls = new CGameControls(&player_manager, unit_controls);
+  game = new CGame(surfDisplay, rectDisplay, gui_manager, &font_render);
+  if (game->OnInit() != 0)
+  {
+    return -5;
+  }
   
   return 0;
 }
 
 void CApp::OnLoop() {
-  map_controls->OnLoop();
-  unit_controls->OnLoop();
-  projectile_controls->OnLoop();
+  game->OnLoop();
   gui_manager->OnLoop();
 }
 
@@ -154,27 +125,24 @@ void CApp::OnEvent(SDL_Event* event) {
       }      
     } break;
   }
-  map_controls->OnEvent(event);
-  unit_controls->OnEvent(event);
-  game_controls->OnEvent(event);
+
+  game->OnEvent(event);
   gui_manager->OnEvent(*event);
 }
 
 void CApp::OnRender() {
   SDL_FillRect(surfDisplay, NULL, SDL_MapRGB(surfDisplay->format, 0, 0, 0));
-  map_render->OnRender(surfDisplay);
+  
+  game->OnRender();
   gui_manager->OnRender();
   
-  SDL_Rect   player_rect = {0, 0, 200, 32};
-  SDL_Color  player_color = {255, 255, 255}; 
-  
-  font_render->RenderText(surfDisplay, player_rect, player_manager.GetPlayer(game_controls->GetCurrentPlayerID())->GetName(), player_color);
   //font_render->RenderText(surfDisplay, {0, 32, 200, 32}, to_string(FPS), player_color);
   
   SDL_Flip(surfDisplay);
 }
 
 void CApp::OnCleanup() {
+  font_render.onCleanup();
   SDL_Quit();
   TTF_Quit();
 }

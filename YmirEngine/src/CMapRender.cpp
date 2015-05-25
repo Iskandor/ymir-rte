@@ -10,8 +10,10 @@
 #include "CMapRender.h"
 #include "GlobalDefine.h"
 #include "CUtils.h"
+#include "CUnitPicture.h"
+#include "CProjectilePicture.h"
 
-CMapRender::CMapRender(SDL_Rect* display_rect, CMap* map, CTileRender* tile_render, CUnitRender* unit_render, CObjectRender* object_render) {
+CMapRender::CMapRender(SDL_Rect* display_rect, CMap* map, CTileRender* tile_render, CUnitRender* unit_render, CObjectRender* object_render, CProjectileRender* projectile_render) {
   camera.x = 0;
   camera.y = 0;
   camera.w = CAMERA_W * (TILE_W / MAP_ELEM);
@@ -32,10 +34,11 @@ CMapRender::CMapRender(SDL_Rect* display_rect, CMap* map, CTileRender* tile_rend
   this->tile_render   = tile_render;
   this->unit_render   = unit_render;
   this->object_render = object_render;
+  this->projectile_render = projectile_render;
   
   for(int i = 0; i < map->getMapSizeY(sizemode_segment); i++) {
     for(int j = 0; j < map->getMapSizeX(sizemode_segment); j++) {
-      CMapSegment* segment = new CMapSegment(j, i, this->map, this->tile_render, this->unit_render);
+      CMapSegment* segment = new CMapSegment(j, i, this->map, this->tile_render);
       
       map_segments.push_back(segment);
     }
@@ -73,13 +76,27 @@ void CMapRender::OnRender(SDL_Surface* dest) {
     render_possible_loc(dest, selected_unit);
   }
 
-  multimap<double, CObjectPicture*, less<double> >* ytree = object_render->GetYSortedTree();
-  multimap<double, CObjectPicture*, less<double> >::iterator it;
+  multimap<double, CPicture*, less<double> >* ytree = picture_render->GetYSortedTree();
+  multimap<double, CPicture*, less<double> >::iterator it;
 
+  CPicture* object_picture = NULL;
+  CUnitPicture* unit_picture = NULL;
+  CProjectilePicture* projectile_picture = NULL;
+
+  
   for(it = ytree->begin(); it != ytree->end(); it++) {
-    CObjectPicture* object_picture = it->second;
-   
-    object_picture->OnRender(dest, camera);
+    
+    object_picture = ((CPicture*)(&(*it->second)));
+    
+    if (object_picture->GetObjectEntity()->GetClassName() == "unit_entity")
+    {
+      unit_picture = ((CUnitPicture*)(&(*it->second)));
+      unit_picture->OnRender(dest, camera);
+    }
+    else
+    {
+      object_picture->OnRender(dest, camera);
+    }
   }
 }
 
@@ -111,6 +128,49 @@ CMap* CMapRender::GetMap() {
 
 void CMapRender::SortObjects(CObjectEntity* object_entity)
 {
-  CObjectPicture* object_picture = object_render->GetObjectPicture(object_entity->GetID());
-  object_render->SortObjects(object_picture);
+  CPicture* object_picture = picture_render->GetObjectPicture(object_entity->GetID());
+  
+  if (object_picture != NULL)
+  {
+    picture_render->SortObjects(object_picture);
+  }
 }
+
+void CMapRender::AddObject(CObjectEntity* object_entity, double z_index)
+{
+  CObjectPicture* object_picture = object_render->addPicture(object_entity, z_index);
+  picture_render->addPicture(object_picture);
+}
+
+void CMapRender::AddProjectile(CProjectileEntity* projectile_entity, double z_index)
+{
+  CProjectilePicture* projectile_picture = projectile_render->addPicture(projectile_entity, z_index);
+  picture_render->addPicture(projectile_picture);  
+}
+
+void CMapRender::AddUnit(CUnitEntity* unit_entity, double z_index)
+{
+  CUnitPicture* unit_picture = unit_render->addPicture(unit_entity, z_index);
+  picture_render->addPicture(unit_picture);
+  
+}
+
+void CMapRender::RemObject(int id)
+{
+ picture_render->remPicture(id);
+ object_render->remPicture(id);
+}
+
+void CMapRender::RemProjectile(int id)
+{
+ picture_render->remPicture(id);
+ projectile_render->remPicture(id);  
+}
+
+void CMapRender::RemUnit(int id)
+{
+ picture_render->remPicture(id);
+ unit_render->remPicture(id);  
+}
+
+  

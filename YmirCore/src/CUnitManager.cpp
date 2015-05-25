@@ -7,7 +7,7 @@
 
 #include "CUnitManager.h"
 
-CUnitManager::CUnitManager(CModule<CUnit> *unit_module, CObjectManager* object_manager) : CManager<CUnit, CUnitEntity>(unit_module, object_manager) {
+CUnitManager::CUnitManager(CModule<CUnit> *unit_module) : CManager<CUnit, CUnitEntity>(unit_module) {
 }
 
 CUnitManager::CUnitManager(const CUnitManager& orig) : CManager<CUnit, CUnitEntity>(orig) {
@@ -21,7 +21,7 @@ CUnitEntity* CUnitManager::Add(int x, int y, int id, int player_id) {
   
   unit = new CUnitEntity(type_module->GetUnitPtr(id), 0, player_id, x, y);
   
-  object_manager->addObject(unit);
+  
   entity_list.push_back(reinterpret_cast<CUnitEntity*>(unit));
   
   return reinterpret_cast<CUnitEntity*>(unit);

@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>include/CAction.h</itemPath>
+      <itemPath>include/CDataManager.h</itemPath>
       <itemPath>include/CManager.h</itemPath>
       <itemPath>include/CMap.h</itemPath>
       <itemPath>include/CMathUtils.h</itemPath>
@@ -37,6 +38,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>src/CAction.cpp</itemPath>
+      <itemPath>src/CDataManager.cpp</itemPath>
       <itemPath>src/CMap.cpp</itemPath>
       <itemPath>src/CMathUtils.cpp</itemPath>
       <itemPath>src/CModifier.cpp</itemPath>
@@ -106,6 +108,8 @@
       </compileType>
       <item path="include/CAction.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CDataManager.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CManager.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CMap.h" ex="false" tool="3" flavor2="0">
@@ -153,6 +157,8 @@
       <item path="include/IModifier.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/CAction.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CDataManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMap.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -215,6 +221,8 @@
       </compileType>
       <item path="include/CAction.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/CDataManager.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/CManager.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/CMap.h" ex="false" tool="3" flavor2="0">
@@ -262,6 +270,8 @@
       <item path="include/IModifier.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/CAction.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/CDataManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CMap.cpp" ex="false" tool="1" flavor2="0">
       </item>

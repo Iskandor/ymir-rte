@@ -21,10 +21,13 @@ public:
   CFontRender(const CFontRender& orig);
   virtual ~CFontRender();
   
+  int onInit();
+  void onCleanup();
+  
   bool  LoadFonts();
   void  RenderText(SDL_Surface* dest, SDL_Rect dest_rect, string message, SDL_Color color);
 private:
-  TTF_Font *font;
+  TTF_Font *font = NULL;
   
   map<string, SDL_Surface*> dictionary;
 };

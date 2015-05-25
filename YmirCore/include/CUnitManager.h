@@ -20,7 +20,7 @@ using namespace std;
 
 class CUnitManager : public CManager<CUnit, CUnitEntity> {
 public:
-  CUnitManager(CModule<CUnit> *unit_module, CObjectManager* object_manager);
+  CUnitManager(CModule<CUnit> *unit_module);
   CUnitManager(const CUnitManager& orig);
   virtual ~CUnitManager();
 

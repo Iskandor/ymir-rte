@@ -10,12 +10,11 @@
 #include "CMapRender.h"
 #include "CUtils.h"
 
-CMapSegment::CMapSegment(int x, int y, CMap* map, CTileRender* tile_render, CUnitRender*  unit_render) {
+CMapSegment::CMapSegment(int x, int y, CMap* map, CTileRender* tile_render) {
   this->x = x;
   this->y = y;
   this->map = map;
   this->tile_render = tile_render;
-  this->unit_render = unit_render;
   
   main_rect.x = x * TILE_PER_SEGMENT * TILE_W;
   main_rect.y = y * TILE_PER_SEGMENT * TILE_H;
@@ -34,6 +33,7 @@ CMapSegment::CMapSegment(const CMapSegment& orig) {
   this->x = orig.x;
   this->y = orig.y;
   this->map = orig.map;
+  this->tile_render = orig.tile_render;
 }
 
 CMapSegment::~CMapSegment() {

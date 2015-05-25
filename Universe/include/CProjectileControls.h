@@ -11,10 +11,11 @@
 #include "CMap.h"
 #include "CMapRender.h"
 #include "CProjectileEntity.h"
+#include "CControls.h"
 
-class CProjectileControls {
+class CProjectileControls : public CControls {
 public:
-  CProjectileControls(CMapRender* map_render);
+  CProjectileControls(CMap* map, CMapRender* map_render, CObjectBuilder* object_builder);
   CProjectileControls(const CProjectileControls& orig);
   virtual ~CProjectileControls();
   
@@ -23,10 +24,6 @@ public:
 private:
   void Move(CProjectileEntity* projectile_entity);
   void TargetReached(CProjectileEntity* projectile_entity);
-  
-private:
-  CMapRender*   map_render;
-  CMap*         map;
 };
 
 #endif	/* CPROJECTILECONTROL_H */

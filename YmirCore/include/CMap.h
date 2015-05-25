@@ -12,11 +12,11 @@
 #include <string>
 #include <fstream>
 
-#include "CTile.h"
 #include "CObjectManager.h"
 #include "CUnitManager.h"
 #include "CPlayerManager.h"
 #include "CProjectileManager.h"
+#include "CDataManager.h"
 
 using namespace std;
 
@@ -26,18 +26,16 @@ enum SizeMode {
   sizemode_elem
 };
 
-class CMap : public CObjectManager {
+class CMap {
 public:
   CMap();
-  CMap(CModule<CTile> *tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module, CModule<CProjectile> *projectile_module);
-  CMap(int x, int y, int default_tile, CModule<CTile> *tile_module, CModule<CUnit> *unit_module, CModule<CObject> *object_module, CModule<CProjectile> *projectile_module);
+  CMap(CDataManager* data_manager);
+  CMap(int x, int y, int default_tile, CDataManager* data_manager);
   CMap(const CMap& orig);
   virtual ~CMap();
 private:
-  CModule<CTile>        *tile_module;
-  CModule<CUnit>        *unit_module;
-  CModule<CObject>      *object_module;
-  CModule<CProjectile>  *projectile_module;
+  CDataManager          *data_manager;
+  CObjectManager        *object_manager;  
   CUnitManager          *unit_manager;
   CPlayerManager        *player_manager;
   CProjectileManager    *projectile_manager;
@@ -85,10 +83,13 @@ public:
   CUnitManager* GetUnitManager() { return unit_manager; };
   CProjectileManager* GetProjectileManager() { return projectile_manager; };
   
-  CUnitEntity* addUnit(int x, int y, int id, int player_id);
-  void remUnit(CUnitEntity* unit_entity);
+  CObjectEntity*  addObject(int x, int y, int class_id, CObject* object = NULL);
+  CObjectEntity*  addObject(CObjectEntity* object_entity);
+  void            remObject(int id);
+  CUnitEntity*    addUnit(int x, int y, int id, int player_id);
+  void            remUnit(CUnitEntity* unit_entity);
   CProjectileEntity* addProj(int x, int y, int id, CUnitEntity* target);
-  void remProj(CProjectileEntity* projectile_entity);
+  void            remProj(CProjectileEntity* projectile_entity);
   
   void Block(CUnitEntity* unit_entity);
   void Unblock(CUnitEntity* unit_entity);

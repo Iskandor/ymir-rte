@@ -19,7 +19,7 @@
 
 class CMapSegment {
 public:
-  CMapSegment(int x, int y, CMap* map, CTileRender* tile_render, CUnitRender*  unit_render);
+  CMapSegment(int x, int y, CMap* map, CTileRender* tile_render);
   CMapSegment(const CMapSegment& orig);
   virtual ~CMapSegment();
   
@@ -32,7 +32,6 @@ public:
 private:
   CMap*         map;
   CTileRender*  tile_render;
-  CUnitRender*  unit_render;
   int           x;
   int           y;
   

@@ -9,9 +9,7 @@
 #include <iostream>
 
 CFontRender::CFontRender() {
-  if (!LoadFonts()) {
-    cout << "Error in loading fonts! " << TTF_GetError() << endl;
-  }
+  font = NULL;
 }
 
 CFontRender::CFontRender(const CFontRender& orig) {
@@ -22,8 +20,24 @@ CFontRender::~CFontRender() {
   for(map<string, SDL_Surface*>::iterator it = dictionary.begin(); it != dictionary.end(); it++) {
     SDL_FreeSurface(pair<string, SDL_Surface*>(*it).second);
   }
+}
+
+int CFontRender::onInit()
+{
+  if (!LoadFonts()) {
+    cout << "Error in loading fonts! " << TTF_GetError() << endl;
+    return -1;
+  }
   
-  TTF_CloseFont(font);
+  return 0;
+}
+
+void CFontRender::onCleanup()
+{
+  if (font != NULL)
+  {
+    TTF_CloseFont(font);
+  }  
 }
 
 bool CFontRender::LoadFonts() {
