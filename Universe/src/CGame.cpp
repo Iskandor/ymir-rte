@@ -57,11 +57,12 @@ int CGame::OnInit()
   projectile_render = new CProjectileRender(projectile_module);
     
   map = new CMap(&data_manager);
+  map->Load("data/maps/mapa1.map");
+  
   map_render = new CMapRender(&rectDisplay, map, tile_render, unit_render, object_render, projectile_render);
   
   object_builder = new CObjectBuilder(map, map_render);
-    
-  map->Load("data/maps/mapa1.map");
+
   player_manager.AddPlayer("Drow", "");
   player_manager.AddPlayer("Snake", "");
   map->SetPlayerManager(&player_manager);

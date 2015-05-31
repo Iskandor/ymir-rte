@@ -35,6 +35,7 @@ CMapRender::CMapRender(SDL_Rect* display_rect, CMap* map, CTileRender* tile_rend
   this->unit_render   = unit_render;
   this->object_render = object_render;
   this->projectile_render = projectile_render;
+  this->picture_render = new CPictureRender();
   
   for(int i = 0; i < map->getMapSizeY(sizemode_segment); i++) {
     for(int j = 0; j < map->getMapSizeX(sizemode_segment); j++) {
@@ -51,6 +52,8 @@ CMapRender::CMapRender(const CMapRender& orig) {
 
 CMapRender::~CMapRender() {
   SDL_FreeSurface(tech_surface);
+  
+  delete picture_render;
 }
 
 void CMapRender::OnRender(SDL_Surface* dest) {
@@ -76,27 +79,28 @@ void CMapRender::OnRender(SDL_Surface* dest) {
     render_possible_loc(dest, selected_unit);
   }
 
-  multimap<double, CPicture*, less<double> >* ytree = picture_render->GetYSortedTree();
-  multimap<double, CPicture*, less<double> >::iterator it;
-
-  CPicture* object_picture = NULL;
-  CUnitPicture* unit_picture = NULL;
+  CPicture* picture = NULL;
+  
+  CUnitPicture*       unit_picture = NULL;
+  CObjectPicture*     object_picture = NULL;
   CProjectilePicture* projectile_picture = NULL;
 
-  
-  for(it = ytree->begin(); it != ytree->end(); it++) {
+  for(int i = 0; i < picture_render->Size(); i++) {
     
-    object_picture = ((CPicture*)(&(*it->second)));
+    picture = picture_render->operator [](i);
     
-    if (object_picture->GetObjectEntity()->GetClassName() == "unit_entity")
+    if (object_picture = dynamic_cast<CObjectPicture*>(picture))
     {
-      unit_picture = ((CUnitPicture*)(&(*it->second)));
-      unit_picture->OnRender(dest, camera);
-    }
-    else
+      object_picture->OnRender(dest, camera); 
+    }    
+    if (unit_picture = dynamic_cast<CUnitPicture*>(picture))
     {
-      object_picture->OnRender(dest, camera);
+      unit_picture->OnRender(dest, camera); 
     }
+    if (projectile_picture = dynamic_cast<CProjectilePicture*>(picture))
+    {
+      projectile_picture->OnRender(dest, camera); 
+    }    
   }
 }
 
@@ -128,7 +132,7 @@ CMap* CMapRender::GetMap() {
 
 void CMapRender::SortObjects(CObjectEntity* object_entity)
 {
-  CPicture* object_picture = picture_render->GetObjectPicture(object_entity->GetID());
+  CPicture* object_picture = picture_render->getObjectPicture(object_entity->GetID());
   
   if (object_picture != NULL)
   {

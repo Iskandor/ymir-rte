@@ -8,26 +8,20 @@
 #ifndef CPICTURERENDER_H
 #define	CPICTURERENDER_H
 
-#include <map>
-#include "CPicture.h"
+#include "SortedLinkedList.h"
 
 using namespace std;
 
-class CPictureRender {
+class CPictureRender : public SortedLinkedList {
 public:
   CPictureRender();
   CPictureRender(const CPictureRender& orig);
   virtual ~CPictureRender();
   
-  void SortObjects(CPicture*);
-  multimap<double, CPicture*, less< double > >* GetYSortedTree() { return &ysorted_tree; };
-  
-  void addPicture(CPicture* picture);
-  void remPicture(int id);
-  CPicture* GetObjectPicture(int object_id);
+  void SortObjects(CPicture* picture);
   
 private:
-  multimap<double, CPicture*, less< double > > ysorted_tree;
+  
 };
 
 #endif	/* CPICTURERENDER_H */

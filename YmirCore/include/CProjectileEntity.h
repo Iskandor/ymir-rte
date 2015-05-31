@@ -23,10 +23,10 @@ public:
   int GetTargetY() { return target->GetY() + target->GetRootObject()->GetYSize() / 2; };
   int GetDeltaX() { return delta_x; };
   int GetDeltaY() { return delta_y; };
-  int GetX() { return map_x; };
-  int GetY() { return map_y; };
+  virtual int GetX() { return map_x; };
+  virtual int GetY() { return map_y; };
   
-  void setPosition(int x, int y);
+  virtual void setPosition(int x, int y);
   
   
   CUnitEntity* GetTarget() { return target; };

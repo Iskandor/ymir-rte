@@ -21,8 +21,8 @@ CProjectileControls::~CProjectileControls() {
 
 void CProjectileControls::OnLoop() { 
   for(int i = 0; i < map->GetProjectileManager()->GetListSize(); i++) {
-    TargetReached(map->GetProjectileManager()->Get(i));
     Move(map->GetProjectileManager()->Get(i));
+    TargetReached(map->GetProjectileManager()->Get(i));
   }
 }
 

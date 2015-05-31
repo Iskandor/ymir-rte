@@ -51,7 +51,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CSprite.o \
 	${OBJECTDIR}/src/CTileRender.o \
 	${OBJECTDIR}/src/CUnitPicture.o \
-	${OBJECTDIR}/src/CUnitRender.o
+	${OBJECTDIR}/src/CUnitRender.o \
+	${OBJECTDIR}/src/SortedLinkedList.o
 
 
 # C Compiler Flags
@@ -162,6 +163,11 @@ ${OBJECTDIR}/src/CUnitRender.o: src/CUnitRender.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CUnitRender.o src/CUnitRender.cpp
+
+${OBJECTDIR}/src/SortedLinkedList.o: src/SortedLinkedList.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SortedLinkedList.o src/SortedLinkedList.cpp
 
 # Subprojects
 .build-subprojects:

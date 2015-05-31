@@ -26,6 +26,8 @@ CProjectileEntity::CProjectileEntity(CProjectile* projectile, int inner_id, int 
   if (target_y < y) {
     delta_y *= -1;
   }
+  
+  setPosition(x * MAP_ELEM, y * MAP_ELEM);
 }
 
 CProjectileEntity::CProjectileEntity(const CProjectileEntity& orig) : CObjectEntity(orig) {
@@ -39,6 +41,6 @@ CProjectileEntity::~CProjectileEntity() {
 }
 
 void CProjectileEntity::setPosition(int x, int y) {
-  this->map_x = x * MAP_ELEM;
-  this->map_y = y * MAP_ELEM;
+  this->map_x = x;
+  this->map_y = y;
 }

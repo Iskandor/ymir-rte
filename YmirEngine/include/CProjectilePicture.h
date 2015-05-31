@@ -16,6 +16,9 @@ public:
   CProjectilePicture(CSprite* asset, CProjectileEntity* projectile_entity, double z_index);
   CProjectilePicture(const CProjectilePicture& orig);
   virtual ~CProjectilePicture();
+  
+  virtual void OnRender(SDL_Surface* dest, SDL_Rect camera);
+  
 private:
 
 };
