@@ -136,7 +136,7 @@ void CApp::OnRender() {
   game->OnRender();
   gui_manager->OnRender();
   
-  //font_render->RenderText(surfDisplay, {0, 32, 200, 32}, to_string(FPS), player_color);
+  //font_render.RenderText(surfDisplay, {0, 32, 200, 32}, to_string(FPS), {255,255,255});
   
   SDL_Flip(surfDisplay);
 }

@@ -75,10 +75,22 @@ void SortedLinkedList::addPicture(CPicture* picture)
     }
     else
     {
-      ListElem* temp = elem->next;
+      if (insert->order < elem->order)
+      {
+        insert->next = elem;
+        
+        if (elem == begin)
+        {
+          begin = insert;
+        }
+      }
+      else
+      {
+        ListElem* temp = elem->next;
 
-      elem->next = insert;
-      insert->next = temp;
+        elem->next = insert;
+        insert->next = temp;
+      }
     }
   }
   
@@ -107,7 +119,14 @@ void SortedLinkedList::remPicture(int id)
     
     if (del != NULL)
     {
-      prev->next = del->next;
+      if (del == begin)
+      {
+        begin = del->next;
+      }
+      if (prev != NULL)
+      {
+        prev->next = del->next;
+      }
       delete del;
       size--;
     }

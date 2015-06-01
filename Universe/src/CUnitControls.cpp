@@ -330,7 +330,7 @@ void CUnitControls::FireOrFight(CUnitEntity* unit_entity, CUnitEntity* target) {
 void CUnitControls::Fight(CUnitEntity* unit_entity, CUnitEntity* target, bool recursive) {
   int attack_type = unit_entity->GetRootUnit()->GetAttackType(CUtils::Probability(100));
 
-  double attack_str = CUtils::rollDice(unit_entity->GetRootUnit()->getWeapon(), 1) + (unit_entity->GetRootUnit()->getProp()[STR_IND] / 2) - 2;
+  double attack_str = CMathUtils::gaussian_random(unit_entity->GetRootUnit()->getWeapon(), 2) + (unit_entity->GetRootUnit()->getProp()[STR_IND] / 2) - 2;
   double dexterity_def = unit_entity->GetRootUnit()->getArmor();
   
   Turn(unit_entity, target->GetX());

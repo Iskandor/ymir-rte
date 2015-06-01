@@ -7,6 +7,8 @@
 
 #include "CMathUtils.h"
 #include <cmath>
+#include <random>
+
 
 CMathUtils::CMathUtils() {
 }
@@ -104,5 +106,14 @@ int CMathUtils::find_val(int* array, int length, int val) {
   }
   
   return -1;  
+}
+
+double CMathUtils::gaussian_random(int mean, int sigma)
+{
+  random_device rd;
+  mt19937 e2(rd());
+  normal_distribution<> dist(mean, sigma);
+  
+  return round(dist(e2));
 }
 

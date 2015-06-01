@@ -25,6 +25,7 @@ public:
   static int    find_val(int* array, int length, int val);
   static bool   intersect(SDL_Rect rect1, SDL_Rect rect2);
   static bool   intersect(int x, int y, int x1, int y1, int x2, int y2);
+  static double gaussian_random(int mean, int sigma);
 private:
 
 };
